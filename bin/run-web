@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+# Run
+bash -c "sleep 3; open http://localhost:8080/" &
+npm run web-dev-server

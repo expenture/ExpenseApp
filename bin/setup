@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Set up React Native app. Run this script immediately after cloning the codebase.
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+# Detect Node.js version
+NODE_VERISON=$(node -v)
+NODE_VERISON_INT=$(node -v | awk 'match($0, /[0-9]+/) {print substr($0,RSTART,RLENGTH)}')
+if [ ! "$NODE_VERISON_INT" -ge 5 ]; then
+  echo "You're using an obsolete version of Node.js: $NODE_VERISON. The minimum requirement is v5.0.0. Please upgrade."
+  exit -1
+fi
+
+# Set up Node.js dependencies via npm
+npm install
+
+cd app
+for dir in *
+do
+  if [[ -d $dir ]]; then
+    rm -f "$BASEDIR/node_modules/$dir"
+    ln -sf "../app/$dir" "$BASEDIR/node_modules/$dir"
+  fi
+done
+cd ..
+
+# Only if this isn't CI
+# if [ -z "$CI" ]; then
+# fi

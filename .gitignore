@@ -28,6 +28,10 @@ project.xcworkspace
 .gradle
 local.properties
 
+# Web
+#
+bundle.js
+
 # node.js
 #
 node_modules/
