@@ -5,13 +5,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-
-import SamplePage from 'views/SamplePage';
+import AppContainer from './containers';
 
 export default class Application extends Component {
   render() {
     return (
-      <SamplePage />
+      <AppContainer />
     );
   }
 }
