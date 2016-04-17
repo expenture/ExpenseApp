@@ -1,20 +1,32 @@
-var path = require("path");
+var path = require('path');
+var HasteResolverPlugin = require('haste-resolver-webpack-plugin');
 
 module.exports = {
-  entry: "./index.js",
+  entry: './index.js',
   output: {
-    path: path.resolve(__dirname, "web"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, 'web'),
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
-        test: /.jsx?$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: ['transform-class-properties']
         }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
       }
     ]
-  }
+  },
+  plugins: [
+    new HasteResolverPlugin({
+      platform: 'web',
+      nodeModules: ['react-web']
+    })
+  ]
 };
