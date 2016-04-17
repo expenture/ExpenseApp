@@ -8,6 +8,9 @@ cd "$(dirname "$0")"
 cd ..
 BASEDIR=$(pwd)
 
+# Render templates
+./bin/render-templates
+
 # Build
 cd android
 ./gradlew assembleRelease

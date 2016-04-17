@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Set up React Native app. Run this script immediately after cloning the codebase.
 
 # Exit if any subcommand fails
@@ -21,6 +20,16 @@ fi
 # Set up Node.js dependencies via npm
 npm install
 
+# Copy sample config file if needed
+if [ ! -f config.js ]; then
+  cp config.sample.js config.js
+fi
+
+# Render templates
+./bin/render-templates
+
 # Only if this isn't CI
 # if [ -z "$CI" ]; then
 # fi
+
+echo 'Setup done.'

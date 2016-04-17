@@ -1,4 +1,4 @@
-package com.expenseapp;
+package io.expenture.app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;

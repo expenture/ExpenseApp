@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+BASEDIR=$(dirname "$0")
+cd "$BASEDIR"
+cd ..
+
+# Find and render templates for android
+find android/templates -type f -exec bin/render-template {} \;
