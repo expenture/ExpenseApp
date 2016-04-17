@@ -11,6 +11,8 @@ import React, {
   ActionSheetIOS
 } from 'react-native';
 
+import style from 'constants/style';
+
 export default class Navigator extends Component {
   propTypes: {
     initialRoute: PropTypes.object.isRequired,
@@ -41,6 +43,7 @@ export default class Navigator extends Component {
       <NavigatorIOS
         ref="nav"
         style={{ flex: 1 }}
+        tintColor={style.PRIMARY_COLOR}
         initialRoute={renderRouteObject(initialRoute, navigator)}
       />
     );

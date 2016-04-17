@@ -21,16 +21,6 @@ fi
 # Set up Node.js dependencies via npm
 npm install
 
-cd app
-for dir in *
-do
-  if [[ -d $dir ]]; then
-    rm -f "$BASEDIR/node_modules/$dir"
-    ln -sf "../app/$dir" "$BASEDIR/node_modules/$dir"
-  fi
-done
-cd ..
-
 # Only if this isn't CI
 # if [ -z "$CI" ]; then
 # fi

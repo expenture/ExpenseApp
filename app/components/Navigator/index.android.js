@@ -12,6 +12,8 @@ import React, {
   ToolbarAndroid
 } from 'react-native';
 
+import style from 'constants/style';
+
 const APP_BAR_HEIGH = 56;
 const BACK_ICON_WHITE = require('./images/android-arrow-back-icon-white.png');
 const BACK_ICON_BLACK = require('./images/android-arrow-back-icon-black.png');
@@ -38,6 +40,7 @@ export default class NavigatorE extends Component {
           const sceneObj = this.props.renderScene(route, navigator);
           const SceneComponent = sceneObj.component;
           const SceneComponentProps = sceneObj.passProps;
+
           let actions = [];
           if (sceneObj.actions && sceneObj.actions.length > 0) {
             actions = sceneObj.actions.map((action) => {
@@ -47,19 +50,17 @@ export default class NavigatorE extends Component {
               };
             });
           }
+
           let color, navIcon, overflowIcon;
-          if (sceneObj.theme == 'dark') {
-            color = '#FFFFFF';
-            navIcon = BACK_ICON_WHITE;
-            overflowIcon = MORE_ICON_WHITE;
-          } else {
-            color = '#202020';
-            navIcon = BACK_ICON_BLACK;
-            overflowIcon = MORE_ICON_BLACK;
-          }
+
+          color = '#FFFFFF';
+          navIcon = BACK_ICON_WHITE;
+          overflowIcon = MORE_ICON_WHITE;
+
           if (route.root) {
             navIcon = null;
           }
+
           return (
             <View
               style={{ flex: 1 }}
@@ -68,7 +69,7 @@ export default class NavigatorE extends Component {
               }}
             >
               <ToolbarAndroid
-                style={{ height: APP_BAR_HEIGH }}
+                style={{ backgroundColor: style.PRIMARY_COLOR, height: APP_BAR_HEIGH }}
                 titleColor={color}
                 subtitleColor={color}
                 title={sceneObj.title}
