@@ -20,9 +20,39 @@ export const scene = (route, navigator) => {
       break;
 
     case 'test':
+      var actions = [];
+
+      if (route.actionSet == 1) {
+        actions = [
+          { title: 'Back', show: 'always', onSelect: navigator.pop }
+        ]
+      }
+
+      if (route.actionSet == 2) {
+        actions = [
+          { title: 'Alert', show: 'always', onSelect: () => alert('hi') }
+        ]
+      }
+
+      if (route.actionSet == 3) {
+        actions = [
+          { title: 'Alert Hi', show: 'always', onSelect: () => alert('Hi') },
+          { title: 'Alert Yo', show: 'always', onSelect: () => alert('Yo') },
+          { title: 'Alert Hello', onSelect: () => alert('Hello') },
+          { title: 'Alert Yay!', onSelect: () => alert('Yay!') },
+        ]
+      }
+
+      let theme;
+      if (route.dark) {
+        theme = 'dark';
+      }
+
       return {
         component: NavigatorTestPage,
         title: 'Navigator Test Page',
+        theme,
+        actions: actions,
         passProps: {
           route: route,
           nextRoute: route.nextRoute

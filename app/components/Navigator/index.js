@@ -1,7 +1,7 @@
 /**
  * Navigator.js
  * A universal navigator wrapper, providing navigators across different
- * platforms with the same API.
+ * platforms with the same API and logic. This is the web version.
  */
 
 import React, { Component, PropTypes } from 'react';
