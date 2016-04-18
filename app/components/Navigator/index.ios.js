@@ -82,7 +82,7 @@ export default class Navigator extends Component {
           },
           (optionIndex) => {
             // Execute action if it is not the cancelButton
-            if (!optionIndex == actions.length) {
+            if (!(optionIndex == actions.length)) {
               actions[optionIndex].onSelect && actions[optionIndex].onSelect();
             }
           })
