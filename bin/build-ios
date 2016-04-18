@@ -3,6 +3,9 @@
 # Exit if any subcommand fails
 # set -e
 
+export PROJECT='ios/ExpenseApp.xcodeproj'
+export SCHEME='ExpenseApp'
+
 # Switch to the project directory
 cd "$(dirname "$0")"
 cd ..
@@ -12,13 +15,10 @@ BASEDIR=$(pwd)
 ./bin/render-templates
 
 # Prepare XCode build
-cat ios/ExpenseApp/AppDelegate.m | sed 's/ *\/\/ *jsCodeLocation = \[\[NSBundle mainBundle\]/  jsCodeLocation = \[\[NSBundle mainBundle\]/g' | sed 's/jsCodeLocation = \[NSURL URLWithString/\/\/ jsCodeLocation = \[NSURL URLWithString/g' > ios/ExpenseApp/AppDelegate.m.tmp
-mv ios/ExpenseApp/AppDelegate.m ios/ExpenseApp/AppDelegate.m.org
-mv ios/ExpenseApp/AppDelegate.m.tmp ios/ExpenseApp/AppDelegate.m
+./bin/ios-use-bundle-js
 
 # Build
-xcodebuild -project ios/ExpenseApp.xcodeproj -scheme ExpenseApp -derivedDataPath ios/build -configuration Release
+xcodebuild -project $PROJECT -scheme $SCHEME -derivedDataPath ios/build -configuration Release
 
 # Cleanup
-rm ios/ExpenseApp/AppDelegate.m
-mv ios/ExpenseApp/AppDelegate.m.org ios/ExpenseApp/AppDelegate.m
+./bin/ios-use-dev-server

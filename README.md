@@ -15,7 +15,26 @@ Then start the iOS app with `bin/run-ios`, Android app with `bin/run-android` or
 
 > Note: Make sure you have done [setting up your development environment for React Native](https://facebook.github.io/react-native/docs/getting-started.html) before running native apps.
 
+
 ## Build
+
+### Build for iOS
+
+`open ios/ExpenseApp.xcodeproj` with Xcode and configure the release build.
+
+#### Build `.app` With CLI
+
+To build a `.app` for manual installation (e.g. using the `ios-deploy` command), run:
+
+```bash
+$ bin/build-ios
+```
+
+The app will locate at `ios/build/Build/Products/Release-iphoneos/`.
+
+#### Build With Xcode
+
+If you want to upload the app to App Store, or use any Xcode releasing features, be sure to run `bin/ios-use-bundle-js` before building or archiving the app, and run `bin/ios-use-dev-server` after it's done.
 
 ### Build for Android
 
@@ -27,7 +46,7 @@ Before building the releasing Android application, you'll need to have a keystor
 After completing the steps above, run:
 
 ```bash
-bin/build-android
+$ bin/build-android
 ```
 
 The release APK will locate at `android/app/build/outputs/apk/`.

@@ -18,18 +18,28 @@ if [ ! "$NODE_VERISON_INT" -ge 5 ]; then
 fi
 
 # Set up Node.js dependencies via npm
+echo '== Running npm install =='
 npm install
+echo ''
 
 # Copy sample config file if needed
+echo '== Copying sample files =='
 if [ ! -f config.js ]; then
+  echo 'Copying sample config file: cp config.sample.js config.js'
   cp config.sample.js config.js
+else
+  echo 'The config file: config.js already exists'
 fi
+echo ''
 
 # Render templates
+echo '== Render templates =='
+echo 'Rendering native templates with bin/render-templates'
 ./bin/render-templates
+echo ''
 
 # Only if this isn't CI
 # if [ -z "$CI" ]; then
 # fi
 
-echo 'Setup done.'
+echo 'Setup done'

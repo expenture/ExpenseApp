@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+# set -e
+
+export PROJECT='ios/ExpenseApp.xcodeproj'
+export SCHEME='ExpenseApp'
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+cat ios/ExpenseApp/AppDelegate.m | sed 's/^ *jsCodeLocation = \[\[NSBundle mainBundle\]/\/\/   jsCodeLocation = \[\[NSBundle mainBundle\]/g' | sed 's/^ *\/\/ *jsCodeLocation = \[NSURL URLWithString/  jsCodeLocation = \[NSURL URLWithString/g' > ios/ExpenseApp/AppDelegate.m.tmp
+rm ios/ExpenseApp/AppDelegate.m
+mv ios/ExpenseApp/AppDelegate.m.tmp ios/ExpenseApp/AppDelegate.m
+echo 'Switched to use development server to serve JS code for the iOS app'
