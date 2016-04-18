@@ -3,8 +3,8 @@
 # Exit if any subcommand fails
 # set -e
 
-export PROJECT='ios/ExpenseApp.xcodeproj'
-export SCHEME='ExpenseApp'
+export PROJECT='ios/Expense.xcodeproj'
+export SCHEME='Expense'
 
 # Switch to the project directory
 cd "$(dirname "$0")"

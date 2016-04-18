@@ -20,7 +20,7 @@ Then start the iOS app with `bin/run-ios`, Android app with `bin/run-android` or
 
 ### Build for iOS
 
-`open ios/ExpenseApp.xcodeproj` with Xcode and configure the release build.
+`open ios/Expense.xcodeproj` with Xcode and configure the release build.
 
 #### Build `.app` With CLI
 
