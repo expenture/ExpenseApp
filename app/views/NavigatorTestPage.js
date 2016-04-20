@@ -1,14 +1,18 @@
+/**
+ * @providesModule views/NavigatorTestPage
+ */
+
 import React, {
   Component,
   PropTypes
 } from 'react';
 
 export default class NavigatorTestPage extends Component {
-  propTypes: {
+  static propTypes = {
     route: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
     nextRoute: PropTypes.object
-  };
+  }
 
   constructor() {
     super();

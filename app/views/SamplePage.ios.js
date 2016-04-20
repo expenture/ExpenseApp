@@ -1,4 +1,6 @@
-'use strict';
+/**
+ * @providesModule views/SamplePage
+ */
 
 import React, {
   Component,
@@ -31,16 +33,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    padding: 16,
+    padding: 16
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    margin: 10
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
-  },
+    marginBottom: 5
+  }
 });

@@ -2,6 +2,8 @@
  * Navigator.android.js
  * A universal navigator wrapper, providing navigators across different
  * platforms with the same API and logic. This is the Android version.
+ *
+ * @providesModule components/Navigator
  */
 
 import React, {
@@ -21,7 +23,7 @@ const MORE_ICON_WHITE = require('./images/android-more-icon-white.png');
 const MORE_ICON_BLACK = require('./images/android-more-icon-black.png');
 
 export default class NavigatorE extends Component {
-  propTypes: {
+  static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired
   };

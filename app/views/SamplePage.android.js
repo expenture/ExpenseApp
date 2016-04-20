@@ -1,4 +1,6 @@
-'use strict';
+/**
+ * @providesModule views/SamplePage
+ */
 
 import React, {
   Component,

@@ -8,10 +8,10 @@ import React, { Component, PropTypes } from 'react';
 var Navigator = require('ReactNavigator');
 
 export default class NavigatorE extends Component {
-  propTypes: {
+  static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired
-  };
+  }
 
   constructor() {
     super();
@@ -23,7 +23,6 @@ export default class NavigatorE extends Component {
         initialRoute={this.props.initialRoute}
         renderScene={(route, navigator) => {
           const sceneObj = this.props.renderScene(route, navigator);
-          console.log(sceneObj)
           const SceneComponent = sceneObj.component;
           const SceneComponentProps = sceneObj.passProps;
           return <SceneComponent {...SceneComponentProps} navigator={navigator} title={sceneObj.title} />;

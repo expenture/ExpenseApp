@@ -2,6 +2,8 @@
  * Navigator.ios.js
  * A universal navigator wrapper, providing navigators across different
  * platforms with the same API and logic. This is the iOS version.
+ *
+ * @providesModule components/Navigator
  */
 
 import React, {
@@ -14,10 +16,10 @@ import React, {
 import style from 'constants/style';
 
 export default class Navigator extends Component {
-  propTypes: {
+  static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired
-  };
+  }
 
   constructor() {
     super();
