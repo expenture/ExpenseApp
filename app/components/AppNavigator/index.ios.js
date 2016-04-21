@@ -1,9 +1,9 @@
 /**
- * Navigator.ios.js
+ * AppNavigator
  * A universal navigator wrapper, providing navigators across different
  * platforms with the same API and logic. This is the iOS version.
  *
- * @providesModule components/Navigator
+ * @providesModule components/AppNavigator
  */
 
 import React, {
@@ -15,7 +15,7 @@ import React, {
 
 import style from 'constants/style';
 
-export default class Navigator extends Component {
+export default class AppNavigator extends Component {
   static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired
@@ -54,7 +54,7 @@ export default class Navigator extends Component {
   _renderRouteObject(route, navigator) {
     const sceneObj = this.props.renderScene(route, navigator);
     const SceneComponent = sceneObj.component;
-    const SceneComponentProps = sceneObj.passProps;
+    const SceneComponentProps = sceneObj.passProps || {};
     SceneComponentProps.navigator = navigator;
 
     var rightButtonIcon, rightButtonTitle, onRightButtonPress;

@@ -1,9 +1,9 @@
 /**
- * Navigator.android.js
+ * AppNavigator
  * A universal navigator wrapper, providing navigators across different
  * platforms with the same API and logic. This is the Android version.
  *
- * @providesModule components/Navigator
+ * @providesModule components/AppNavigator
  */
 
 import React, {
@@ -22,7 +22,7 @@ const BACK_ICON_BLACK = require('./images/android-arrow-back-icon-black.png');
 const MORE_ICON_WHITE = require('./images/android-more-icon-white.png');
 const MORE_ICON_BLACK = require('./images/android-more-icon-black.png');
 
-export default class NavigatorE extends Component {
+export default class AppNavigator extends Component {
   static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired
@@ -91,6 +91,7 @@ export default class NavigatorE extends Component {
             </View>
           );
         }}
+        style={{ backgroundColor: '#000' }}
       />
     );
   }

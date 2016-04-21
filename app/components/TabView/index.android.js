@@ -72,7 +72,7 @@ export default class TabView extends Component {
             );
           })}
         </View>
-        <View style={{ height: 56, flexDirection: 'row' }}>
+        <View style={{ height: 56, flexDirection: 'row', backgroundColor: '#FFF' }}>
           {this.props.children.map((item, i) => {
             let selected = this.state.currentTab === i;
             let tabIcon = item.props.iconAndroid || item.props.icon || require('./images/unselected.png');

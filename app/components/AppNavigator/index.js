@@ -1,13 +1,15 @@
 /**
- * Navigator.js
+ * AppNavigator
  * A universal navigator wrapper, providing navigators across different
  * platforms with the same API and logic. This is the web version.
+ *
+ * @providesModule components/AppNavigator
  */
 
 import React, { Component, PropTypes } from 'react';
 var Navigator = require('ReactNavigator');
 
-export default class NavigatorE extends Component {
+export default class AppNavigator extends Component {
   static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired

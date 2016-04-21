@@ -1,45 +1,28 @@
+/**
+ * The top level index and root of containers.
+ */
+
 import React, { Component } from 'react';
 import TabView from 'components/TabView';
-import Navigator from 'components/Navigator';
-import scene from './scene';
+import AppNavigator from 'components/AppNavigator';
+import RootNavigator from 'components/RootNavigator';
+
+import SignInContainer from './SignInContainer';
+import MainFrameContainer from './MainFrameContainer';
 
 export default class AppContainer extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   render() {
+    if (!this.state.signedIn) {
+      return <SignInContainer tempSignInAction={() => this.setState({ signedIn: true })} rootNavigator={navigator} />;
+    }
+
     return (
-      <TabView>
-        <TabView.Item
-          title="First Tab"
-        >
-          <Navigator
-            initialRoute={{ name: 'test', root: true, actionSet: 2, nextRoute: {
-              name: 'test', actionSet: 1, dark: true, nextRoute: {
-                name: 'test', actionSet: 3, nextRoute: {
-                  name: 'test', actionSet: 3, dark: true, nextRoute: {
-                    name: 'test'
-                  }
-                }
-              }
-            } }}
-            renderScene={scene}
-          />
-        </TabView.Item>
-        <TabView.Item
-          title="Second Tab"
-        >
-          <Navigator
-            initialRoute={{ name: 'test', root: true, actionSet: 2, nextRoute: {
-              name: 'test', actionSet: 1, dark: true, nextRoute: {
-                name: 'test', actionSet: 3, nextRoute: {
-                  name: 'test', actionSet: 3, dark: true, nextRoute: {
-                    name: 'test'
-                  }
-                }
-              }
-            } }}
-            renderScene={scene}
-          />
-        </TabView.Item>
-      </TabView>
+      <MainFrameContainer />
     );
   }
 }

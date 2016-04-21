@@ -1,6 +1,6 @@
 /**
  * app/index.js
- * Entery point of the application.
+ * The entery point of the application.
  */
 'use strict';
 
