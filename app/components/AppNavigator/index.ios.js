@@ -62,9 +62,20 @@ export default class AppNavigator extends Component {
     SceneComponentProps.navigator = navigator;
 
     let rightButtonIcon, rightButtonTitle, onRightButtonPress;
+    let leftButtonIcon, leftButtonTitle, onLeftButtonPress;
     if (sceneObj.actions && sceneObj.actions.length > 0) {
-      if (sceneObj.actions.length === 1) {
-        let action = sceneObj.actions[0];
+      let actions = sceneObj.actions.slice(0);
+
+      if (route.root && actions.length > 1) {
+        let leftAction = actions.shift();
+        leftButtonTitle = leftAction.title;
+        if (leftAction.icon) leftButtonIcon = leftAction.icon;
+        if (leftAction.iconIOS) leftButtonIcon = leftAction.iconIOS;
+        onLeftButtonPress = leftAction.onSelect;
+      }
+
+      if (actions.length === 1) {
+        let action = actions[0];
         rightButtonTitle = action.title;
         if (action.icon) rightButtonIcon = action.icon;
         if (action.iconIOS) rightButtonIcon = action.iconIOS;
@@ -73,7 +84,6 @@ export default class AppNavigator extends Component {
         rightButtonTitle = sceneObj.actionsTitle || 'Actions';
         if (sceneObj.actionsIcon) rightButtonIcon = sceneObj.actionsIcon;
         if (sceneObj.actionsIconIOS) rightButtonIcon = sceneObj.actionsIconIOS;
-        let actions = sceneObj.actions;
         let destructiveButtonIndex;
         let options = actions.map((action, i) => {
           if (action.destructive) destructiveButtonIndex = i;
@@ -102,7 +112,10 @@ export default class AppNavigator extends Component {
       passProps: SceneComponentProps,
       rightButtonTitle,
       rightButtonIcon,
-      onRightButtonPress
+      onRightButtonPress,
+      leftButtonTitle,
+      leftButtonIcon,
+      onLeftButtonPress
     };
   }
 }

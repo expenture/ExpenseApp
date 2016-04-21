@@ -6,4 +6,4 @@ module.exports = {
   androidReleaseKeystorePassword: '',
   androidReleaseKeyAlias: '',
   androidReleaseKeyPassword: ''
-}
+};

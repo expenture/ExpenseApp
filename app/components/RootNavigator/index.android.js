@@ -11,6 +11,6 @@ import React, {
 export default class RootNavigator extends Navigator {
   static defaultProps = {
     ...Navigator.defaultProps,
-    style: { backgroundColor: '#000' }
+    style: { backgroundColor: '#111' }
   };
 }

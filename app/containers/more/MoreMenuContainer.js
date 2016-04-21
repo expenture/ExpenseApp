@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import SignInView from 'views/SignInView';
+import BlankPageView from 'views/BlankPageView';
 
 export default class MoreMenuContainer extends Component {
   constructor() {
@@ -8,8 +8,6 @@ export default class MoreMenuContainer extends Component {
   }
 
   render() {
-    return (
-      <SignInView />
-    );
+    return <BlankPageView title="MoreMenuContainer" />;
   }
 }

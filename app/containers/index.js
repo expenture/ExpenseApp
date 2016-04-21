@@ -18,7 +18,7 @@ export default class AppContainer extends Component {
 
   render() {
     if (!this.state.signedIn) {
-      return <SignInContainer tempSignInAction={() => this.setState({ signedIn: true })} rootNavigator={navigator} />;
+      return <SignInContainer tempSignInAction={() => this.setState({ signedIn: true })} />;
     }
 
     return (
