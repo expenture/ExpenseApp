@@ -42,3 +42,9 @@ node_modules/
 npm-debug.log
 config.js
 android/app/src/main/res/values/strings.xml
+
+# BUCK
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore

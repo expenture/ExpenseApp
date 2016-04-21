@@ -8,5 +8,8 @@ cd "$(dirname "$0")"
 cd ..
 BASEDIR=$(pwd)
 
+# Render templates
+./bin/render-templates
+
 # Run
 react-native run-ios
