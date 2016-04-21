@@ -30,7 +30,27 @@ export default class AppNavigator extends Component {
 
   constructor() {
     super();
+    this.push = this.push.bind(this);
+    this.pop = this.pop.bind(this);
+    this.popToTop = this.popToTop.bind(this);
+    this.getRouteStackLength = this.getRouteStackLength.bind(this);
     this.scenes = [];
+  }
+
+  push(route) {
+    this.refs.nav.push(route);
+  }
+
+  pop() {
+    this.refs.nav.pop();
+  }
+
+  popToTop() {
+    this.refs.nav.popToTop();
+  }
+
+  getRouteStackLength() {
+    return this.refs.nav.getCurrentRoutes().length;
   }
 
   render() {

@@ -23,30 +23,34 @@ export default class AppNavigator extends Component {
 
   constructor() {
     super();
+    this.push = this.push.bind(this);
+    this.pop = this.pop.bind(this);
+    this.popToTop = this.popToTop.bind(this);
     this._renderRouteObject = this._renderRouteObject.bind(this);
+  }
+
+  push(route) {
+    this.refs.nav.push(this._renderRouteObject(route, this));
+  }
+
+  pop() {
+    this.refs.nav.pop();
+  }
+
+  popToTop() {
+    this.refs.nav.popToTop();
   }
 
   render() {
     const { initialRoute } = this.props;
     const renderRouteObject = this._renderRouteObject;
 
-    // A navigator object to pass into each components with the general push()
-    // and pop() function
-    const navigator = {
-      push: (route) => {
-        this.refs.nav.push(renderRouteObject(route, navigator));
-      },
-      pop: () => {
-        this.refs.nav.pop();
-      }
-    };
-
     return (
       <NavigatorIOS
         ref="nav"
         style={{ flex: 1 }}
         tintColor={style.PRIMARY_COLOR}
-        initialRoute={renderRouteObject(initialRoute, navigator)}
+        initialRoute={renderRouteObject(initialRoute, this)}
       />
     );
   }
@@ -57,9 +61,9 @@ export default class AppNavigator extends Component {
     const SceneComponentProps = sceneObj.passProps || {};
     SceneComponentProps.navigator = navigator;
 
-    var rightButtonIcon, rightButtonTitle, onRightButtonPress;
+    let rightButtonIcon, rightButtonTitle, onRightButtonPress;
     if (sceneObj.actions && sceneObj.actions.length > 0) {
-      if (sceneObj.actions.length == 1) {
+      if (sceneObj.actions.length === 1) {
         let action = sceneObj.actions[0];
         rightButtonTitle = action.title;
         if (action.icon) rightButtonIcon = action.icon;
@@ -84,11 +88,11 @@ export default class AppNavigator extends Component {
           },
           (optionIndex) => {
             // Execute action if it is not the cancelButton
-            if (!(optionIndex == actions.length)) {
+            if (!(optionIndex === actions.length)) {
               actions[optionIndex].onSelect && actions[optionIndex].onSelect();
             }
-          })
-        }
+          });
+        };
       }
     }
 

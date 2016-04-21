@@ -30,7 +30,8 @@ class Item extends Component {
     selectedIconIOS: Image.propTypes.source,
     iconAndroid: Image.propTypes.source,
     selectedIconAndroid: Image.propTypes.source,
-    badge: PropTypes.number
+    badge: PropTypes.number,
+    onSelect: PropTypes.func
   };
 }
 
@@ -38,7 +39,9 @@ export default class TabView extends Component {
   static Item = Item;
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.object).isRequired,
-    initialTab: PropTypes.number
+    initialTab: PropTypes.number,
+    onTabSelected: PropTypes.func,
+    onCurrentTabPress: PropTypes.func
   };
   static defaultProps = {
     initialTab: 0
@@ -75,9 +78,14 @@ export default class TabView extends Component {
         <View style={{ height: 56, flexDirection: 'row', backgroundColor: '#FFF' }}>
           {this.props.children.map((item, i) => {
             let selected = this.state.currentTab === i;
-            let tabIcon = item.props.iconAndroid || item.props.icon || require('./images/unselected.png');
+            let tabIcon = item.props.iconAndroid ||
+                          item.props.icon ||
+                          require('./images/unselected.png');
             if (selected) {
-              tabIcon = item.props.selectedIconAndroid || item.props.selectedIcon || require('./images/selected.png');
+              if (item.props.onSelect) item.props.onSelect();
+              tabIcon = item.props.selectedIconAndroid ||
+                        item.props.selectedIcon ||
+                        require('./images/selected.png');
             }
             return (
               <TouchableNativeFeedback
@@ -114,6 +122,14 @@ export default class TabView extends Component {
 
   selectTab(i) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    this.setState({ currentTab: i });
+    if (this.state.currentTab !== i) {
+      this.setState({ currentTab: i });
+    } else if (this.props.onCurrentTabPress) {
+      this.props.onCurrentTabPress();
+    }
+
+    if (this.props.onTabSelected) {
+      this.props.onTabSelected(i);
+    }
   }
 }

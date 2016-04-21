@@ -82,7 +82,7 @@ module.exports = {
     "block-scoped-var": 0, // treat var statements as if they were block scoped (off by default). 0: deep destructuring is not compatible https://github.com/eslint/eslint/issues/1863
     "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
     "consistent-return": 1, // require return statements to either always or never specify values
-    "curly": 2, // specify curly brace conventions for all control statements
+    "curly": 1, // specify curly brace conventions for all control statements
     "default-case": 2, // require default case in switch statements (off by default)
     "dot-notation": 2, // encourages use of dot notation whenever possible
     "eqeqeq": 2, // require the use of === and !==
@@ -90,7 +90,7 @@ module.exports = {
     "no-alert": 1, // disallow the use of alert, confirm, and prompt
     "no-caller": 2, // disallow use of arguments.caller or arguments.callee
     "no-div-regex": 2, // disallow division operators explicitly at beginning of regular expression (off by default)
-    "no-else-return": 2, // disallow else after a return in an if (off by default)
+    "no-else-return": 1, // disallow else after a return in an if (off by default)
     "no-labels": 2, // disallow use of labels for anything other then loops and switches
     "no-eq-null": 2, // disallow comparisons to null without a type-checking operator (off by default)
     "no-eval": 2, // disallow use of eval()
@@ -182,7 +182,7 @@ module.exports = {
     "no-ternary": 0, // disallow the use of ternary operators (off by default)
     "no-trailing-spaces": 1, // disallow trailing whitespace at the end of lines
     "no-underscore-dangle": 0, // disallow dangling underscores in identifiers
-    "one-var": [1, "never"], // allow just one var statement per function (off by default)
+    "one-var": [0, "never"], // allow just one var statement per function (off by default)
     "operator-assignment": [1, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
     "padded-blocks": [1, "never"], // enforce padding within blocks (off by default)
     "quote-props": [1, "as-needed"], // require quotes around object literal property names (off by default)
