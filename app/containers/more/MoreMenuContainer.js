@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import BlankPageView from 'views/BlankPageView';
+import MoreMenuView from 'views/more/MoreMenuView';
 
 export default class MoreMenuContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    return <BlankPageView title="MoreMenuContainer" />;
+    return <MoreMenuView />;
   }
 }
