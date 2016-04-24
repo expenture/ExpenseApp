@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+# Export designs if needed
+DISIGN_FILE_PATH="app/design/Design.sketch"
+GIT_FILE_STATUS=$(git status $DISIGN_FILE_PATH --porcelain)
+if [ "${GIT_FILE_STATUS:0:1}" == "M" ]; then
+  echo "Staging changes detected in design file ($DISIGN_FILE_PATH), running export..."
+  bin/export-design
+  git add app/images
+else
+  echo "No staging changes in design file ($DISIGN_FILE_PATH), skipping design export."
+fi

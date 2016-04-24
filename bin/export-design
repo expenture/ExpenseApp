@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+if [ -x "/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool" ]; then
+  echo "Exporting design from the Sketch file..."
+  /Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool export slices --output=app/images/ app/design/Design.sketch
+  echo "Exporting done."
+else
+  echo "ERROR: Sketch is not installed on this machine, the design can not be exported."
+  exit -1
+fi

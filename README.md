@@ -16,6 +16,15 @@ Then start the iOS app with `bin/run-ios`, Android app with `bin/run-android` or
 > Note: Make sure you have done [setting up your development environment for React Native](https://facebook.github.io/react-native/docs/getting-started.html) before running native apps.
 
 
+## Design
+
+To do the design, you'll need the [Sketch](https://www.sketchapp.com/) app installed on your machine.
+
+After running `bin/setup` (yes, we need some dependencies to setup for the design workflow), `open app/design/Design.sketch` and make some changes, save it, then run `bin/export-design` to export your new designs.
+
+> Note: `bin/export-design` will also run automatically via git hooks before you commit changes for `Design.sketch`.
+
+
 ## Build
 
 ### Build for iOS
