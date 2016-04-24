@@ -23,7 +23,8 @@
     "react": "^0.14.8",
     "react-dom": "^0.14.7",
     "react-native": "^0.24.0",
-    "react-native-tableview-simple": "^0.8.0",
+    "react-native-android-checkbox": "0.0.1",
+    "react-native-tableview-simple": "Neson/react-native-tableview-simple",
     "react-web": "^0.2.4",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1"

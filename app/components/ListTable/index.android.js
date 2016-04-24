@@ -7,12 +7,17 @@
 import React, {
   Component,
   PropTypes,
+  StyleSheet,
   View,
   Text,
+  TextInput,
   TouchableWithoutFeedback,
   TouchableNativeFeedback,
-  StyleSheet
+  Switch,
+  ProgressBarAndroid
 } from 'react-native';
+
+import Checkbox from 'react-native-android-checkbox';
 
 export default class ListTable extends Component {
   static propTypes = {
@@ -39,7 +44,10 @@ export default class ListTable extends Component {
     render() {
       return (
         <View
-          style={styles.section}
+          style={[
+            styles.section,
+            !this.props.children && { paddingTop: 0 }
+          ]}
         >
           {(() => {
             if (this.props.header) return (
@@ -50,9 +58,13 @@ export default class ListTable extends Component {
               </View>
             );
           })()}
-          <View style={styles.sectionContent}>
-            {this.props.children}
-          </View>
+          {(() => {
+            if (this.props.children) return (
+              <View style={styles.sectionContent}>
+                {this.props.children}
+              </View>
+            );
+          })()}
           {(() => {
             if (this.props.footer) return (
               <View style={styles.sectionFooter}>
@@ -70,7 +82,11 @@ export default class ListTable extends Component {
   static Cell = class extends Component {
     static propTypes = {
       title: PropTypes.string,
+      textInput: PropTypes.bool,
       navigated: PropTypes.bool,
+      switch: PropTypes.bool,
+      switched: PropTypes.bool,
+      check: PropTypes.bool,
       detail: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -81,14 +97,86 @@ export default class ListTable extends Component {
       ]),
       onPress: PropTypes.func,
       onDisabledPress: PropTypes.func,
+      onSwitch: PropTypes.func,
+      onCheck: PropTypes.func,
+      checked: PropTypes.bool,
+      loading: PropTypes.bool,
       disabled: PropTypes.bool,
       children: PropTypes.any,
       backgroundColor: PropTypes.string
     };
 
+    constructor(props) {
+      super(props);
+      this.state = {
+        switched: this.props.switched,
+        checked: this.props.checked
+      };
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (typeof nextProps.switched !== 'undefined') {
+        this.state.switched = nextProps.switched;
+      }
+      if (typeof nextProps.checked !== 'undefined') {
+        this.state.checked = nextProps.checked;
+      }
+    }
+
     render() {
+      if (this.props.textInput) {
+        const textStyle = [styles.cellTitleText, {
+          flex: 20,
+          fontSize: 16,
+          paddingRight: 2
+        }, this.props.disabled && {
+          color: 'grey'
+        }];
+
+        return (
+          <TouchableWithoutFeedback
+            onPress={this.handlePress.bind(this)}
+          >
+            <View style={[
+              styles.cell,
+              this.props.backgroundColor && { backgroundColor: this.props.backgroundColor }
+            ]}>
+              {(() => {
+                if (this.props.title) return (
+                  <Text
+                    style={[
+                      textStyle,
+                      { flex: 8 }
+                    ]}
+                    numberOfLines={1}
+                  >
+                    {this.props.title}
+                  </Text>
+                );
+              })()}
+              <TextInput
+                {...this.props}
+                ref="textInput"
+                editable={!this.props.disabled}
+                style={[
+                  textStyle,
+                  {
+                    padding: 0,
+                    height: this.props.multiline ? 160 : 26
+                  },
+                  this.props.style
+                ]}
+                placeholderTextColor="#1F1F1F55"
+                numberOfLines={this.props.multiline ? 8 : 1}
+                underlineColorAndroid="transparent"
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        );
+      }
+
       let Wrapper = TouchableWithoutFeedback;
-      if (this.props.onPress && !this.props.disabled) {
+      if ((this.props.onPress || this.props.onSwitch || this.props.onCheck) && !this.props.disabled) {
         Wrapper = TouchableNativeFeedback;
       }
 
@@ -100,7 +188,22 @@ export default class ListTable extends Component {
             styles.cell,
             this.props.backgroundColor && { backgroundColor: this.props.backgroundColor }
           ]}>
-            <View style={this.props.disabled && { opacity: 0.4 }}>
+            {(() => {
+              if (this.props.check || this.props.checked) {
+                return (
+                  <Checkbox
+                    style={{ paddingRight: 32 }}
+                    value={this.props.checked}
+                    onValueChange={this.props.onCheck}
+                    disabled={this.props.disabled}
+                  />
+                );
+              }
+            })()}
+            <View style={[
+              { flex: 1 },
+              this.props.disabled && { opacity: 0.4 }
+            ]}>
               {(() => {
                 if (this.props.title) {
                   return (
@@ -122,6 +225,25 @@ export default class ListTable extends Component {
               })()}
               {this.props.children}
             </View>
+            {(() => {
+              if (this.props.loading) return (
+                <ProgressBarAndroid
+                  style={{ paddingHorizontal: 6 }}
+                  styleAttr="Small"
+                />
+              );
+            })()}
+            {(() => {
+              if (this.props.switch) return (
+                <Switch
+                  ref="switch"
+                  style={{ paddingLeft: 2 }}
+                  value={this.props.switched}
+                  onValueChange={this.props.onSwitch}
+                  disabled={this.disabled}
+                />
+              );
+            })()}
           </View>
         </Wrapper>
       );
@@ -130,8 +252,12 @@ export default class ListTable extends Component {
     handlePress() {
       if (this.props.disabled) {
         this.props.onDisabledPress && this.props.onDisabledPress();
-      } else {
-        this.props.onPress && this.props.onPress();
+      } else if (this.props.onPress) {
+        this.props.onPress();
+      } else if (this.props.onSwitch) {
+        this.props.onSwitch(!this.state.switched);
+      } else if (this.props.onCheck) {
+        this.props.onCheck(!this.state.checked);
       }
     }
   };
@@ -161,7 +287,8 @@ const styles = StyleSheet.create({
   },
   sectionFooterText: {
     color: '#727272',
-    fontSize: 12
+    fontSize: 13,
+    lineHeight: 16
   },
   sectionContent: {
     borderTopWidth: 1,

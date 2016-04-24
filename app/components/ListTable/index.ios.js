@@ -6,7 +6,9 @@ import React, {
   Component,
   PropTypes,
   View,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Text,
+  TextInput
 } from 'react-native';
 
 import {
@@ -55,7 +57,10 @@ export default class ListTable extends Component {
   static Cell = class extends Component {
     static propTypes = {
       title: PropTypes.string,
+      textInput: PropTypes.bool,
       navigated: PropTypes.bool,
+      switch: PropTypes.bool,
+      switched: PropTypes.bool,
       detail: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -66,10 +71,27 @@ export default class ListTable extends Component {
       ]),
       onPress: PropTypes.func,
       onDisabledPress: PropTypes.func,
+      onSwitch: PropTypes.func,
+      onCheck: PropTypes.func,
+      checked: PropTypes.bool,
+      loading: PropTypes.bool,
       disabled: PropTypes.bool,
       children: PropTypes.any,
       backgroundColor: PropTypes.string
     };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        checked: this.props.checked
+      };
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (typeof nextProps.checked !== 'undefined') {
+        this.state.checked = nextProps.checked;
+      }
+    }
 
     render() {
       if (this.props.children) {
@@ -88,12 +110,61 @@ export default class ListTable extends Component {
         );
       }
 
+      if (this.props.textInput) {
+        const textStyle = [{
+          flex: 20,
+          fontSize: 16,
+          paddingRight: 2
+        }, this.props.disabled && {
+          color: 'grey'
+        }];
+
+        return (
+          <TouchableWithoutFeedback
+            onPress={this.handlePress.bind(this)}
+          >
+            <CustomCell
+              cellHeight={this.props.multiline && 160}
+            >
+              {(() => {
+                if (this.props.title) return (
+                  <Text
+                    style={[
+                      textStyle,
+                      { flex: 8 }
+                    ]}
+                    numberOfLines={1}
+                  >
+                    {this.props.title}
+                  </Text>
+                );
+              })()}
+              <TextInput
+                {...this.props}
+                ref="textInput"
+                editable={!this.props.disabled}
+                style={[
+                  textStyle,
+                  this.props.style
+                ]}
+              />
+            </CustomCell>
+          </TouchableWithoutFeedback>
+        );
+      }
+
       let cellstyle;
       if (this.props.detail) cellstyle = 'RightDetail';
       if (this.props.subtitle) cellstyle = 'Subtitle';
 
       let accessory;
+      if (this.props.checked) accessory = 'Checkmark';
       if (this.props.navigated) accessory = 'DisclosureIndicator';
+      if (this.props.switch) accessory = 'Switch';
+
+      let onPress = this.props.onPress || this.props.onCheck && (() => {
+        this.props.onCheck(!this.state.checked);
+      });
 
       let detail = this.props.detail || this.props.subtitle;
 
@@ -107,9 +178,12 @@ export default class ListTable extends Component {
             <Cell
               cellstyle={cellstyle}
               accessory={accessory}
+              switchValue={this.props.switched}
+              onSwitchValueChange={this.props.onSwitch}
               title={this.props.title}
               detail={detail}
-              onPress={this.props.onPress}
+              onPress={onPress}
+              isLoading={this.props.loading}
               isDisabled={this.props.disabled}
               cellTintColor={this.props.backgroundColor}
               highlightActiveOpacity={0.7}
@@ -122,8 +196,10 @@ export default class ListTable extends Component {
     handlePress() {
       if (this.props.disabled) {
         this.props.onDisabledPress && this.props.onDisabledPress();
-      } else {
-        this.props.onPress && this.props.onPress();
+      } else if (this.props.onPress) {
+        this.props.onPress();
+      } else if (this.refs.textInput) {
+        this.refs.textInput.focus();
       }
     }
   };

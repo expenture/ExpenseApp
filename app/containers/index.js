@@ -3,9 +3,6 @@
  */
 
 import React, { Component } from 'react';
-import TabView from 'components/TabView';
-import AppNavigator from 'components/AppNavigator';
-import RootNavigator from 'components/RootNavigator';
 
 import DevCenterContainer from './DevCenterContainer';
 import SignInContainer from './SignInContainer';
