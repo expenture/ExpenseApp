@@ -101,12 +101,18 @@ export default class ListTable extends Component {
             this.props.backgroundColor && { backgroundColor: this.props.backgroundColor }
           ]}>
             <View style={this.props.disabled && { opacity: 0.4 }}>
-              <Text style={[
-                styles.cellTitleText,
-                subtitle && styles.cellTitleText_withSubtitle
-              ]}>
-                {this.props.title}
-              </Text>
+              {(() => {
+                if (this.props.title) {
+                  return (
+                    <Text style={[
+                      styles.cellTitleText,
+                      subtitle && styles.cellTitleText_withSubtitle
+                    ]}>
+                      {this.props.title}
+                    </Text>
+                  );
+                }
+              })()}
               {(() => {
                 if (subtitle) {
                   return (
@@ -114,6 +120,7 @@ export default class ListTable extends Component {
                   );
                 }
               })()}
+              {this.props.children}
             </View>
           </View>
         </Wrapper>
@@ -132,6 +139,7 @@ export default class ListTable extends Component {
 
 const styles = StyleSheet.create({
   listTable: {
+    flex: 1,
     paddingVertical: 14,
     backgroundColor: '#EEE'
   },

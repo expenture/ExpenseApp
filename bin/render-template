@@ -14,7 +14,27 @@
  */
 
 var Mustache = require('mustache');
+var child_process = require('child_process');
 var fs = require('fs');
+
+function execSync(command) {
+  // Run the command in a subshell
+  child_process.exec(command + ' 2>&1 1> nodejs_execSync_output && echo done! > nodejs_execSync_done');
+
+  // Block the event loop until the command has executed.
+  while (!fs.existsSync('nodejs_execSync_done')) {
+    // Do nothing
+  }
+
+  // Read the output
+  var output = fs.readFileSync('nodejs_execSync_output', 'utf8');
+
+  // Delete temporary files.
+  fs.unlinkSync('nodejs_execSync_output');
+  fs.unlinkSync('nodejs_execSync_done');
+
+  return output.replace(/\n$/, '');
+}
 
 // Build variables
 var variables = {};
@@ -36,6 +56,13 @@ try {
   });
 } catch (e) {}
 
+// load build info
+variables.build = {};
+variables.build.commit = execSync('git rev-parse HEAD');
+variables.build.hostname = execSync('hostname');
+variables.build.user = execSync('echo "$USER"');
+variables.build.timeStamp = (new Date()).toISOString();
+
 // Do the render
 var templateFileName = process.argv[2];
 
@@ -44,10 +71,10 @@ if (!templateFileName) {
   return -1;
 }
 
-var outputFileName = templateFileName.replace(/[\._\-\/]templates?/, '');
+var outputFileName = templateFileName.replace(/[\._\-]?templates?[\/]?/, '');
 
 if (outputFileName == templateFileName) {
-  console.error('Error: The template file path does not contains "template", so we can\'t determine where to place the output file. Please rename the template file or place the template file in a directory named "template".');
+  console.error('Error: The template file path ' + templateFileName + ' does not contains "template", so we can\'t determine where to place the output file. Please rename the template file or place the template file in a directory named "template".');
   return -1;
 }
 

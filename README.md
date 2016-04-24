@@ -34,7 +34,7 @@ The app will locate at `ios/build/Build/Products/Release-iphoneos/`.
 
 #### Build With Xcode
 
-If you want to upload the app to App Store, or use any Xcode releasing features, be sure to run `bin/ios-use-bundle-js` before building or archiving the app, and run `bin/ios-use-dev-server` after it's done.
+If you want to upload the app to App Store, or use any Xcode releasing features, be sure to run `bin/render-templates` and `bin/ios-use-bundle-js` before building or archiving the app, and run `bin/ios-use-dev-server` after it's done.
 
 ### Build for Android
 

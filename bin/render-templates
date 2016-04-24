@@ -8,6 +8,9 @@ BASEDIR=$(dirname "$0")
 cd "$BASEDIR"
 cd ..
 
+# Find and render templates
+find templates -type f -exec bin/render-template {} \;
+
 # Find and render templates for ios
 find ios/templates -type f -exec bin/render-template {} \;
 

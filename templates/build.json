@@ -1,0 +1,6 @@
+{
+  "commit": "{{build.commit}}",
+  "user": "{{build.user}}",
+  "hostname": "{{build.hostname}}",
+  "timeStamp": "{{build.timeStamp}}"
+}

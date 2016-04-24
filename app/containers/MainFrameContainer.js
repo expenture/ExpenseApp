@@ -9,8 +9,9 @@ import React, { Component } from 'react';
 import RootNavigator from 'components/RootNavigator';
 import AppNavigator from 'components/AppNavigator';
 import TabView from 'components/TabView';
-import config from 'config';
 import Platform from 'utils/Platform';
+
+import { renderDevCenterScene } from './DevCenterContainer';
 
 import NewTransactionContainer from './NewTransactionContainer';
 
@@ -20,9 +21,6 @@ import MoneyFlowContainer from './money-flow/MoneyFlowContainer';
 import AccountsContainer from './accounts/AccountsContainer';
 import MoreMenuContainer from './more/MoreMenuContainer';
 import NotificationsContainer from './more/NotificationsContainer';
-
-import SamplePage from 'views/SamplePage';
-import NavigatorTestPage from 'views/NavigatorTestPage';
 
 export default class MainFrameContainer extends Component {
   constructor() {
@@ -34,8 +32,8 @@ export default class MainFrameContainer extends Component {
     };
     this.directlySetState = this.directlySetState.bind(this);
     this.registerAppNavigator = this.registerAppNavigator.bind(this);
-    this.touchDevTestTrigger = this.touchDevTestTrigger.bind(this);
-    this.loadDevTest = this.loadDevTest.bind(this);
+    this.touchDevCenterTrigger = this.touchDevCenterTrigger.bind(this);
+    this.loadDevCenter = this.loadDevCenter.bind(this);
   }
 
   render() {
@@ -65,8 +63,7 @@ export default class MainFrameContainer extends Component {
             let currentAppNavigator = this.state.appNavigators[this.state.currentTab];
             if (currentAppNavigator) currentAppNavigator.popToTop();
 
-            // For dev test
-            this.touchDevTestTrigger();
+            this.touchDevCenterTrigger();
           }}
         >
           <TabView.Item
@@ -154,7 +151,7 @@ export default class MainFrameContainer extends Component {
     switch (route.name) {
     case 'dashboard':
       return {
-        title: config.appName,
+        title: 'Expense',
         component: DashboardContainer,
         actions: [
           {
@@ -201,55 +198,8 @@ export default class MainFrameContainer extends Component {
         component: NotificationsContainer
       };
 
-    case 'sample-page':
-      return {
-        component: SamplePage,
-        title: 'Sample Page'
-      };
-
-    case 'test':
-      var actions = [];
-
-      if (route.actionSet == 1) {
-        actions = [
-          { title: 'Back', show: 'always', onSelect: navigator.pop }
-        ]
-      }
-
-      if (route.actionSet == 2) {
-        actions = [
-          { title: 'Alert', show: 'always', onSelect: () => alert('hi') }
-        ]
-      }
-
-      if (route.actionSet == 3) {
-        actions = [
-          { title: 'Alert Hi', show: 'always', onSelect: () => alert('Hi') },
-          { title: 'Alert Yo', show: 'always', onSelect: () => alert('Yo') },
-          { title: 'Alert Hello', onSelect: () => alert('Hello') },
-          { title: 'Alert Yay!', onSelect: () => alert('Yay!') },
-        ]
-      }
-
-      let theme;
-      if (route.dark) {
-        theme = 'dark';
-      }
-
-      return {
-        component: NavigatorTestPage,
-        title: 'Navigator Test Page',
-        theme,
-        actions: actions,
-        passProps: {
-          route: route,
-          nextRoute: route.nextRoute
-        }
-      };
-
     default:
-      console.error(`No route defined for: ${route.name}, route: ${JSON.stringify(route)}`);
-      return null;
+      return renderDevCenterScene(route, navigator);
     }
   }
 
@@ -267,13 +217,13 @@ export default class MainFrameContainer extends Component {
     this.state.appNavigatorKeys.push(name);
   }
 
-  touchDevTestTrigger() {
+  touchDevCenterTrigger() {
     if (!this.dtc) this.dtc = 0;
     this.dtc++;
 
     if (this.dtc > 9) {
       this.dtc = 0;
-      this.loadDevTest();
+      this.loadDevCenter();
     }
 
     if (this.tdt) clearTimeout(this.tdt);
@@ -282,22 +232,10 @@ export default class MainFrameContainer extends Component {
     }, 1000);
   }
 
-  loadDevTest() {
+  loadDevCenter() {
     // This is a place to load development test content
     let currentAppNavigator = this.state.appNavigators[this.state.currentTab];
-    currentAppNavigator.push(
-      {
-        name: 'test', root: true, actionSet: 2, nextRoute: {
-          name: 'test', actionSet: 1, dark: true, nextRoute: {
-            name: 'test', actionSet: 3, nextRoute: {
-              name: 'test', actionSet: 3, dark: true, nextRoute: {
-                name: 'test'
-              }
-            }
-          }
-        }
-      }
-    );
+    currentAppNavigator.push({ name: 'dev-center-menu' });
   }
 
   componentWillMount() {

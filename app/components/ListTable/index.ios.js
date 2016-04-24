@@ -72,6 +72,22 @@ export default class ListTable extends Component {
     };
 
     render() {
+      if (this.props.children) {
+        return (
+          <View style={{
+            paddingLeft: 15,
+            paddingRight: 20,
+            paddingTop: 10,
+            paddingBottom: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#FFF'
+          }}>
+            {this.props.children}
+          </View>
+        );
+      }
+
       let cellstyle;
       if (this.props.detail) cellstyle = 'RightDetail';
       if (this.props.subtitle) cellstyle = 'Subtitle';
@@ -97,9 +113,7 @@ export default class ListTable extends Component {
               isDisabled={this.props.disabled}
               cellTintColor={this.props.backgroundColor}
               highlightActiveOpacity={0.7}
-            >
-              {this.props.children}
-            </Cell>
+            />
           </View>
         </TouchableWithoutFeedback>
       );

@@ -83,7 +83,7 @@ module.exports = {
     "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
     "consistent-return": 1, // require return statements to either always or never specify values
     "curly": 1, // specify curly brace conventions for all control statements
-    "default-case": 2, // require default case in switch statements (off by default)
+    "default-case": 1, // require default case in switch statements (off by default)
     "dot-notation": 2, // encourages use of dot notation whenever possible
     "eqeqeq": 2, // require the use of === and !==
     "guard-for-in": 2, // make sure for-in loops have an if statement (off by default)
