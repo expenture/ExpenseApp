@@ -15,6 +15,7 @@ if [ "${GIT_FILE_STATUS:0:1}" == "M" ]; then
   echo "Staging changes detected in design file ($DISIGN_FILE_PATH), running export..."
   bin/export-design
   git add app/images
+  git add app/constants/colors.js
 else
   echo "No staging changes in design file ($DISIGN_FILE_PATH), skipping design export."
 fi
