@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1024px" height="725px" viewBox="0 0 1024 725" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>Spec/ColorApplications</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="60" height="60"></rect>
+        <rect id="path-3" x="0" y="0" width="60" height="60"></rect>
+    </defs>
+    <g id="Identity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Color-Applications" transform="translate(9.000000, 0.000000)">
+            <rect id="Color" fill="#919396" x="262" y="541" width="120" height="60"></rect>
+            <rect id="Color" fill="#FF5252" x="262" y="451" width="120" height="60"></rect>
+            <rect id="Color" fill="#D5A845" x="262" y="361" width="120" height="60"></rect>
+            <rect id="Color" fill="#FC3252" x="262" y="271" width="120" height="60"></rect>
+            <rect id="Color" fill="#919396" x="92" y="541" width="120" height="60"></rect>
+            <rect id="Color" fill="#B868FD" x="92" y="451" width="120" height="60"></rect>
+            <rect id="Color" fill="#2B91FF" x="92" y="361" width="120" height="60"></rect>
+            <rect id="Color" fill="#35DE81" x="92" y="271" width="120" height="60"></rect>
+            <rect id="Color" fill="#7945D0" x="642" y="541" width="120" height="60"></rect>
+            <rect id="Color" fill="#E36CED" x="472" y="541" width="120" height="60"></rect>
+            <rect id="Color" fill="#6C49A6" x="812" y="541" width="120" height="60"></rect>
+            <text id="Violet" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="679.398539" y="576">Violet</tspan>
+            </text>
+            <rect id="Color" fill="#3B99C9" x="642" y="451" width="120" height="60"></rect>
+            <rect id="Color" fill="#62D0CB" x="472" y="451" width="120" height="60"></rect>
+            <rect id="Color" fill="#61708C" x="812" y="451" width="120" height="60"></rect>
+            <text id="Blue" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="685.016832" y="486">Blue</tspan>
+            </text>
+            <rect id="Color" fill="#50BE3D" x="642" y="361" width="120" height="60"></rect>
+            <rect id="Color" fill="#71C643" x="472" y="361" width="120" height="60"></rect>
+            <rect id="Color" fill="#17B373" x="812" y="361" width="120" height="60"></rect>
+            <text id="Green" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="676.192793" y="396">Green</tspan>
+            </text>
+            <rect id="Color" fill="#FFCC02" x="642" y="271" width="120" height="60"></rect>
+            <rect id="Color" fill="#FFCC02" x="472" y="271" width="120" height="60"></rect>
+            <rect id="Color" fill="#E08C29" x="812" y="271" width="120" height="60"></rect>
+            <text id="Yellow" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="678.21348" y="306">Yellow</tspan>
+            </text>
+            <rect id="Color" fill="#FCAF17" x="642" y="181" width="120" height="60"></rect>
+            <rect id="Color" fill="#FFC438" x="472" y="181" width="120" height="60"></rect>
+            <rect id="Color" fill="#B65B42" x="812" y="181" width="120" height="60"></rect>
+            <text id="Orange" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="672.362894" y="216">Orange</tspan>
+            </text>
+            <rect id="Color" fill="#F26D5F" x="642" y="91" width="120" height="60"></rect>
+            <rect id="Color" fill="#F6534A" x="472" y="91" width="120" height="60"></rect>
+            <rect id="Color" fill="#C92841" x="812" y="91" width="120" height="60"></rect>
+            <text id="Red" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="688.375051" y="126">Red</tspan>
+            </text>
+            <rect id="Color" fill="#3C4852" x="92" y="91" width="120" height="60"></rect>
+            <rect id="Color" fill="#253240" x="152" y="91" width="60" height="60"></rect>
+            <rect id="Color" fill="#253240" x="92" y="181" width="120" height="60"></rect>
+            <text id="Branding-1" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.45" fill="#FFFFFF">
+                <tspan x="110.725586" y="126">Branding 1</tspan>
+            </text>
+            <text id="Manage" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="120.314066" y="216">Manage</tspan>
+            </text>
+            <text id="Success" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="119.193152" y="306">Success</tspan>
+            </text>
+            <text id="Warning" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="288.949012" y="396">Warning</tspan>
+            </text>
+            <text id="Authorize" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="113.352691" y="486">Authorize</tspan>
+            </text>
+            <text id="Touch-ID" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="287.331516" y="486">Touch ID</tspan>
+            </text>
+            <text id="Info" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="136.153551" y="396">Info</tspan>
+            </text>
+            <text id="Error" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                <tspan x="302.522383" y="306">Error</tspan>
+            </text>
+            <rect id="Color" fill="#FFFFFF" x="262" y="181" width="120" height="60"></rect>
+            <text id="Report" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#253240">
+                <tspan x="295.012797" y="216">Report</tspan>
+            </text>
+            <rect id="Color" fill="#35DE81" x="322" y="91" width="60" height="60"></rect>
+            <rect id="Color" fill="#7EE78B" x="262" y="91" width="120" height="60"></rect>
+            <g id="Group" transform="translate(262.000000, 91.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Color" fill="#7EE78B" xlink:href="#path-1"></use>
+                <text id="Branding-2" mask="url(#mask-2)" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#253240">
+                    <tspan x="16.7776757" y="36">Branding 2</tspan>
+                </text>
+            </g>
+            <g id="Group" transform="translate(322.000000, 91.000000)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Color" fill="#35DE81" xlink:href="#path-3"></use>
+                <text id="Branding-2" mask="url(#mask-4)" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                    <tspan x="-43.2223243" y="36">Branding 2</tspan>
+                </text>
+            </g>
+            <g id="Note-1" transform="translate(146.000000, 616.000000)">
+                <text id="Identity-Color-Appli" opacity="0.5" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#5B6D7B">
+                    <tspan x="22.3059686" y="19">Identity Color Applications</tspan>
+                </text>
+                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(8.998765, 8.000000) scale(1, -1) translate(-8.998765, -8.000000) " points="0.5 16 0.5 1.11022302e-16 17.49753 1.11022302e-16"></polyline>
+                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(173.192442, 8.000000) scale(1, -1) translate(-173.192442, -8.000000) " points="180.5 16 180.5 0 165.884884 1.78983552e-15"></polyline>
+            </g>
+            <g id="Note-2" transform="translate(521.000000, 616.000000)">
+                <text id="Extensional-Color-Pa" opacity="0.5" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#5B6D7B">
+                    <tspan x="77.3837576" y="19">Extensional Color Palette &amp; </tspan>
+                    <tspan x="223.380305" y="19" letter-spacing="-0.3">Applications</tspan>
+                </text>
+                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(36.145393, 8.000000) scale(1, -1) translate(-36.145393, -8.000000) " points="0.5 16 0.5 0 71.7907867 0"></polyline>
+                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(327.290871, 8.000000) scale(1, -1) translate(-327.290871, -8.000000) " points="360.5 16 360.5 0 294.081743 8.13389064e-15"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

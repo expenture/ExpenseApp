@@ -7,6 +7,7 @@ import SamplePage from 'views/SamplePage';
 import NavigatorTestPage from 'views/NavigatorTestPage';
 
 import MenuContainer from './dev-center/MenuContainer';
+import DesignSpecContainer from './dev-center/DesignSpecContainer';
 import UIPlaygroundContainer from './dev-center/UIPlaygroundContainer';
 
 export const renderDevCenterScene = (route, navigator, handleExit) => {
@@ -24,6 +25,17 @@ export const renderDevCenterScene = (route, navigator, handleExit) => {
       title: 'Dev Center',
       component: MenuContainer,
       actions
+    };
+
+  case 'dev-center-design-spec':
+    return {
+      title: route.specName,
+      component: DesignSpecContainer,
+      passProps: {
+        route,
+        specName: route.specName,
+        specImageSource: route.specImageSource
+      }
     };
 
   case 'dev-center-ui-playground':

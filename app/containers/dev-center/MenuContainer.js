@@ -39,7 +39,14 @@ export default class MoreMenuContainer extends Component {
             </ListTable.Cell>
           </ListTable.Section>
 
-          <ListTable.Section header="UI & Components">
+          <ListTable.Section header="Design & UI & Components">
+            <ListTable.Cell
+              title="Design Spec"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-design-spec' });
+              }}
+            />
             <ListTable.Cell
               title="UI Playground"
               navigated={true}
