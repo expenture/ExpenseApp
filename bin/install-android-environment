@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+echo "Running brew update"
+brew update
+
+echo "Installing Android Development Environment"
+brew install android-sdk
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
+( while true; do sleep 5; echo y; done ) | android update sdk --filter android-23,extra-android-support,extra-android-m2repository,tool,platform-tool,build-tools-23.0.1,build-tools-23.0.3 --all --no-ui

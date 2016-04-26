@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Exit if any subcommand fails
-# set -e
+set -e
 
 export PROJECT='ios/Expense.xcodeproj'
 export SCHEME='Expense'
@@ -11,14 +11,34 @@ cd "$(dirname "$0")"
 cd ..
 BASEDIR=$(pwd)
 
-# Render templates
-./bin/render-templates
+build() {
+  # Render templates
+  ./bin/render-templates
 
-# Prepare XCode build
-./bin/ios-use-bundle-js
+  # Prepare XCode build
+  ./bin/ios-use-bundle-js
 
-# Build
-xcodebuild -project $PROJECT -scheme $SCHEME -derivedDataPath ios/build -configuration Release
+  # Build
+  if [ -z "$CI" ]; then
+    if hash xcpretty 2>/dev/null; then
+      xcodebuild -project $PROJECT -scheme $SCHEME -derivedDataPath ios/build -configuration Release | xcpretty && return "${PIPESTATUS[0]}"
+    else
+      xcodebuild -project $PROJECT -scheme $SCHEME -derivedDataPath ios/build -configuration Release
+    fi
+  else
+    xcodebuild -project $PROJECT -scheme $SCHEME -derivedDataPath ios/build -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty && return "${PIPESTATUS[0]}"
+  fi
+}
 
-# Cleanup
-./bin/ios-use-dev-server
+cleanup() {
+  ./bin/ios-use-dev-server
+}
+
+if build; then
+  cleanup
+  echo "Build Success: ios/build/Build/Products/Release-iphoneos/Expense.app"
+else
+  cleanup
+  echo "Build Faild"
+  exit -1
+fi

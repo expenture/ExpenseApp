@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+if [[ $TEST_COMMAND == *"ios"* ]]; then
+  bin/install-ios-environment
+fi
+
+if [[ $TEST_COMMAND == *"android"* ]]; then
+  bin/install-android-environment
+
+  keytool -genkey -v -keystore android/app/release-key.keystore -storepass keystore_password_here -alias key_alias_here -keypass key_password_here -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown" -noprompt
+fi

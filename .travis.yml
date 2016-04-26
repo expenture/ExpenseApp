@@ -1,0 +1,40 @@
+language: objective-c
+osx_image: xcode7
+xcode_sdk: iphonesimulator9.0
+sudo: false
+
+cache:
+  bundler: true
+  cocoapods: true
+  directories:
+    - ~/.nvm
+    - node_modules
+
+env:
+  - TEST_COMMAND=bin/build-ios
+  - TEST_COMMAND=bin/build-android
+
+before_install:
+  - export NVM_DIR=~/.nvm
+  - which nvm || curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+  -  source ~/.nvm/nvm.sh --install
+  - nvm install 5.5.0
+  - bin/ci-install-environment
+  - export ANT_HOME=/usr/local/opt/ant
+  - export MAVEN_HOME=/usr/local/opt/maven
+  - export GRADLE_HOME=/usr/local/opt/gradle
+  - export ANDROID_HOME=/usr/local/opt/android-sdk
+  - export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
+  - export PATH=$ANT_HOME/bin:$PATH
+  - export PATH=$MAVEN_HOME/bin:$PATH
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - export PATH=$ANDROID_HOME/tools:$PATH
+  - export PATH=$ANDROID_HOME/platform-tools:$PATH
+  - export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
+  - export TERM=dumb
+
+install:
+  - bin/setup
+
+script:
+  - eval "$TEST_COMMAND"
