@@ -6,6 +6,7 @@ import { Image, Dimensions } from 'react-native';
 
 import Lightbox from'react-native-lightbox';
 
+import StatusBar from 'components/StatusBar';
 import ScrollView from 'components/ScrollView';
 import ListTable from 'components/ListTable';
 
@@ -25,6 +26,7 @@ export default class DesignSpecContainer extends ContainerBase {
         <ScrollView
           contentContainerStyle={{ flexDirection: 'row' }}
         >
+          <StatusBar key={this.state.focusKey} barStyle="default" />
           <Lightbox
             // TODO: Make Android work here
             // navigator={this.props.navigator}
@@ -40,6 +42,7 @@ export default class DesignSpecContainer extends ContainerBase {
     } else {
       return (
         <ScrollView>
+          <StatusBar key={this.state.focusKey} barStyle="default" />
           <ListTable>
             <ListTable.Section>
               <ListTable.Cell

@@ -63,11 +63,11 @@ export default class TabView extends Component {
             <TabBarIOS.Item
               key={i}
               title={item.props.title}
-              icon={item.props.iconIOS || item.props.icon || require('./images/unselected.png')}
+              icon={item.props.iconIOS || item.props.icon || require('./images/Icon.png')}
               selectedIcon={
                 item.props.selectedIconIOS ||
                 item.props.selectedIcon ||
-                require('./images/selected.png')
+                require('./images/SelectedIcon.png')
               }
               selectedTab={item.props.selectedTab}
               badge={item.props.badge}

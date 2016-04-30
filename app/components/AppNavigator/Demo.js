@@ -4,6 +4,7 @@ import ScrollView from 'components/ScrollView';
 import View from 'components/View';
 import Text from 'components/Text';
 import ListTable from 'components/ListTable';
+import StatusBar from 'components/StatusBar';
 
 import AppNavigator from 'components/AppNavigator';
 
@@ -12,6 +13,10 @@ class Page extends Component {
     return (
       <ScrollView>
         <ListTable>
+          <StatusBar
+            barStyle={this.props.statusBarStyle || 'default'}
+            animated={true}
+          />
           <ListTable.Section>
             <ListTable.Cell
               title="Navigate To A Page"
@@ -140,7 +145,8 @@ export default class Demo extends Component {
               component: Page,
               theme: 'dark',
               passProps: {
-                ...this.props
+                ...this.props,
+                statusBarStyle: 'light-content'
               }
             };
 

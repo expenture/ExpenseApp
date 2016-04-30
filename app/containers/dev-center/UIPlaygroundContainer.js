@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import ContainerBase from 'ContainerBase';
 
 import ScrollView from 'components/ScrollView';
+import StatusBar from 'components/StatusBar';
 import ListTable from 'components/ListTable';
 
 export default class UIPlaygroundContainer extends ContainerBase {
@@ -16,6 +17,7 @@ export default class UIPlaygroundContainer extends ContainerBase {
   render() {
     return (
       <ScrollView>
+        <StatusBar key={this.state.focusKey} barStyle="default" />
         <ListTable>
           <ListTable.Section
             header="Root Level Components"
@@ -25,6 +27,15 @@ export default class UIPlaygroundContainer extends ContainerBase {
               navigated={true}
               onPress={() => {
                 let ComponentDemo = require('../../components/AppNavigator/Demo').default;
+                let element = <ComponentDemo exitDemo={this.props.rootNavigator.pop} />;
+                this.props.rootNavigator.push({ element, animation: 'fade' });
+              }}
+            />
+            <ListTable.Cell
+              title="AppFrame"
+              navigated={true}
+              onPress={() => {
+                let ComponentDemo = require('../../components/AppFrame/Demo').default;
                 let element = <ComponentDemo exitDemo={this.props.rootNavigator.pop} />;
                 this.props.rootNavigator.push({ element, animation: 'fade' });
               }}

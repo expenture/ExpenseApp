@@ -80,12 +80,12 @@ export default class TabView extends Component {
             let selected = this.state.currentTab === i;
             let tabIcon = item.props.iconAndroid ||
                           item.props.icon ||
-                          require('./images/unselected.png');
+                          require('./images/Icon.png');
             if (selected) {
               if (item.props.onSelect) item.props.onSelect();
               tabIcon = item.props.selectedIconAndroid ||
                         item.props.selectedIcon ||
-                        require('./images/selected.png');
+                        require('./images/SelectedIcon.png');
             }
             return (
               <TouchableNativeFeedback

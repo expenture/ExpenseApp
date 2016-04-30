@@ -21,7 +21,9 @@ export default class ContainerBase extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      focusKey: 0
+    };
   }
 
   _handleConstruct() {

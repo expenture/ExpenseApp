@@ -5,9 +5,6 @@ import Platform from 'utils/Platform';
 
 import RootNavigator from 'components/RootNavigator';
 
-import SamplePage from 'views/SamplePage';
-import NavigatorTestPage from 'views/NavigatorTestPage';
-
 import MenuContainer from './dev-center/MenuContainer';
 import DesignSpecContainer from './dev-center/DesignSpecContainer';
 import UIPlaygroundContainer from './dev-center/UIPlaygroundContainer';
@@ -31,7 +28,7 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
 
   case 'dev-center-design-spec':
     return {
-      title: route.specName,
+      title: route.specName || 'Design Spec',
       component: DesignSpecContainer,
       passProps: {
         route,
@@ -60,37 +57,6 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
         }
       };
     }
-
-  case 'dev-center-nav-demo':
-    if (route.actionSet === 1) {
-      actions = [
-        { title: 'Back', show: 'always', onSelect: navigator.pop }
-      ];
-    }
-
-    if (route.actionSet === 2) {
-      actions = [
-        { title: 'Alert', show: 'always', onSelect: () => alert('hi') }
-      ];
-    }
-
-    if (route.actionSet === 3) {
-      actions = [
-        { title: 'Alert Hi', show: 'always', onSelect: () => alert('Hi') },
-        { title: 'Alert Yo', show: 'always', onSelect: () => alert('Yo') },
-        { title: 'Alert Hello', onSelect: () => alert('Hello') },
-        { title: 'Alert Yay!', onSelect: () => alert('Yay!') },
-      ];
-    }
-    return {
-      component: NavigatorTestPage,
-      title: 'Nav TP',
-      actions: actions,
-      passProps: {
-        route: route,
-        nextRoute: route.nextRoute
-      }
-    };
 
   default:
     console.error(`No route defined for: ${route.name}, route: ${JSON.stringify(route)}`);

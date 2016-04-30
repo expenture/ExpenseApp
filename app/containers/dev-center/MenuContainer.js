@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import ContainerBase from 'ContainerBase';
 
 import ScrollView from 'components/ScrollView';
+import StatusBar from 'components/StatusBar';
 import ListTable from 'components/ListTable';
 import View from 'components/View';
 import Text from 'components/Text';
@@ -21,6 +22,7 @@ export default class MoreMenuContainer extends ContainerBase {
   render() {
     return (
       <ScrollView>
+        <StatusBar key={this.state.focusKey} barStyle="default" />
         <ListTable>
           <ListTable.Section>
             <ListTable.Cell>
