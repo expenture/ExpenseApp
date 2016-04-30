@@ -157,11 +157,13 @@ export default class MainFrameContainer extends Component {
           {
             title: 'Notifications',
             show: 'always',
+            icon: require('../images/iOS/Toolbar/Notifications-White.png'),
             onSelect: () => navigator.push({ name: 'notifications' })
           },
           {
             title: 'New',
             show: 'always',
+            icon: require('../images/iOS/Toolbar/Create-White.png'),
             onSelect: () => rootNavigator.push({ name: 'new-transaction' })
           }
         ]

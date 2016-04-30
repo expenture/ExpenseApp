@@ -3,121 +3,323 @@
     <!-- Generator: sketchtool 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
     <title>Spec/ColorApplications</title>
     <desc>Created with sketchtool.</desc>
-    <defs>
-        <rect id="path-1" x="0" y="0" width="60" height="60"></rect>
-        <rect id="path-3" x="0" y="0" width="60" height="60"></rect>
-    </defs>
+    <defs></defs>
     <g id="Identity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Color-Applications" transform="translate(9.000000, 0.000000)">
-            <rect id="Color" fill="#919396" x="262" y="541" width="120" height="60"></rect>
-            <rect id="Color" fill="#FF5252" x="262" y="451" width="120" height="60"></rect>
-            <rect id="Color" fill="#D5A845" x="262" y="361" width="120" height="60"></rect>
-            <rect id="Color" fill="#FC3252" x="262" y="271" width="120" height="60"></rect>
-            <rect id="Color" fill="#919396" x="92" y="541" width="120" height="60"></rect>
-            <rect id="Color" fill="#B868FD" x="92" y="451" width="120" height="60"></rect>
-            <rect id="Color" fill="#2B91FF" x="92" y="361" width="120" height="60"></rect>
-            <rect id="Color" fill="#35DE81" x="92" y="271" width="120" height="60"></rect>
-            <rect id="Color" fill="#7945D0" x="642" y="541" width="120" height="60"></rect>
-            <rect id="Color" fill="#E36CED" x="472" y="541" width="120" height="60"></rect>
-            <rect id="Color" fill="#6C49A6" x="812" y="541" width="120" height="60"></rect>
-            <text id="Violet" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="679.398539" y="576">Violet</tspan>
-            </text>
-            <rect id="Color" fill="#3B99C9" x="642" y="451" width="120" height="60"></rect>
-            <rect id="Color" fill="#62D0CB" x="472" y="451" width="120" height="60"></rect>
-            <rect id="Color" fill="#61708C" x="812" y="451" width="120" height="60"></rect>
-            <text id="Blue" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="685.016832" y="486">Blue</tspan>
-            </text>
-            <rect id="Color" fill="#50BE3D" x="642" y="361" width="120" height="60"></rect>
-            <rect id="Color" fill="#71C643" x="472" y="361" width="120" height="60"></rect>
-            <rect id="Color" fill="#17B373" x="812" y="361" width="120" height="60"></rect>
-            <text id="Green" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="676.192793" y="396">Green</tspan>
-            </text>
-            <rect id="Color" fill="#FFCC02" x="642" y="271" width="120" height="60"></rect>
-            <rect id="Color" fill="#FFCC02" x="472" y="271" width="120" height="60"></rect>
-            <rect id="Color" fill="#E08C29" x="812" y="271" width="120" height="60"></rect>
-            <text id="Yellow" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="678.21348" y="306">Yellow</tspan>
-            </text>
-            <rect id="Color" fill="#FCAF17" x="642" y="181" width="120" height="60"></rect>
-            <rect id="Color" fill="#FFC438" x="472" y="181" width="120" height="60"></rect>
-            <rect id="Color" fill="#B65B42" x="812" y="181" width="120" height="60"></rect>
-            <text id="Orange" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="672.362894" y="216">Orange</tspan>
-            </text>
-            <rect id="Color" fill="#F26D5F" x="642" y="91" width="120" height="60"></rect>
-            <rect id="Color" fill="#F6534A" x="472" y="91" width="120" height="60"></rect>
-            <rect id="Color" fill="#C92841" x="812" y="91" width="120" height="60"></rect>
-            <text id="Red" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="688.375051" y="126">Red</tspan>
-            </text>
-            <rect id="Color" fill="#3C4852" x="92" y="91" width="120" height="60"></rect>
-            <rect id="Color" fill="#253240" x="152" y="91" width="60" height="60"></rect>
-            <rect id="Color" fill="#253240" x="92" y="181" width="120" height="60"></rect>
-            <text id="Branding-1" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.45" fill="#FFFFFF">
-                <tspan x="110.725586" y="126">Branding 1</tspan>
-            </text>
-            <text id="Manage" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="120.314066" y="216">Manage</tspan>
-            </text>
-            <text id="Success" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="119.193152" y="306">Success</tspan>
-            </text>
-            <text id="Warning" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="288.949012" y="396">Warning</tspan>
-            </text>
-            <text id="Authorize" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="113.352691" y="486">Authorize</tspan>
-            </text>
-            <text id="Touch-ID" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="287.331516" y="486">Touch ID</tspan>
-            </text>
-            <text id="Info" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="136.153551" y="396">Info</tspan>
-            </text>
-            <text id="Error" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                <tspan x="302.522383" y="306">Error</tspan>
-            </text>
-            <rect id="Color" fill="#FFFFFF" x="262" y="181" width="120" height="60"></rect>
-            <text id="Report" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#253240">
-                <tspan x="295.012797" y="216">Report</tspan>
-            </text>
-            <rect id="Color" fill="#35DE81" x="322" y="91" width="60" height="60"></rect>
-            <rect id="Color" fill="#7EE78B" x="262" y="91" width="120" height="60"></rect>
-            <g id="Group" transform="translate(262.000000, 91.000000)">
-                <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                </mask>
-                <use id="Color" fill="#7EE78B" xlink:href="#path-1"></use>
-                <text id="Branding-2" mask="url(#mask-2)" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#253240">
-                    <tspan x="16.7776757" y="36">Branding 2</tspan>
+        <g id="Color-Applications">
+            <g id="Extensional-Color-Group" transform="translate(832.000000, 547.000000)">
+                <rect id="Color" fill="#9E87B3" x="0" y="0" width="100" height="54"></rect>
+                <text id="Public-Utilities" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="13.2883749" y="31">Public Utilities</tspan>
+                </text>
+                <text id="Amethyst-Smoke" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="39.8794061" y="62">Amethyst Smoke</tspan>
                 </text>
             </g>
-            <g id="Group" transform="translate(322.000000, 91.000000)">
-                <mask id="mask-4" fill="white">
-                    <use xlink:href="#path-3"></use>
-                </mask>
-                <use id="Color" fill="#35DE81" xlink:href="#path-3"></use>
-                <text id="Branding-2" mask="url(#mask-4)" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
-                    <tspan x="-43.2223243" y="36">Branding 2</tspan>
+            <g id="Extensional-Color-Group" transform="translate(712.000000, 547.000000)">
+                <rect id="Color" fill="#BB72D9" x="0" y="0" width="100" height="54"></rect>
+                <text id="Lavender" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="67.0399061" y="62">Lavender</tspan>
                 </text>
             </g>
-            <g id="Note-1" transform="translate(146.000000, 616.000000)">
-                <text id="Identity-Color-Appli" opacity="0.5" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#5B6D7B">
-                    <tspan x="22.3059686" y="19">Identity Color Applications</tspan>
+            <g id="Extensional-Color-Group" transform="translate(592.000000, 547.000000)">
+                <rect id="Color" fill="#BE4CDB" x="0" y="0" width="100" height="54"></rect>
+                <text id="Electric-Violet" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="51.5596873" y="62">Electric Violet</tspan>
                 </text>
-                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(8.998765, 8.000000) scale(1, -1) translate(-8.998765, -8.000000) " points="0.5 16 0.5 1.11022302e-16 17.49753 1.11022302e-16"></polyline>
-                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(173.192442, 8.000000) scale(1, -1) translate(-173.192442, -8.000000) " points="180.5 16 180.5 0 165.884884 1.78983552e-15"></polyline>
             </g>
-            <g id="Note-2" transform="translate(521.000000, 616.000000)">
+            <g id="Extensional-Color-Group" transform="translate(472.000000, 547.000000)">
+                <rect id="Color" fill="#E775CE" x="0" y="0" width="100" height="54"></rect>
+                <text id="Beauty" font-family="SFUIText-Light, SF UI Text" font-size="14" font-weight="300" letter-spacing="-0.335999995" fill="#FFFFFF">
+                    <tspan x="28.4015547" y="32">Beauty</tspan>
+                </text>
+                <text id="Magenta" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="68.8166562" y="62">Magenta</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(856.000000, 471.000000)">
+                <text id="Corduroy" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="43.0672499" y="62">Corduroy</tspan>
+                </text>
+                <rect id="Color" fill="#575E5F" x="0" y="0" width="76" height="54"></rect>
+                <text id="Electricity" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="12.4599765" y="31">Electricity</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(760.000000, 471.000000)">
+                <text id="Storm-Gray" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="36.0410936" y="62">Storm Gray</tspan>
+                </text>
+                <rect id="Color" fill="#6C6F7B" x="0" y="0" width="76" height="54"></rect>
+                <text id="Film" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="27.6619375" y="31">Film</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(663.000000, 471.000000)">
+                <text id="Regent-Gray" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="32.1979374" y="62">Regent Gray</tspan>
+                </text>
+                <rect id="Color" fill="#848FA6" x="0" y="0" width="76" height="54"></rect>
+                <text id="Bank" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="25.2244375" y="31">Bank</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(568.000000, 471.000000)">
+                <text id="Gray-Chateau" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="27.6750936" y="62">Gray Chateau</tspan>
+                </text>
+                <rect id="Color" fill="#9DA4AF" x="0" y="0" width="76" height="54"></rect>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(472.000000, 471.000000)">
+                <text id="Danube" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="48.2184062" y="62">Danube</tspan>
+                </text>
+                <rect id="Color" fill="#809CDA" x="0" y="0" width="76" height="54"></rect>
+                <text id="Museum" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="15.4841172" y="31">Museum</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(872.000000, 395.000000)">
+                <text id="Rhino" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="39.8701562" y="62">Rhino</tspan>
+                </text>
+                <rect id="Color" fill="#4E5384" x="0" y="0" width="60" height="54"></rect>
+                <text id="Hotel" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="16.3869922" y="31">Hotel</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(792.000000, 395.000000)">
+                <text id="Sapphire" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="28.3797499" y="62">Sapphire</tspan>
+                </text>
+                <rect id="Color" fill="#4462B4" x="0" y="0" width="60" height="54"></rect>
+                <text id="Network" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="8.11444527" y="31">Network</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(712.000000, 395.000000)">
+                <text id="Indigo" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="38.1637187" y="62">Indigo</tspan>
+                </text>
+                <rect id="Color" fill="#5474CF" x="0" y="0" width="60" height="54"></rect>
+                <text id="Sailing" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="13.0744062" y="31">Sailing</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(632.000000, 395.000000)">
+                <text id="Havelock-Blue" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="9.92959358" y="62">Havelock Blue</tspan>
+                </text>
+                <rect id="Color" fill="#4783D5" x="0" y="0" width="60" height="54"></rect>
+                <text id="Car" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="21.135125" y="31">Car</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(552.000000, 395.000000)">
+                <text id="Cornflower-Blue" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="3.47765605" y="62">Cornflower Blue</tspan>
+                </text>
+                <rect id="Color" fill="#549AF7" x="0" y="0" width="60" height="54"></rect>
+                <text id="Parking" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="10.6544843" y="31">Parking</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(472.000000, 395.000000)">
+                <text id="Malibu" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="36.5426249" y="62">Malibu</tspan>
+                </text>
+                <rect id="Color" fill="#64A9F8" x="0" y="0" width="60" height="54"></rect>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(856.000000, 319.000000)">
+                <text id="Aqua-Forest" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="33.3190311" y="62">Aqua Forest</tspan>
+                </text>
+                <rect id="Color" fill="#6EA77B" x="0" y="0" width="76" height="54"></rect>
+                <text id="Golf" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="27.5886953" y="31">Golf</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(760.000000, 319.000000)">
+                <text id="Amazon" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="47.0504374" y="62">Amazon</tspan>
+                </text>
+                <rect id="Color" fill="#3F7F60" x="0" y="0" width="76" height="54"></rect>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(664.000000, 319.000000)">
+                <text id="Fruit-Salad" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="38.4674686" y="62">Fruit Salad</tspan>
+                </text>
+                <rect id="Color" fill="#4AA46E" x="0" y="0" width="76" height="54"></rect>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(568.000000, 319.000000)">
+                <text id="Sushi" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="56.5498437" y="62">Sushi</tspan>
+                </text>
+                <rect id="Color" fill="#73B435" x="0" y="0" width="76" height="54"></rect>
+                <text id="Field" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="25.8782031" y="31">Field</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(472.000000, 319.000000)">
+                <text id="Fern" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="59.9750312" y="62">Fern</tspan>
+                </text>
+                <rect id="Color" fill="#70B45A" x="0" y="0" width="76" height="54"></rect>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(832.000000, 243.000000)">
+                <text id="Woody-Brown" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="50.8073124" y="62">Woody Brown</tspan>
+                </text>
+                <rect id="Color" fill="#806A49" x="0" y="0" width="100" height="54"></rect>
+                <text id="Sights" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="33.3591172" y="31">Sights</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(712.000000, 243.000000)">
+                <rect id="Color" fill="#C5A179" x="0" y="0" width="100" height="54"></rect>
+                <text id="Dining" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="33.1188828" y="31">Dining</tspan>
+                </text>
+                <text id="Tan" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="87.122875" y="62">Tan</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(592.000000, 243.000000)">
+                <rect id="Color" fill="#FFB933" x="0" y="0" width="100" height="54"></rect>
+                <text id="Resorts" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="30.1593671" y="31">Resorts</tspan>
+                </text>
+                <text id="Sunglow" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="69.5588437" y="62">Sunglow</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(472.000000, 243.000000)">
+                <text id="Supernova" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="61.8959686" y="61">Supernova</tspan>
+                </text>
+                <rect id="Color" fill="#FFCB00" x="0" y="0" width="100" height="54"></rect>
+                <text id="Activity" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="31.0562968" y="31">Activity</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(792.000000, 167.000000)">
+                <text id="Equator" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="112.293219" y="62">Equator</tspan>
+                </text>
+                <rect id="Color" fill="#E3B75F" x="0" y="0" width="140" height="54"></rect>
+                <text id="Beer" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="58.0945547" y="31">Beer</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(632.000000, 167.000000)">
+                <rect id="Color" fill="#FF9853" x="0" y="0" width="140" height="54"></rect>
+                <text id="Bakery" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="52.294664" y="31">Bakery</tspan>
+                </text>
+                <text id="Tangerine" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="104.681125" y="62">Tangerine</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(472.000000, 167.000000)">
+                <text id="Texas-Rose" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="99.9160936" y="62">Texas Rose</tspan>
+                </text>
+                <rect id="Color" fill="#FFA853" x="0" y="0" width="140" height="54"></rect>
+                <text id="Pets" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="58.3709219" y="31">Pets</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(792.000000, 91.000000)">
+                <text id="Mojo" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="122.576594" y="62">Mojo</tspan>
+                </text>
+                <rect id="Color" fill="#C33F40" x="0" y="0" width="140" height="54"></rect>
+                <text id="Music" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="54.2053515" y="31">Music</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(632.000000, 91.000000)">
+                <rect id="Color" fill="#EA5B5C" x="0" y="0" width="140" height="54"></rect>
+                <text id="Health" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="53.1706406" y="31">Health</tspan>
+                </text>
+                <text id="Mandy" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="115.909219" y="62">Mandy</tspan>
+                </text>
+            </g>
+            <g id="Extensional-Color-Group" transform="translate(473.000000, 91.000000)">
+                <rect id="Color" fill="#F76446" x="0" y="0" width="140" height="54"></rect>
+                <text id="Fitness" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#FFFFFF">
+                    <tspan x="51.0246015" y="31">Fitness</tspan>
+                </text>
+                <text id="Carnation" font-family="SFUIText-Light, SF UI Text" font-size="8" font-weight="300" letter-spacing="-0.191999987" fill-opacity="0.32" fill="#000000">
+                    <tspan x="105.481906" y="62">Carnation</tspan>
+                </text>
+            </g>
+            <rect id="Color" fill="#E6AE46" x="262" y="541" width="120" height="60"></rect>
+            <rect id="Color" fill="#B868FD" x="92" y="541" width="120" height="60"></rect>
+            <g id="Color-Group" transform="translate(262.000000, 451.000000)">
+                <rect id="Color" fill="#52ABF5" x="0" y="0" width="120" height="60"></rect>
+                <text id="Question" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                    <tspan x="24.0097382" y="37">Question</tspan>
+                </text>
+            </g>
+            <rect id="Color" fill="#FF5252" x="92" y="451" width="120" height="60"></rect>
+            <g id="Color-Group" transform="translate(262.000000, 361.000000)" fill="#7EE78B">
+                <rect id="Color" x="0" y="0" width="120" height="60"></rect>
+            </g>
+            <g id="Color-Group" transform="translate(92.000000, 361.000000)" fill="#D5A845">
+                <rect id="Color" x="0" y="0" width="120" height="60"></rect>
+            </g>
+            <g id="Color-Group" transform="translate(262.000000, 271.000000)">
+                <rect id="Color" fill="#7838FE" x="0" y="0" width="120" height="60"></rect>
+                <text id="Authorize" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.45" fill="#FFFFFF">
+                    <tspan x="22.4336914" y="37">Authorize</tspan>
+                </text>
+            </g>
+            <g id="Color-Group" transform="translate(92.000000, 271.000000)">
+                <rect id="Color" fill="#2B91FF" x="0" y="0" width="120" height="60"></rect>
+                <text id="Info" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                    <tspan x="45.1535507" y="37">Info</tspan>
+                </text>
+            </g>
+            <g id="Color-Group" transform="translate(262.000000, 181.000000)">
+                <rect id="Color" fill="#FC3252" x="0" y="0" width="120" height="60"></rect>
+                <text id="Error" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                    <tspan x="41.0223828" y="37">Error</tspan>
+                </text>
+            </g>
+            <g id="Color-Group" transform="translate(92.000000, 181.000000)">
+                <rect id="Color" fill="#35DE81" x="0" y="0" width="120" height="60"></rect>
+                <text id="Success" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                    <tspan x="26.1931523" y="37">Success</tspan>
+                </text>
+            </g>
+            <g id="Color-Group" transform="translate(262.000000, 91.000000)">
+                <rect id="Color" fill="#FFFFFF" x="0" y="0" width="120" height="60"></rect>
+                <text id="Report" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#253240">
+                    <tspan x="33.0127968" y="37">Report</tspan>
+                </text>
+            </g>
+            <g id="Color-Group" transform="translate(92.000000, 91.000000)">
+                <rect id="Color" fill="#253240" x="0" y="0" width="120" height="60"></rect>
+                <text id="Manage" font-family="SFUIText-Light, SF UI Text" font-size="18" font-weight="300" letter-spacing="-0.431999981" fill="#FFFFFF">
+                    <tspan x="28.3140664" y="37">Manage</tspan>
+                </text>
+            </g>
+            <g id="Note-2" transform="translate(521.000000, 614.000000)">
                 <text id="Extensional-Color-Pa" opacity="0.5" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#5B6D7B">
                     <tspan x="77.3837576" y="19">Extensional Color Palette &amp; </tspan>
                     <tspan x="223.380305" y="19" letter-spacing="-0.3">Applications</tspan>
                 </text>
                 <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(36.145393, 8.000000) scale(1, -1) translate(-36.145393, -8.000000) " points="0.5 16 0.5 0 71.7907867 0"></polyline>
                 <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(327.290871, 8.000000) scale(1, -1) translate(-327.290871, -8.000000) " points="360.5 16 360.5 0 294.081743 8.13389064e-15"></polyline>
+            </g>
+            <g id="Note-1" transform="translate(146.000000, 614.000000)">
+                <text id="Identity-Color-Appli" opacity="0.5" font-family="SFUIText-Light, SF UI Text" font-size="12" font-weight="300" letter-spacing="-0.287999988" fill="#5B6D7B">
+                    <tspan x="22.3059686" y="19">Identity Color Applications</tspan>
+                </text>
+                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(8.998765, 8.000000) scale(1, -1) translate(-8.998765, -8.000000) " points="0.5 16 0.5 1.11022302e-16 17.49753 1.11022302e-16"></polyline>
+                <polyline id="Line" stroke="#5B6D7B" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.360000014" transform="translate(173.192442, 8.000000) scale(1, -1) translate(-173.192442, -8.000000) " points="180.5 16 180.5 0 165.884884 1.78983552e-15"></polyline>
             </g>
         </g>
     </g>
