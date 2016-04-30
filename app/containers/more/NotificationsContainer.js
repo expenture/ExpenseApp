@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ContainerBase from 'ContainerBase';
 
 import BlankPageView from 'views/BlankPageView';
 
-export default class NotificationsContainer extends Component {
+export default class NotificationsContainer extends ContainerBase {
   constructor() {
     super();
   }
 
   render() {
-    return <BlankPageView title="NotificationsContainer" />;
+    return <BlankPageView ref="view" title="NotificationsContainer" />;
+  }
+
+  onFocus() {
+    const view = this.refs.view;
+    view && view.remountStatusBar && view.remountStatusBar();
   }
 }

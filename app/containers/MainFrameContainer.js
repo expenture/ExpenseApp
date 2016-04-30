@@ -28,12 +28,14 @@ export default class MainFrameContainer extends Component {
     this.state = {
       currentTab: 0,
       appNavigators: {},
-      appNavigatorKeys: []
+      appNavigatorKeys: ['dashboard', 'feed', 'money-flow', 'accounts', 'more'],
+      appNavigatorRefStacks: {}
     };
     this.directlySetState = this.directlySetState.bind(this);
     this.registerAppNavigator = this.registerAppNavigator.bind(this);
     this.touchDevCenterTrigger = this.touchDevCenterTrigger.bind(this);
     this.loadDevCenter = this.loadDevCenter.bind(this);
+    this.renderSceneFuncForAppNavigatorConstructor = this.renderSceneFuncForAppNavigatorConstructor.bind(this);
   }
 
   render() {
@@ -54,7 +56,7 @@ export default class MainFrameContainer extends Component {
     case 'index':
       // All AppNavigators uses the same scene configuration, definedin
       // this.renderAppScene
-      const renderAppScene = this.renderAppScene.bind(this, rootNavigator);
+      const renderSceneFuncForAppNavigator = this.renderSceneFuncForAppNavigatorConstructor(rootNavigator);
 
       return (
         <TabView
@@ -64,6 +66,14 @@ export default class MainFrameContainer extends Component {
             if (currentAppNavigator) currentAppNavigator.popToTop();
 
             this.touchDevCenterTrigger();
+          }}
+          onTabSelected={(tabIndex) => {
+            let appNavigatorName = this.state.appNavigatorKeys[tabIndex];
+            if (!appNavigatorName) return;
+            let appNavigatorRefStack = this.state.appNavigatorRefStacks[appNavigatorName];
+            if (!appNavigatorRefStack) return;
+            let appNavigatorCurrentRef = appNavigatorRefStack[appNavigatorRefStack.length - 1];
+            appNavigatorCurrentRef && appNavigatorCurrentRef.onFocus && appNavigatorCurrentRef.onFocus();
           }}
         >
           <TabView.Item
@@ -75,7 +85,7 @@ export default class MainFrameContainer extends Component {
             <AppNavigator
               ref={(r) => this.registerAppNavigator('dashboard', r)}
               initialRoute={{ name: 'dashboard', root: true }}
-              renderScene={renderAppScene}
+              renderScene={renderSceneFuncForAppNavigator('dashboard')}
             />
           </TabView.Item>
 
@@ -88,7 +98,7 @@ export default class MainFrameContainer extends Component {
             <AppNavigator
               ref={(r) => this.registerAppNavigator('feed', r)}
               initialRoute={{ name: 'feed', root: true }}
-              renderScene={renderAppScene}
+              renderScene={renderSceneFuncForAppNavigator('feed')}
             />
           </TabView.Item>
 
@@ -101,7 +111,7 @@ export default class MainFrameContainer extends Component {
             <AppNavigator
               ref={(r) => this.registerAppNavigator('money-flow', r)}
               initialRoute={{ name: 'money-flow', root: true }}
-              renderScene={renderAppScene}
+              renderScene={renderSceneFuncForAppNavigator('money-flow')}
             />
           </TabView.Item>
 
@@ -114,7 +124,7 @@ export default class MainFrameContainer extends Component {
             <AppNavigator
               ref={(r) => this.registerAppNavigator('accounts', r)}
               initialRoute={{ name: 'accounts', root: true }}
-              renderScene={renderAppScene}
+              renderScene={renderSceneFuncForAppNavigator('accounts')}
             />
           </TabView.Item>
 
@@ -127,7 +137,7 @@ export default class MainFrameContainer extends Component {
             <AppNavigator
               ref={(r) => this.registerAppNavigator('more', r)}
               initialRoute={{ name: 'more', root: true }}
-              renderScene={renderAppScene}
+              renderScene={renderSceneFuncForAppNavigator('more')}
             />
           </TabView.Item>
         </TabView>
@@ -147,12 +157,37 @@ export default class MainFrameContainer extends Component {
     }
   }
 
-  renderAppScene(rootNavigator, route, navigator) {
+  renderAppScene(rootNavigator, navigatorName, route, navigator) {
+    const onConstruct = (ref) => {
+      if (!this.state.appNavigatorRefStacks[navigatorName]) {
+        this.state.appNavigatorRefStacks[navigatorName] = [];
+      }
+      this.state.appNavigatorRefStacks[navigatorName].push(ref);
+      ref.onFocus && ref.onFocus();
+    };
+    const onDestruct = () => {
+      this.state.appNavigatorRefStacks[navigatorName].pop();
+      let rs = this.state.appNavigatorRefStacks[navigatorName];
+      let ref = rs[rs.length - 1];
+      ref && ref.onFocus && ref.onFocus();
+    };
+    const propsBase = {
+      rootNavigator,
+      navigator,
+      route,
+      onConstruct,
+      onDestruct
+    };
+
     switch (route.name) {
     case 'dashboard':
       return {
         title: 'Expense',
         component: DashboardContainer,
+        theme: 'dark',
+        passProps: {
+          ...propsBase
+        },
         actions: [
           {
             title: 'Notifications',
@@ -172,32 +207,47 @@ export default class MainFrameContainer extends Component {
     case 'feed':
       return {
         title: 'Feed',
-        component: FeedContainer
+        component: FeedContainer,
+        passProps: {
+          ...propsBase
+        }
       };
 
     case 'money-flow':
       return {
         title: 'Money Flow',
-        component: MoneyFlowContainer
+        component: MoneyFlowContainer,
+        passProps: {
+          ...propsBase
+        }
       };
 
     case 'accounts':
       return {
         title: 'Accounts',
-        component: AccountsContainer
+        component: AccountsContainer,
+        passProps: {
+          ...propsBase
+        }
       };
 
     case 'more':
     case 'more-menu':
       return {
         title: 'More',
-        component: MoreMenuContainer
+        component: MoreMenuContainer,
+        passProps: {
+          ...propsBase
+        }
       };
 
     case 'notifications':
       return {
         title: 'Notifications',
-        component: NotificationsContainer
+        component: NotificationsContainer,
+        passProps: {
+          ...propsBase
+        }
       };
 
     default:
@@ -216,7 +266,16 @@ export default class MainFrameContainer extends Component {
   registerAppNavigator(name, ref) {
     // directly sets the state to avoid rerendering
     this.state.appNavigators[name] = ref;
-    this.state.appNavigatorKeys.push(name);
+    if (!this.state.appNavigatorKeys.includes(name)) {
+      this.state.appNavigatorKeys.push(name);
+    }
+    if (!this.state.appNavigatorRefStacks[name]) {
+      this.state.appNavigatorRefStacks[name] = [];
+    }
+  }
+
+  renderSceneFuncForAppNavigatorConstructor(rootNavigator) {
+    return (name) => this.renderAppScene.bind(this, rootNavigator, name);
   }
 
   touchDevCenterTrigger() {

@@ -1,7 +1,5 @@
-import React, {
-  Component,
-  PropTypes
-} from 'react';
+import React, { PropTypes } from 'react';
+import ContainerBase from 'ContainerBase';
 
 // TODO: Place this view to views, remove RN here
 import { Image, Dimensions } from 'react-native';
@@ -11,7 +9,7 @@ import Lightbox from'react-native-lightbox';
 import ScrollView from 'components/ScrollView';
 import ListTable from 'components/ListTable';
 
-export default class DesignSpecContainer extends Component {
+export default class DesignSpecContainer extends ContainerBase {
   static propTypes = {
     navigator: PropTypes.object.isRequired
   };

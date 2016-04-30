@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ContainerBase from 'ContainerBase';
 
 import MoreMenuView from 'views/more/MoreMenuView';
 
-export default class MoreMenuContainer extends Component {
+export default class MoreMenuContainer extends ContainerBase {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <MoreMenuView />;
+    return <MoreMenuView ref="view" />;
+  }
+
+  onFocus() {
+    const view = this.refs.view;
+    view && view.remountStatusBar && view.remountStatusBar();
   }
 }

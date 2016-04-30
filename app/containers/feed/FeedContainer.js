@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ContainerBase from 'ContainerBase';
 
 import BlankPageView from 'views/BlankPageView';
 
-export default class FeedContainer extends Component {
+export default class FeedContainer extends ContainerBase {
   constructor() {
     super();
   }
 
   render() {
-    return <BlankPageView title="FeedContainer" />;
+    return <BlankPageView ref="view" title="FeedContainer" />;
+  }
+
+  onFocus() {
+    const view = this.refs.view;
+    view && view.remountStatusBar && view.remountStatusBar();
   }
 }

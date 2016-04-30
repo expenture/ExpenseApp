@@ -1,12 +1,10 @@
-import React, {
-  Component,
-  PropTypes
-} from 'react';
+import React, { PropTypes } from 'react';
+import ContainerBase from 'ContainerBase';
 
 import ScrollView from 'components/ScrollView';
 import ListTable from 'components/ListTable';
 
-export default class UIPlaygroundContainer extends Component {
+export default class UIPlaygroundContainer extends ContainerBase {
   static propTypes = {
     navigator: PropTypes.object.isRequired
   };

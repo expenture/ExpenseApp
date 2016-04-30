@@ -1,7 +1,5 @@
-import React, {
-  Component,
-  PropTypes
-} from 'react';
+import React, { PropTypes } from 'react';
+import ContainerBase from 'ContainerBase';
 
 import ScrollView from 'components/ScrollView';
 import ListTable from 'components/ListTable';
@@ -11,7 +9,7 @@ import Text from 'components/Text';
 import packageInfo from 'packageInfo';
 import buildInfo from 'buildInfo';
 
-export default class MoreMenuContainer extends Component {
+export default class MoreMenuContainer extends ContainerBase {
   static propTypes = {
     navigator: PropTypes.object.isRequired
   };

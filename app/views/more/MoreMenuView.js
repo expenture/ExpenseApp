@@ -7,7 +7,8 @@ import React, {
   Component,
   ScrollView,
   View,
-  Text
+  Text,
+  StatusBar
 } from 'react-native';
 
 import ListTable from 'components/ListTable';
@@ -18,11 +19,31 @@ export default class MoreMenuView extends Component {
   static propTypes = {
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      statusBarIndex: 0
+    };
+
+    this.remountStatusBar = this.remountStatusBar.bind(this);
+  }
+
+  remountStatusBar() {
+    let statusBarIndex = this.state.statusBarIndex;
+    statusBarIndex += 1;
+    this.setState({ statusBarIndex });
+  }
+
   render() {
     return (
       <ScrollView
         style={{ backgroundColor: style.IOS_BACKGROUND_COLOR }}
       >
+        <StatusBar
+          key={this.state.statusBarIndex}
+          barStyle="default"
+        />
         <ListTable>
           <ListTable.Section
             header="Hello World"

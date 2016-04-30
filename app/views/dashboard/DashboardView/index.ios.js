@@ -1,16 +1,16 @@
 /**
- * @providesModule views/BlankPageView
+ * @providesModule views/DashboardView
  */
 
 import React, {
   PropTypes,
   Component,
+  StatusBar,
   View,
-  Text,
-  StatusBar
+  Text
 } from 'react-native';
 
-export default class BlankPageView extends Component {
+export default class DashboardView extends Component {
   static propTypes = {
     title: PropTypes.string
   };
@@ -41,7 +41,7 @@ export default class BlankPageView extends Component {
       }}>
         <StatusBar
           key={this.state.statusBarIndex}
-          barStyle="default"
+          barStyle="light-content"
         />
         <Text>{this.props.title}</Text>
       </View>

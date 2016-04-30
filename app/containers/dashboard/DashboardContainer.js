@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ContainerBase from 'ContainerBase';
 
-import BlankPageView from 'views/BlankPageView';
+import DashboardView from 'views/DashboardView';
 
-export default class DashboardContainer extends Component {
+export default class DashboardContainer extends ContainerBase {
   constructor() {
     super();
   }
 
   render() {
-    return <BlankPageView title="DashboardContainer" />;
+    return <DashboardView ref="view" title="DashboardContainer" />;
+  }
+
+  onFocus() {
+    const view = this.refs.view;
+    view && view.remountStatusBar && view.remountStatusBar();
   }
 }
