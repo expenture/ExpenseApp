@@ -14,6 +14,7 @@ import React, {
 } from 'react-native';
 
 import style from 'constants/style';
+import colors from 'constants/colors';
 
 export default class AppNavigator extends Component {
   static propTypes = {
@@ -58,8 +59,8 @@ export default class AppNavigator extends Component {
   _renderRouteObject(route, navigator) {
     const sceneObj = this.props.renderScene(route, navigator);
     const SceneComponent = sceneObj.component;
-    const SceneComponentProps = sceneObj.passProps || {};
-    SceneComponentProps.navigator = navigator;
+    const sceneComponentProps = sceneObj.passProps || {};
+    sceneComponentProps.navigator = navigator;
 
     let rightButtonIcon, rightButtonTitle, onRightButtonPress;
     let leftButtonIcon, leftButtonTitle, onLeftButtonPress;
@@ -106,16 +107,40 @@ export default class AppNavigator extends Component {
       }
     }
 
+    let barTintColor, tintColor, titleTextColor, translucent, navigationBarHidden, shadowHidden;
+
+    const { theme } = sceneObj;
+
+    if (theme === 'dark') {
+      translucent = true;
+      barTintColor = colors.dark;
+      tintColor = colors.light;
+      titleTextColor = colors.light;
+    } else if (theme === 'navigationBarHidden') {
+      navigationBarHidden = true;
+    } else {
+      translucent = true;
+      barTintColor = colors.light;
+      tintColor = colors.dark;
+      titleTextColor = colors.dark;
+    }
+
     return {
       component: SceneComponent,
       title: sceneObj.title,
-      passProps: SceneComponentProps,
+      passProps: sceneComponentProps,
       rightButtonTitle,
       rightButtonIcon,
       onRightButtonPress,
       leftButtonTitle,
       leftButtonIcon,
-      onLeftButtonPress
+      onLeftButtonPress,
+      barTintColor,
+      tintColor,
+      titleTextColor,
+      translucent,
+      navigationBarHidden,
+      shadowHidden
     };
   }
 }

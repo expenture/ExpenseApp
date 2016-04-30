@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import AppNavigator from 'components/AppNavigator';
 import Platform from 'utils/Platform';
 
+import RootNavigator from 'components/RootNavigator';
+
 import SamplePage from 'views/SamplePage';
 import NavigatorTestPage from 'views/NavigatorTestPage';
 
@@ -10,7 +12,7 @@ import MenuContainer from './dev-center/MenuContainer';
 import DesignSpecContainer from './dev-center/DesignSpecContainer';
 import UIPlaygroundContainer from './dev-center/UIPlaygroundContainer';
 
-export const renderDevCenterScene = (route, navigator, handleExit) => {
+export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit) => {
   let actions;
 
   switch (route.name) {
@@ -42,12 +44,20 @@ export const renderDevCenterScene = (route, navigator, handleExit) => {
     if (route.componentDemo) {
       return {
         title: route.componentName,
-        component: route.componentDemo
+        component: route.componentDemo,
+        theme: (route.hideNav ? 'navigationBarHidden' : ''),
+        passProps: {
+          rootNavigator,
+          exitDemo: (() => navigator.pop())
+        }
       };
     } else {
       return {
         title: 'UI Playground',
-        component: UIPlaygroundContainer
+        component: UIPlaygroundContainer,
+        passProps: {
+          rootNavigator
+        }
       };
     }
 
@@ -98,12 +108,32 @@ export default class DevCenterContainer extends Component {
   };
 
   render() {
-    return (
-      <AppNavigator
-        initialRoute={this.props.initialRoute}
-        renderScene={(r, n) => renderDevCenterScene(r, n, this.exit)}
-      />
-    );
+    // The DevCenter must be wrapped in a RootNavigator for some views,
+    // if the rootNavigator prop is not passed, then we will warp it here.
+    if (this.props.rootNavigator) {
+      let { rootNavigator } = this.props;
+      return (
+        <AppNavigator
+          initialRoute={this.props.initialRoute}
+          renderScene={(r, n) => renderDevCenterScene(rootNavigator, r, n, this.exit)}
+        />
+      );
+    } else {
+      return (
+        <RootNavigator
+          initialRoute={{}}
+          renderScene={(route, rootNavigator) => {
+            return route.element || (
+              <AppNavigator
+                initialRoute={this.props.initialRoute}
+                renderScene={(r, n) => renderDevCenterScene(rootNavigator, r, n, this.exit)}
+              />
+            );
+          }}
+          configureScene={() => RootNavigator.SceneConfigs.FadeAndroid}
+        />
+      );
+    }
   }
 
   exit() {

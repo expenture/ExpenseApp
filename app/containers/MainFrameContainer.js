@@ -145,12 +145,20 @@ export default class MainFrameContainer extends Component {
     case 'new-transaction':
       return <NewTransactionContainer/>;
     default:
-      console.error(`No root-route defined for: ${rootRoute.name}, rootRoute: ${JSON.stringify(rootRoute)}`);
-      return null;
+      if (rootRoute.element) {
+        return rootRoute.element;
+      } else {
+        console.error(`No root-route defined for: ${rootRoute.name}, rootRoute: ${JSON.stringify(rootRoute)}`);
+        return null;
+      }
     }
   }
 
   configureRootScene(rootRoute) {
+    if (rootRoute.animation === 'fade') {
+      return RootNavigator.SceneConfigs.FadeAndroid;
+    }
+
     switch (rootRoute.name) {
     default:
       return RootNavigator.SceneConfigs.FloatFromBottom;
@@ -251,7 +259,7 @@ export default class MainFrameContainer extends Component {
       };
 
     default:
-      return renderDevCenterScene(route, navigator);
+      return renderDevCenterScene(rootNavigator, route, navigator);
     }
   }
 
@@ -266,7 +274,7 @@ export default class MainFrameContainer extends Component {
   registerAppNavigator(name, ref) {
     // directly sets the state to avoid rerendering
     this.state.appNavigators[name] = ref;
-    if (!this.state.appNavigatorKeys.includes(name)) {
+    if (this.state.appNavigatorKeys.indexOf(name) > -1) {
       this.state.appNavigatorKeys.push(name);
     }
     if (!this.state.appNavigatorRefStacks[name]) {

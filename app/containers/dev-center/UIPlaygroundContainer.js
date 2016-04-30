@@ -17,25 +17,22 @@ export default class UIPlaygroundContainer extends ContainerBase {
     return (
       <ScrollView>
         <ListTable>
-          <ListTable.Section>
+          <ListTable.Section
+            header="Root Level Components"
+          >
             <ListTable.Cell
               title="AppNavigator"
               navigated={true}
               onPress={() => {
-                let navRoutes = {
-                  name: 'dev-center-nav-demo', root: true, actionSet: 2, nextRoute: {
-                    name: 'dev-center-nav-demo', actionSet: 1, dark: true, nextRoute: {
-                      name: 'dev-center-nav-demo', actionSet: 3, nextRoute: {
-                        name: 'dev-center-nav-demo', actionSet: 3, dark: true, nextRoute: {
-                          name: 'dev-center-nav-demo'
-                        }
-                      }
-                    }
-                  }
-                };
-                this.props.navigator.push(navRoutes);
+                let ComponentDemo = require('../../components/AppNavigator/Demo').default;
+                let element = <ComponentDemo exitDemo={this.props.rootNavigator.pop} />;
+                this.props.rootNavigator.push({ element, animation: 'fade' });
               }}
             />
+          </ListTable.Section>
+          <ListTable.Section
+            header="Nested Components"
+          >
             <ListTable.Cell
               title="ListTable"
               navigated={true}
