@@ -9,11 +9,10 @@ export default class DashboardContainer extends ContainerBase {
   }
 
   render() {
-    return <DashboardView ref="view" title="DashboardContainer" />;
+    const notificationPress = () => this.props.navigator.push({ name: 'notifications' });
+    return <DashboardView ref="view" focusKey={this.state.focusKey} onNotificationPress={notificationPress} />;
   }
 
   onFocus() {
-    const view = this.refs.view;
-    view && view.remountStatusBar && view.remountStatusBar();
   }
 }

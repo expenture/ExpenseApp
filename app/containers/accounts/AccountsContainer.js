@@ -9,11 +9,6 @@ export default class AccountsContainer extends ContainerBase {
   }
 
   render() {
-    return <BlankPageView ref="view" title="AccountsContainer" />;
-  }
-
-  onFocus() {
-    const view = this.refs.view;
-    view && view.remountStatusBar && view.remountStatusBar();
+    return <BlankPageView ref="view" title="AccountsContainer" focusKey={this.state.focusKey} />;
   }
 }

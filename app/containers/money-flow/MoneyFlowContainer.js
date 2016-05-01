@@ -9,11 +9,6 @@ export default class MoneyFlowContainer extends ContainerBase {
   }
 
   render() {
-    return <BlankPageView ref="view" title="MoneyFlowContainer" />;
-  }
-
-  onFocus() {
-    const view = this.refs.view;
-    view && view.remountStatusBar && view.remountStatusBar();
+    return <BlankPageView ref="view" title="MoneyFlowContainer" focusKey={this.state.focusKey} />;
   }
 }

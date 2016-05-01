@@ -9,11 +9,6 @@ export default class FeedContainer extends ContainerBase {
   }
 
   render() {
-    return <BlankPageView ref="view" title="FeedContainer" />;
-  }
-
-  onFocus() {
-    const view = this.refs.view;
-    view && view.remountStatusBar && view.remountStatusBar();
+    return <BlankPageView ref="view" title="FeedContainer" focusKey={this.state.focusKey} />;
   }
 }

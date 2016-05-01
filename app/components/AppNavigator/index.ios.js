@@ -13,6 +13,8 @@ import React, {
   ActionSheetIOS
 } from 'react-native';
 
+import Color from 'color';
+
 import style from 'constants/style';
 import colors from 'constants/colors';
 
@@ -113,7 +115,7 @@ export default class AppNavigator extends Component {
 
     if (theme === 'dark') {
       translucent = true;
-      barTintColor = colors.dark;
+      barTintColor = Color(colors.dark).saturate(0.7).darken(0.32).hexString();
       tintColor = colors.light;
       titleTextColor = colors.light;
     } else if (theme === 'navigationBarHidden') {

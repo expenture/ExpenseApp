@@ -131,6 +131,7 @@ export default class MainFrameContainer extends Component {
           case 'notifications':
             return {
               title: 'Notifications',
+              theme: 'dark',
               component: NotificationsContainer
             };
 

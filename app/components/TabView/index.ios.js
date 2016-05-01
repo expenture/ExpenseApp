@@ -13,7 +13,9 @@ import React, {
   Image
 } from 'react-native';
 
-import style from 'constants/style';
+import Color from 'color';
+
+import colors from 'constants/colors';
 
 class Item extends Component {
   static propTypes = {
@@ -51,7 +53,11 @@ export default class TabView extends Component {
 
   render() {
     return (
-      <TabBarIOS>
+      <TabBarIOS
+        translucent={true}
+        tintColor={colors.light}
+        barTintColor={Color(colors.dark).saturate(1).darken(0.72).hexString()}
+      >
         {this.props.children.map((item, i) => {
           let selected = this.state.currentTab === i;
 

@@ -15,22 +15,6 @@ export default class BlankPageView extends Component {
     title: PropTypes.string
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      statusBarIndex: 0
-    };
-
-    this.remountStatusBar = this.remountStatusBar.bind(this);
-  }
-
-  remountStatusBar() {
-    let statusBarIndex = this.state.statusBarIndex;
-    statusBarIndex += 1;
-    this.setState({ statusBarIndex });
-  }
-
   render() {
     return (
       <View style={{
@@ -40,8 +24,8 @@ export default class BlankPageView extends Component {
         alignItems: 'center'
       }}>
         <StatusBar
-          key={this.state.statusBarIndex}
-          barStyle="default"
+          key={this.props.focusKey}
+          barStyle={this.props.barStyle || 'default'}
         />
         <Text>{this.props.title}</Text>
       </View>
