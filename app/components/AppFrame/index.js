@@ -256,7 +256,9 @@ export default class AppFrame extends Component {
 const setFocusFor = (ref) => {
   if (!ref) return;
   ref.onFocus && ref.onFocus.bind(ref)();
-  if (ref.setState && ref.state && typeof ref.state.focusKey === 'number') {
+  if (ref.setState) {
+    if (!ref.state) ref.state = {};
+    if (!ref.state.focusKey) ref.state.focusKey = 0;
     let { focusKey } = ref.state;
     focusKey += 1;
     ref.setState({ focusKey });
