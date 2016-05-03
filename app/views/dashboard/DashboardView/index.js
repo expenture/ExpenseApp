@@ -11,7 +11,7 @@ import React, {
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
-
+import { BarChart } from 'react-native-ios-charts';
 import Color from 'color';
 
 import StatusBar from 'components/StatusBar';
@@ -31,6 +31,8 @@ export default class DashboardView extends Component {
     refreshing: PropTypes.bool,
     // Data
     currencyLabel: PropTypes.string,
+    currentYear: PropTypes.number,
+    currentMonth: PropTypes.number,
     isAllAssestsShown: PropTypes.bool,
     isIncomeShown: PropTypes.bool,
     assetsAmount: PropTypes.number,
@@ -41,6 +43,10 @@ export default class DashboardView extends Component {
     unreadNotificationsCount: PropTypes.number,
     pendingNotificationsCount: PropTypes.number,
     notificationTitles: PropTypes.arrayOf(PropTypes.string),
+    latestMonthlyExpenseAmounts: PropTypes.arrayOf(PropTypes.number),
+    latestMonthlyIncomeAmounts: PropTypes.arrayOf(PropTypes.number),
+    latestMonthlyExpectedExpenseAmounts: PropTypes.arrayOf(PropTypes.number),
+    latestMonthlyExpectedIncomeAmounts: PropTypes.arrayOf(PropTypes.number),
     // Action Handlers
     onNotificationsPress: PropTypes.func.isRequired,
     onShowAllAssestsPress: PropTypes.func.isRequired,
@@ -61,6 +67,36 @@ export default class DashboardView extends Component {
 
   render() {
     const { state, props } = this;
+
+    let monthlyAmountsCount = 0;
+    let monthlyExpenseAmountsCount =
+      props.latestMonthlyExpenseAmounts &&
+      props.latestMonthlyExpenseAmounts.length ||
+      0;
+    if (props.isIncomeShown) {
+      let monthlyIncomeAmountsCount =
+        props.latestMonthlyIncomeAmounts &&
+        props.latestMonthlyIncomeAmounts.length ||
+        0;
+      monthlyAmountsCount =
+        Math.min(monthlyExpenseAmountsCount, monthlyIncomeAmountsCount);
+    } else {
+      monthlyAmountsCount = monthlyExpenseAmountsCount;
+    }
+    const monthlyAmountsEndingDate = new Date(props.currentYear, props.currentMonth - 1);
+    const monthlyAmountsStartingDate = new Date(props.currentYear, props.currentMonth - 1 - (monthlyAmountsCount - 1));
+    let monthlyAmountsLabel = [];
+    for (let i=0; i<monthlyAmountsCount; i++) {
+      let date = new Date(props.currentYear, props.currentMonth - 1 - i);
+      monthlyAmountsLabel.push((date.getMonth()).toString());
+    }
+
+    const monthlyExpenseAmounts = (new Array(monthlyAmountsCount)).fill(0).concat(props.latestMonthlyExpenseAmounts).slice(-monthlyAmountsCount);
+    const monthlyIncomeAmounts = (new Array(monthlyAmountsCount)).fill(0).concat(props.latestMonthlyIncomeAmounts).slice(-monthlyAmountsCount);
+    const monthlyExpectedExpenseAmounts = (new Array(monthlyAmountsCount)).fill(0).concat(props.latestMonthlyExpectedExpenseAmounts).slice(-monthlyAmountsCount);
+    const monthlyExpectedIncomeAmounts = (new Array(monthlyAmountsCount)).fill(0).concat(props.latestMonthlyExpectedIncomeAmounts).slice(-monthlyAmountsCount);
+    const monthlyExpenseMaxAmount = Math.min(...monthlyExpenseAmounts, ...monthlyExpectedExpenseAmounts);
+    const monthlyIncomeMaxAmount = Math.max(...monthlyIncomeAmounts, ...monthlyExpectedIncomeAmounts);
 
     return (
       <ScrollView
@@ -336,6 +372,129 @@ export default class DashboardView extends Component {
             />
           </View>
         </TouchableHighlight>
+        <TouchableHighlight>
+          <View style={styles.monthlyAmountsChartSection}>
+            <View style={styles.sectionHeader}>
+              <Text
+                numberOfLines={1}
+                allowFontScaling={false}
+                style={styles.sectionHeaderTitleText}
+              >
+                {props.isIncomeShown ? '每月收支' : '每月支出'}
+              </Text>
+              <Text
+                numberOfLines={1}
+                allowFontScaling={false}
+                style={styles.sectionHeaderDescriptionText}
+              >
+                {`${monthlyAmountsStartingDate.getFullYear()} 年 ${monthlyAmountsStartingDate.getMonth() + 1} 月 － ${monthlyAmountsEndingDate.getFullYear()} 年 ${monthlyAmountsEndingDate.getMonth() + 1} 月`}
+              </Text>
+            </View>
+            {(() => {
+              if (props.isIncomeShown) {
+                return (
+                  <View style={styles.monthlyAmountsChartContainer}>
+                    <BarChart
+                      config={{
+                        ...monthlyAmountsBarChartConfig,
+                        dataSets: [
+                          {
+                            values: [monthlyExpenseMaxAmount/1000, monthlyIncomeMaxAmount/1000, ...monthlyExpectedExpenseAmounts.map(v => v/1000)],
+                            colors: expectedExpenseBarChartColors,
+                            barSpace: 0.5,
+                            drawValues: false
+                          }
+                        ],
+                        labels: ['', '', ...monthlyAmountsLabel]
+                      }}
+                      style={styles.monthlyAmountsBarChart}
+                    />
+                    <BarChart
+                      config={{
+                        ...monthlyAmountsBarChartConfig,
+                        dataSets: [
+                          {
+                            values: [monthlyExpenseMaxAmount/1000, monthlyIncomeMaxAmount/1000, ...monthlyExpenseAmounts.map(v => v/1000)],
+                            colors: expenseBarChartColors,
+                            barSpace: 0.5,
+                            drawValues: false
+                          }
+                        ],
+                        labels: ['', '', ...monthlyAmountsLabel]
+                      }}
+                      style={styles.monthlyAmountsBarChart}
+                    />
+                    <BarChart
+                      config={{
+                        ...monthlyAmountsBarChartConfig,
+                        dataSets: [
+                          {
+                            values: [monthlyExpenseMaxAmount/1000, monthlyIncomeMaxAmount/1000, ...monthlyExpectedIncomeAmounts.map(v => v/1000)],
+                            colors: expectedIncomeBarChartColors,
+                            barSpace: 0.5,
+                            drawValues: false
+                          }
+                        ],
+                        labels: ['', '', ...monthlyAmountsLabel]
+                      }}
+                      style={styles.monthlyAmountsBarChart}
+                    />
+                    <BarChart
+                      config={{
+                        ...monthlyAmountsBarChartConfig,
+                        dataSets: [
+                          {
+                            values: [monthlyExpenseMaxAmount/1000, monthlyIncomeMaxAmount/1000, ...monthlyIncomeAmounts.map(v => v/1000)],
+                            colors: incomeBarChartColors,
+                            barSpace: 0.5,
+                            drawValues: false
+                          }
+                        ],
+                        labels: ['', '', ...monthlyAmountsLabel]
+                      }}
+                      style={styles.monthlyAmountsBarChart}
+                    />
+                  </View>
+                );
+              } else {
+                return (
+                  <View style={styles.monthlyAmountsChartContainer}>
+                    <BarChart
+                      config={{
+                        ...monthlyAmountsBarChartConfig,
+                        dataSets: [
+                          {
+                            values: [-monthlyExpenseMaxAmount/1000, 0, ...monthlyExpectedExpenseAmounts.map(v => -v/1000)],
+                            colors: expectedExpenseBarChartColors,
+                            barSpace: 0.5,
+                            drawValues: false
+                          }
+                        ],
+                        labels: ['', '', ...monthlyAmountsLabel]
+                      }}
+                      style={styles.monthlyAmountsBarChart}
+                    />
+                    <BarChart
+                      config={{
+                        ...monthlyAmountsBarChartConfig,
+                        dataSets: [
+                          {
+                            values: [-monthlyExpenseMaxAmount/1000, 0, ...monthlyExpenseAmounts.map(v => -v/1000)],
+                            colors: expenseBarChartColors,
+                            barSpace: 0.5,
+                            drawValues: false
+                          }
+                        ],
+                        labels: ['', '', ...monthlyAmountsLabel]
+                      }}
+                      style={styles.monthlyAmountsBarChart}
+                    />
+                  </View>
+                );
+              }
+            })()}
+          </View>
+        </TouchableHighlight>
       </ScrollView>
     );
   }
@@ -401,11 +560,66 @@ const inlineOffIconLight = require('../../../images/iOS/Elements/InlineOffIcon-L
 const inlineOnIconLight = require('../../../images/iOS/Elements/InlineOnIcon-Light.png');
 
 const viewSettingsSectionHeight = 46;
+const monthlyAmountsChartHeight = 120;
+
+const expenseBarChartColors = ['transparent', 'transparent'].concat((new Array(100)).fill(colors.redLight));
+const incomeBarChartColors = ['transparent', 'transparent'].concat((new Array(100)).fill(colors.greenLight));
+const expectedExpenseBarChartColors = ['transparent', 'transparent'].concat((new Array(100)).fill(Color(colors.redLight).lighten(0.2).hexString()));
+const expectedIncomeBarChartColors = ['transparent', 'transparent'].concat((new Array(100)).fill(Color(colors.greenLight).lighten(0.2).hexString()));
+
+const monthlyAmountsBarChartConfig = {
+  userInteractionEnabled: false,
+  noDataText: 'No Data',
+  xEntrySpace: 0,
+  yEntrySpace: 0,
+  valueFormatter: {
+    type: 'abbreviated',
+    numberStyle: 'CurrencyAccountingStyle'
+  },
+  showLegend: false,
+  drawBorders: false,
+  gridBackgroundColor: 'transparent',
+  xAxis: {
+    enabled: true,
+    position: 'bottom',
+    drawGridLines: false,
+    drawLabels: false,
+    drawAxisLine: false
+  },
+  leftAxis: {
+    enabled: true,
+    position: 'inside',
+    drawLabels: false,
+    textSize: 11,
+    textColor: colors.assistance,
+    drawGridLines: false,
+    gridColor: Color(colors.assistanceLight).lighten(0.8).hexString(),
+    gridLineWidth: StyleSheet.hairlineWidth,
+    gridDashedLine: {
+      lineLength: 1,
+      spaceLength: StyleSheet.hairlineWidth
+    },
+    drawAxisLine: false
+  },
+  rightAxis: {
+    enabled: false
+  },
+  dragDecelerationEnabled: false,
+  dragEnabled: true,
+  highlightPerTap: true,
+  scaleXEnabled: false,
+  scaleYEnabled: false,
+  pinchZoomEnabled: false,
+  doubleTapToZoomEnabled: false,
+  highlightPerDragEnabled: true
+};
 
 // Magic numers, these work for viewSettingsSectionHeight=46, I don't know why
 const snapToIntervalForViewSettingsSection = 50;
 const snapToAlignmentForViewSettingsSection = 'end';
 const initialScrollContentOffsetY = -17;
+
+const barChartPadding = 9.8;
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -531,5 +745,36 @@ const styles = StyleSheet.create({
   notificationSectionContentFadeOutMask: {
     position: 'absolute',
     right: 0
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingVertical: 20,
+    paddingHorizontal: 24,
+    marginBottom: -4
+  },
+  sectionHeaderTitleText: {
+    fontSize: 19,
+    color: colors.dark,
+    paddingBottom: 1
+  },
+  sectionHeaderDescriptionText: {
+    fontSize: 11,
+    color: colors.assistanceLight
+  },
+  monthlyAmountsChartContainer: {
+    flex: 1,
+    marginHorizontal: 18,
+    height: monthlyAmountsChartHeight,
+    overflow: 'hidden'
+  },
+  monthlyAmountsBarChart: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: -barChartPadding,
+    right: -barChartPadding,
+    bottom: -barChartPadding,
+    left: -barChartPadding - 16
   }
 });
