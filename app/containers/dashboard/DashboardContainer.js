@@ -43,6 +43,17 @@ export default class DashboardContainer extends ContainerBase {
         latestMonthlyIncomeAmounts={[64000000, 65000000, 64000000, 68000000, 67483000, 69238000, 68000000, 68300000, 65000000, 64000000, 67000000, 12000000]}
         latestMonthlyExpectedExpenseAmounts={[-22000000, -20000000, -52000000, -24194000, -24827000, -20494000, -19398000, -23402000, -25039000, -20395000, -23098000, -23098000]}
         latestMonthlyExpectedIncomeAmounts={[64000000, 65000000, 64000000, 68000000, 67483000, 69238000, 68000000, 68300000, 65000000, 64000000, 67000000, 70000000]}
+        currentMonthExpenseTopCategories={[
+          { name: '餐飲', color: 'sushi', percentage: 0.32 },
+          { name: '家居', color: 'rhino', percentage: 0.20 },
+          { name: '交通', color: 'havelockBlue', percentage: 0.14 },
+          { name: '社交娛樂', color: 'supernova', percentage: 0.12 },
+          { name: '戶外活動', color: 'fern', percentage: 0.07 },
+          { name: '進修教育', color: 'amethystSmoke', percentage: 0.04 },
+          { name: '健身', color: 'carnation', percentage: 0.03 },
+          { name: '零食', color: 'tangerine', percentage: 0.03 },
+          { name: '其他', color: 'grayChateau', percentage: 0.05 }
+        ]}
         onNotificationsPress={handleNotificationPress}
         onShowAllAssestsPress={() => this.setState({ isAllAssestsShown: !this.state.isAllAssestsShown })}
         onShowIncomePress={() => this.setState({ isIncomeShown: !this.state.isIncomeShown })}

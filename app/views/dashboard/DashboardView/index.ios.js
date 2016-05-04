@@ -11,7 +11,7 @@ import React, {
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
-import { BarChart } from 'react-native-ios-charts';
+import { BarChart, PieChart } from 'react-native-ios-charts';
 import Color from 'color';
 
 import StatusBar from 'components/StatusBar';
@@ -47,6 +47,11 @@ export default class DashboardView extends Component {
     latestMonthlyIncomeAmounts: PropTypes.arrayOf(PropTypes.number),
     latestMonthlyExpectedExpenseAmounts: PropTypes.arrayOf(PropTypes.number),
     latestMonthlyExpectedIncomeAmounts: PropTypes.arrayOf(PropTypes.number),
+    currentMonthExpenseTopCategories: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      percentage: PropTypes.number.isRequired
+    })),
     // Action Handlers
     onNotificationsPress: PropTypes.func.isRequired,
     onShowAllAssestsPress: PropTypes.func.isRequired,
@@ -63,6 +68,13 @@ export default class DashboardView extends Component {
 
     this.scrollToTop = this.scrollToTop.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {
+    // A hack to set the backgroundColor for some charts
+    // (some of them may not have the correct backgroundColor if it has not
+    //  been updated after mount)
+    this.setState({ backgroundColor: colors.light });
   }
 
   render() {
@@ -120,6 +132,7 @@ export default class DashboardView extends Component {
         <StatusBar
           key={props.focusKey}
           barStyle="light-content"
+          networkActivityIndicatorVisible={props.refreshing}
         />
         <View style={styles.header}>
           <View style={styles.viewSettingsSection}>
@@ -373,7 +386,8 @@ export default class DashboardView extends Component {
           </View>
         </TouchableHighlight>
         <TouchableHighlight>
-          <View style={styles.monthlyAmountsChartSection}>
+          <View style={styles.monthlyAmountsChartSection}
+          >
             <View style={styles.sectionHeader}>
               <Text
                 numberOfLines={1}
@@ -495,6 +509,61 @@ export default class DashboardView extends Component {
             })()}
           </View>
         </TouchableHighlight>
+        <TouchableHighlight>
+          <View style={styles.expenseCategoriesChartSection}
+          >
+            <View style={styles.sectionHeader}>
+              <Text
+                numberOfLines={1}
+                allowFontScaling={false}
+                style={styles.sectionHeaderTitleText}
+              >
+                消費分類
+              </Text>
+              <Text
+                numberOfLines={1}
+                allowFontScaling={false}
+                style={styles.sectionHeaderDescriptionText}
+              >
+                {`${props.currentYear} 年 ${props.currentMonth} 月`}
+              </Text>
+            </View>
+            <View style={styles.expenseCategoriesChartContainer}>
+              <PieChart
+                config={{
+                  ...expenseCategoriesPieChartConfig,
+                  dataSets: [{
+                    values: props.currentMonthExpenseTopCategories.map(c => c.percentage),
+                    colors: props.currentMonthExpenseTopCategories.map(c => colors[c.color])
+                  }],
+                  labels: props.currentMonthExpenseTopCategories.map(c => c.name),
+                  backgroundColor: state.backgroundColor
+                }}
+                style={styles.expenseCategoriesPieChart}
+              />
+              <View style={styles.expenseCategoriesPieChartLegend}>
+                {props.currentMonthExpenseTopCategories.map((c, i) => {
+                  return (
+                    <View style={styles.expenseCategoriesPieChartLegendRow} key={i}>
+                      <View style={[
+                        styles.expenseCategoriesPieChartLegendForm,
+                        { backgroundColor: colors[c.color] }
+                      ]} />
+                      <Text
+                        numberOfLines={1}
+                        allowFontScaling={false}
+                        style={styles.expenseCategoriesPieChartLegendText}
+                      >
+                        {c.name}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          </View>
+        </TouchableHighlight>
+        <View style={styles.scrollViewExtendBackground} />
       </ScrollView>
     );
   }
@@ -614,19 +683,32 @@ const monthlyAmountsBarChartConfig = {
   highlightPerDragEnabled: true
 };
 
+const expenseCategoriesPieChartConfig = {
+  userInteractionEnabled: false,
+  rotationAngle: 240,
+  holeRadiusPercent: 0.52,
+  transparentCircleRadiusPercent: 0,
+  drawSliceTextEnabled: false,
+  valueFormatter: {
+    type: 'regular',
+    numberStyle: 'PercentStyle'
+  },
+  showLegend: false
+};
+
 // Magic numers, these work for viewSettingsSectionHeight=46, I don't know why
 const snapToIntervalForViewSettingsSection = 50;
 const snapToAlignmentForViewSettingsSection = 'end';
 const initialScrollContentOffsetY = -17;
 
-const barChartPadding = 9.8;
+const chartInnerPadding = 9.8;
 
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: colors.dark
   },
   scrollViewContent: {
-    paddingBottom: 1138,
+    overflow: 'visible',
     backgroundColor: colors.light
   },
   header: {
@@ -640,7 +722,7 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.assistance,
-    borderBottomColor: colors.assistance,
+    borderBottomColor: colors.assistance ,
     flexDirection: 'row'
   },
   viewSettingsSectionOptionWrapper: {
@@ -763,6 +845,11 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: colors.assistanceLight
   },
+  monthlyAmountsChartSection: {
+    paddingBottom: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: Color(colors.assistanceLight).lighten(0.8).hexString()
+  },
   monthlyAmountsChartContainer: {
     flex: 1,
     marginHorizontal: 18,
@@ -772,9 +859,48 @@ const styles = StyleSheet.create({
   monthlyAmountsBarChart: {
     backgroundColor: 'transparent',
     position: 'absolute',
-    top: -barChartPadding,
-    right: -barChartPadding,
-    bottom: -barChartPadding,
-    left: -barChartPadding - 16
+    top: -chartInnerPadding,
+    right: -chartInnerPadding,
+    bottom: -chartInnerPadding,
+    left: -chartInnerPadding - 16
+  },
+  expenseCategoriesChartSection: {
+    paddingBottom: 14
+  },
+  expenseCategoriesChartContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginHorizontal: 18,
+    height: 240
+  },
+  expenseCategoriesPieChart: {
+    flex: 8,
+    marginLeft: -chartInnerPadding
+  },
+  expenseCategoriesPieChartLegend: {
+    flex: 3
+  },
+  expenseCategoriesPieChartLegendRow: {
+    flexDirection: 'row',
+    paddingVertical: 2.4
+  },
+  expenseCategoriesPieChartLegendForm: {
+    borderRadius: 1000,
+    height: 12,
+    width: 12,
+    marginRight: 4
+  },
+  expenseCategoriesPieChartLegendText: {
+    flex: 1,
+    fontSize: 12,
+    color: colors.dark
+  },
+  scrollViewExtendBackground: {
+    position: 'absolute',
+    bottom: -999,
+    left: 0,
+    right: 0,
+    height: 999,
+    backgroundColor: colors.light
   }
 });
