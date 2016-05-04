@@ -31,7 +31,10 @@ export default class AppFrame extends Component {
     this.directlySetState = this.directlySetState.bind(this);
     this.getCurrentAppNavigator = this.getCurrentAppNavigator.bind(this);
     this.getCurrentAppNavigatorRefStack = this.getCurrentAppNavigatorRefStack.bind(this);
+    this.getCurrentContainerRef = this.getCurrentContainerRef.bind(this);
+    this.getAllContainerRefs = this.getAllContainerRefs.bind(this);
     this.registerAppNavigator = this.registerAppNavigator.bind(this);
+    this._setFocusFor = this._setFocusFor.bind(this);
   }
 
   render() {
@@ -49,8 +52,8 @@ export default class AppFrame extends Component {
             return renderTabView(rootRoute, rootNavigator);
           } else {
             const onConstruct = (ref) => {
+              this._setFocusFor(ref);
               this.state.rootNavigatorRefStack.push(ref);
-              setFocusFor(ref);
             };
 
             const onDestruct = () => {
@@ -58,7 +61,7 @@ export default class AppFrame extends Component {
               if (this.state.rootNavigatorRefStack.length === 0) {
                 let rs = this.state.appNavigatorRefStacks[this.state.currentTab];
                 let ref = rs && rs[rs.length - 1];
-                setFocusFor(ref);
+                this._setFocusFor(ref);
               }
             };
 
@@ -128,7 +131,7 @@ export default class AppFrame extends Component {
           let appNavigatorRefStack = this.state.appNavigatorRefStacks[tabIndex];
           if (!appNavigatorRefStack) return;
           let appNavigatorCurrentRef = appNavigatorRefStack[appNavigatorRefStack.length - 1];
-          setFocusFor(appNavigatorCurrentRef);
+          this._setFocusFor(appNavigatorCurrentRef);
         }}
       >
         {tabs.map((tab, tabIndex) => {
@@ -154,17 +157,18 @@ export default class AppFrame extends Component {
 
                   const onConstruct = (ref) => {
                     this.state.appNavigatorRefStacks[tabIndex].push(ref);
-                    setFocusFor(ref);
+                    this._setFocusFor(ref);
                   };
 
                   const onDestruct = () => {
                     this.state.appNavigatorRefStacks[tabIndex].pop();
                     let rs = this.state.appNavigatorRefStacks[tabIndex];
                     let ref = rs[rs.length - 1];
-                    setFocusFor(ref);
+                    this._setFocusFor(ref);
                   };
 
                   const propsBase = {
+                    appFrame: this,
                     rootNavigator,
                     rootRoute,
                     navigator,
@@ -216,6 +220,41 @@ export default class AppFrame extends Component {
     return this.state.appNavigatorRefStacks[this.state.currentTab];
   }
 
+  getCurrentContainerRef() {
+    const rs = this.getCurrentAppNavigatorRefStack();
+    return rs[rs.length - 1];
+  }
+
+  getAllContainerRefs() {
+    const rs = this.state.appNavigatorRefStacks;
+    return Object.keys(rs).map(k => rs[k]).reduce((c, n) => c.concat(n), []);
+  }
+
+  _setFocusFor(ref) {
+    if (!ref) return;
+    ref.onFocus && ref.onFocus.bind(ref)();
+
+    if (ref.setState) {
+      if (!ref.state) ref.state = {};
+      if (!ref.state.focusKey) ref.state.focusKey = 0;
+      let { focusKey } = ref.state;
+      focusKey += 1;
+      ref.setState({ focusKey });
+    }
+
+    const otherRefs = this.getAllContainerRefs();
+
+    otherRefs.forEach((otherRef) => {
+      if (otherRef === ref) return;
+
+      if (this.state.focusedRef === otherRef) {
+        otherRef.onBlur && otherRef.onBlur.bind(otherRef)();
+      }
+    });
+
+    this.state.focusedRef = ref;
+  }
+
   componentWillMount() {
     if (Platform.OS === 'android') {
       this.registerAndroidHardwareBackPress.bind(this)();
@@ -252,15 +291,3 @@ export default class AppFrame extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this.androidHardwareBackPressHandler);
   }
 }
-
-const setFocusFor = (ref) => {
-  if (!ref) return;
-  ref.onFocus && ref.onFocus.bind(ref)();
-  if (ref.setState) {
-    if (!ref.state) ref.state = {};
-    if (!ref.state.focusKey) ref.state.focusKey = 0;
-    let { focusKey } = ref.state;
-    focusKey += 1;
-    ref.setState({ focusKey });
-  }
-};

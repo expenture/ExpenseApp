@@ -113,6 +113,12 @@ class Page extends Component {
     }
   }
 
+  onBlur() {
+    if (this.props.alertOnFocus) {
+      alert(`Page ${this.props.pageNum} blured.`);
+    }
+  }
+
   onRefresh() {
     alert(`Alert: onRefresh() called on page ${this.props.pageNum}.`);
   }

@@ -8,10 +8,13 @@ import React, {
   StyleSheet,
   RefreshControl,
   Image,
+  TouchableWithoutFeedback,
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
+import Overlay from 'react-native-overlay';
 import { BarChart, PieChart } from 'react-native-ios-charts';
+import Orientation from 'react-native-orientation';
 import Color from 'color';
 
 import StatusBar from 'components/StatusBar';
@@ -63,18 +66,14 @@ export default class DashboardView extends Component {
     super(props);
 
     this.state = {
-      scrollContentOffsetY: initialScrollContentOffsetY
+      scrollContentOffsetY: initialScrollContentOffsetY,
+      focus: false
     };
 
     this.scrollToTop = this.scrollToTop.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
-  }
-
-  componentDidMount() {
-    // A hack to set the backgroundColor for some charts
-    // (some of them may not have the correct backgroundColor if it has not
-    //  been updated after mount)
-    this.setState({ backgroundColor: colors.light });
+    this._handleScroll = this._handleScroll.bind(this);
+    this._setScrollViewSnapping = this._setScrollViewSnapping.bind(this);
+    this._orientationDidUpdate = this._orientationDidUpdate.bind(this);
   }
 
   render() {
@@ -114,7 +113,7 @@ export default class DashboardView extends Component {
       <ScrollView
         ref="scrollView"
         contentOffset={{ y: viewSettingsSectionHeight }}
-        onScroll={this.handleScroll}
+        onScroll={this._handleScroll}
         scrollEventThrottle={1}
         snapToAlignment={this.state.scrollViewSnapToAlignment}
         snapToInterval={this.state.scrollViewSnapToInterval}
@@ -134,6 +133,27 @@ export default class DashboardView extends Component {
           barStyle="light-content"
           networkActivityIndicatorVisible={props.refreshing}
         />
+        {(() => {
+          if (props.unreadNotificationsCount || props.pendingNotificationsCount) return (
+              <Overlay
+                isVisible={state.focus}
+              >
+                <TouchableOpacity
+                  onPress={props.onNotificationsPress}
+                >
+                  <Image
+                    style={[
+                      styles.newNotificationDot,
+                      state.orientation === 'LANDSCAPE' && styles.newNotificationDot_landscape
+                    ]}
+                    accessible={false}
+                    pointerEvents="none"
+                    source={NotificationsRedDot}
+                  />
+                </TouchableOpacity>
+              </Overlay>
+          );
+        })()}
         <View style={styles.header}>
           <View style={styles.viewSettingsSection}>
             <TouchableOpacity
@@ -575,9 +595,9 @@ export default class DashboardView extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.refreshing !== this.props.refreshing) {
       if (nextProps.refreshing) {
-        this.setScrollViewSnapping.bind(this)(false);
+        this._setScrollViewSnapping.bind(this)(false);
       } else {
-        this.setScrollViewSnapping.bind(this)();
+        this._setScrollViewSnapping.bind(this)();
 
         if (this.state.scrollContentOffsetY < initialScrollContentOffsetY + 24) {
           setTimeout(this.scrollToTop, 1);
@@ -588,17 +608,17 @@ export default class DashboardView extends Component {
     }
   }
 
-  handleScroll(e) {
+  _handleScroll(e) {
     if (!(e.nativeEvent && e.nativeEvent.contentOffset)) return;
 
     this.state.scrollContentOffsetY = e.nativeEvent.contentOffset.y;
 
     if (this.props.refreshing) return;
 
-    this.setScrollViewSnapping.bind(this)();
+    this._setScrollViewSnapping.bind(this)();
   }
 
-  setScrollViewSnapping(enable = true) {
+  _setScrollViewSnapping(enable = true) {
     const { scrollContentOffsetY } = this.state;
 
     const turnOnScrollViewSnappingForViewSettingsSection = () => {
@@ -623,8 +643,39 @@ export default class DashboardView extends Component {
       turnOffScrollViewSnappingForViewSettingsSection();
     }
   }
+
+  _orientationDidUpdate(orientation) {
+    this.setState({ orientation });
+  }
+
+  componentWillMount() {
+    const initialOrientation = Orientation.getInitialOrientation();
+    this._orientationDidUpdate(initialOrientation);
+  }
+
+  componentDidMount() {
+    Orientation.addOrientationListener(this._orientationDidUpdate);
+
+    // A hack to set the backgroundColor for some charts
+    // (some of them may not have the correct backgroundColor if it has not
+    //  been updated after mount)
+    this.setState({ backgroundColor: colors.light });
+  }
+
+  componentWillUnmount() {
+    Orientation.removeOrientationListener(this._orientationDidUpdate);
+  }
+
+  onFocus() {
+    this.setState({ focus: true });
+  }
+
+  onBlur() {
+    this.setState({ focus: false });
+  }
 }
 
+const NotificationsRedDot = require('../../../images/iOS/Toolbar/NotificationsRedDot-White.png');
 const inlineOffIconLight = require('../../../images/iOS/Elements/InlineOffIcon-Light.png');
 const inlineOnIconLight = require('../../../images/iOS/Elements/InlineOnIcon-Light.png');
 
@@ -710,6 +761,15 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     overflow: 'visible',
     backgroundColor: colors.light
+  },
+  newNotificationDot: {
+    position: 'absolute',
+    top: 27.75,
+    left: 16.25
+  },
+  newNotificationDot_landscape: {
+    top: 1.75,
+    left: 20.00
   },
   header: {
     backgroundColor: colors.dark,

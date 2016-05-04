@@ -6,9 +6,12 @@ import DashboardView from 'views/DashboardView';
 export default class DashboardContainer extends ContainerBase {
   constructor() {
     super();
+
     this.state = {
       isIncomeShown: true
     };
+
+    this.registerView = this.registerView.bind(this);
   }
 
   render() {
@@ -23,7 +26,7 @@ export default class DashboardContainer extends ContainerBase {
 
     return (
       <DashboardView
-        ref="view"
+        ref={(r) => this.registerView(r)}
         focusKey={this.state.focusKey}
         refreshing={state.refreshing}
         currencyLabel="NT$"
@@ -62,10 +65,32 @@ export default class DashboardContainer extends ContainerBase {
     );
   }
 
+  registerView(ref) {
+    if (!ref) return;
+    this.view = ref;
+    if (this.pendingViewFunction) {
+      this.pendingViewFunction(ref);
+      this.pendingViewFunction = null;
+    }
+  }
+
   onFocus() {
+    if (this.view && this.view.onFocus) {
+      this.view.onFocus();
+    } else {
+      this.pendingViewFunction = (ref) => {
+        if (this.props.appFrame.getCurrentContainerRef() === this) {
+          ref.onFocus && ref.onFocus();
+        }
+      };
+    }
+  }
+
+  onBlur() {
+    this.view && this.view.onBlur && this.view.onBlur();
   }
 
   onRefresh() {
-    this.refs.view && this.refs.view.scrollToTop && this.refs.view.scrollToTop();
+    this.view && this.view.scrollToTop && this.view.scrollToTop();
   }
 }

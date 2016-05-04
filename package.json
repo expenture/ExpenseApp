@@ -27,6 +27,8 @@
     "react-native-android-checkbox": "0.0.1",
     "react-native-ios-charts": "^0.2.3",
     "react-native-lightbox": "^0.5.1",
+    "react-native-orientation": "^1.16.0",
+    "react-native-overlay": "^0.4.2",
     "react-native-tableview-simple": "Neson/react-native-tableview-simple",
     "react-web": "^0.2.4",
     "shared-git-hooks": "^1.1.4",
