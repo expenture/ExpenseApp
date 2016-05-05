@@ -75,6 +75,7 @@ export default class DashboardView extends Component {
       focus: false
     };
 
+    this.onRefresh = this.onRefresh.bind(this);
     this.scrollToTop = this.scrollToTop.bind(this);
     this._handleScroll = this._handleScroll.bind(this);
     this._setScrollViewSnapping = this._setScrollViewSnapping.bind(this);
@@ -617,6 +618,10 @@ export default class DashboardView extends Component {
 
   scrollToTop() {
     this.refs.scrollView.scrollTo({ y: initialScrollContentOffsetY });
+  }
+
+  onRefresh() {
+    this.scrollToTop();
   }
 
   componentWillReceiveProps(nextProps) {
