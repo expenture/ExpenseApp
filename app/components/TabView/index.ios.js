@@ -55,8 +55,8 @@ export default class TabView extends Component {
     return (
       <TabBarIOS
         translucent={true}
-        tintColor={colors.light}
-        barTintColor={Color(colors.dark).saturate(1).darken(0.72).hexString()}
+        tintColor={colors.dark}
+        barTintColor={colors.light}
       >
         {this.props.children.map((item, i) => {
           let selected = this.state.currentTab === i;

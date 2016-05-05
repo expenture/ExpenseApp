@@ -16,6 +16,7 @@ import Overlay from 'react-native-overlay';
 import { BarChart, PieChart } from 'react-native-ios-charts';
 import Orientation from 'react-native-orientation';
 import Color from 'color';
+import moment from 'utils/moment';
 
 import StatusBar from 'components/StatusBar';
 import ScrollView from 'components/ScrollView';
@@ -33,6 +34,9 @@ export default class DashboardView extends Component {
     // UI State
     refreshing: PropTypes.bool,
     // Data
+    lastSyncDatetime: PropTypes.number,
+    mostAncientSyncerSyncedDatetime: PropTypes.number,
+    mostAncientSyncerName: PropTypes.string,
     currencyLabel: PropTypes.string,
     currentYear: PropTypes.number,
     currentMonth: PropTypes.number,
@@ -78,6 +82,8 @@ export default class DashboardView extends Component {
 
   render() {
     const { state, props } = this;
+
+    moment.locale('zh-tw');
 
     let monthlyAmountsCount = 0;
     let monthlyExpenseAmountsCount =
@@ -125,7 +131,27 @@ export default class DashboardView extends Component {
             tintColor="#FFFFFF99"
             onRefresh={props.onRefresh}
             title={' '}
-          />
+          >
+            <View style={styles.refreshControlNote}>
+              <Text
+                numberOfLines={2}
+                allowFontScaling={false}
+                style={styles.refreshControlNoteText}
+              >
+                {(() => {
+                  if (props.refreshing) {
+                    return '正在更新⋯⋯';
+                  } else {
+                    let data = [`資料最後更新於：${moment.unix(props.lastSyncDatetime).fromNow()}`];
+                    if (props.mostAncientSyncerName && props.mostAncientSyncerSyncedDatetime) {
+                      data.push(`最舊的資料來源：${props.mostAncientSyncerName}－同步於 ${moment.unix(props.mostAncientSyncerSyncedDatetime).fromNow()}`);
+                    }
+                    return data.join('\n');
+                  }
+                })()}
+              </Text>
+            </View>
+          </RefreshControl>
         }
       >
         <StatusBar
@@ -645,6 +671,7 @@ export default class DashboardView extends Component {
   }
 
   _orientationDidUpdate(orientation) {
+    if (orientation === 'UNKNOWN') return;
     this.setState({ orientation });
   }
 
@@ -770,6 +797,19 @@ const styles = StyleSheet.create({
   newNotificationDot_landscape: {
     top: 1.75,
     left: 20.00
+  },
+  refreshControlNote: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 60,
+    alignItems: 'center'
+  },
+  refreshControlNoteText: {
+    color: colors.light,
+    fontSize: 11,
+    textAlign: 'center',
+    opacity: 0.6
   },
   header: {
     backgroundColor: colors.dark,

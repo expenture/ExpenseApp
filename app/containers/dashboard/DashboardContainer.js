@@ -29,6 +29,9 @@ export default class DashboardContainer extends ContainerBase {
         ref={(r) => this.registerView(r)}
         focusKey={this.state.focusKey}
         refreshing={state.refreshing}
+        lastSyncDatetime={parseInt((new Date()).setMinutes(-10)/1000, 10)}
+        mostAncientSyncerName={'花旗銀行'}
+        mostAncientSyncerSyncedDatetime={parseInt((new Date()).setMinutes(-30)/1000, 10)}
         currencyLabel="NT$"
         currentYear={2016}
         currentMonth={5}
