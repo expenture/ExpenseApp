@@ -6,6 +6,7 @@ import React, {
   PropTypes,
   Component,
   StyleSheet,
+  Dimensions,
   RefreshControl,
   Image,
   TouchableWithoutFeedback,
@@ -671,7 +672,7 @@ export default class DashboardView extends Component {
   }
 
   _orientationDidUpdate(orientation) {
-    if (orientation === 'UNKNOWN') return;
+    if (orientation !== 'PORTRAIT' && orientation !== 'LANDSCAPE') return;
     this.setState({ orientation });
   }
 
@@ -701,6 +702,9 @@ export default class DashboardView extends Component {
     this.setState({ focus: false });
   }
 }
+
+const windowDimension = Dimensions.get('window');
+const screenSize = Math.max(windowDimension.width, windowDimension.height);
 
 const NotificationsRedDot = require('../../../images/iOS/Toolbar/NotificationsRedDot-White.png');
 const inlineOffIconLight = require('../../../images/iOS/Elements/InlineOffIcon-Light.png');
@@ -775,7 +779,9 @@ const expenseCategoriesPieChartConfig = {
 };
 
 // Magic numers, these work for viewSettingsSectionHeight=46, I don't know why
-const snapToIntervalForViewSettingsSection = 50;
+let snapToIntervalForViewSettingsSection = 50;
+if (screenSize < 500) snapToIntervalForViewSettingsSection = 58;
+if (screenSize > 720) snapToIntervalForViewSettingsSection = 60;
 const snapToAlignmentForViewSettingsSection = 'end';
 const initialScrollContentOffsetY = -17;
 
@@ -791,12 +797,36 @@ const styles = StyleSheet.create({
   },
   newNotificationDot: {
     position: 'absolute',
-    top: 27.75,
-    left: 16.25
+    top: (() => {
+      if (screenSize < 720) {
+        return 27.75;
+      } else {
+        return 28.00;
+      }
+    })(),
+    left: (() => {
+      if (screenSize < 720) {
+        return 16.25;
+      } else {
+        return 20.00;
+      }
+    })()
   },
   newNotificationDot_landscape: {
-    top: 1.75,
-    left: 20.00
+    top: (() => {
+      if (screenSize < 720) {
+        return 1.75;
+      } else {
+        return 8.00;
+      }
+    })(),
+    left: (() => {
+      if (screenSize < 720) {
+        return 20.00;
+      } else {
+        return 20.25;
+      }
+    })()
   },
   refreshControlNote: {
     position: 'absolute',
