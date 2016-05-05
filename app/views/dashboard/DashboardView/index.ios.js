@@ -711,7 +711,10 @@ const inlineOffIconLight = require('../../../images/iOS/Elements/InlineOffIcon-L
 const inlineOnIconLight = require('../../../images/iOS/Elements/InlineOnIcon-Light.png');
 
 const viewSettingsSectionHeight = 46;
-const monthlyAmountsChartHeight = 120;
+let monthlyAmountsChartHeight = 120;
+if (screenSize < 580) monthlyAmountsChartHeight = 104;
+let expenseCategoriesChartHeight = 240;
+if (screenSize < 580) expenseCategoriesChartHeight = 200;
 
 const expenseBarChartColors = ['transparent', 'transparent'].concat((new Array(100)).fill(colors.redLight));
 const incomeBarChartColors = ['transparent', 'transparent'].concat((new Array(100)).fill(colors.greenLight));
@@ -1001,11 +1004,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     marginHorizontal: 18,
-    height: 240
+    height: expenseCategoriesChartHeight
   },
   expenseCategoriesPieChart: {
     flex: 8,
-    marginLeft: -chartInnerPadding
+    marginLeft: -chartInnerPadding,
+    marginTop: screenSize < 580 ? -14 : 0
   },
   expenseCategoriesPieChartLegend: {
     flex: 3
