@@ -11,6 +11,7 @@ cache:
     - node_modules
 
 env:
+  - TEST_COMMAND=bin/test-js
   - TEST_COMMAND=bin/build-ios
   - TEST_COMMAND=bin/build-android
 
@@ -37,4 +38,4 @@ install:
   - bin/setup
 
 script:
-  - eval "$TEST_COMMAND"
+  - npm test

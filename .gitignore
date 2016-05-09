@@ -43,8 +43,10 @@ node_modules/
 npm-debug.log
 config.js
 /build.json
+coverage
 
 # BUCK
+#
 buck-out/
 \.buckd/
 android/app/libs
