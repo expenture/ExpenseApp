@@ -61,6 +61,21 @@ class Page extends Component {
               }}
             />
             <ListTable.Cell
+              title="Navigate To A Page w/ No Bar"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'page-with-no-bar' });
+              }}
+            />
+
+            <ListTable.Cell
+              title="Navigate To A Page w/ Transparent Bar"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'page-with-transparent-bar' });
+              }}
+            />
+            <ListTable.Cell
               title="Navigate To A Demo Root Page w/ One Action"
               navigated={true}
               onPress={() => {
@@ -144,9 +159,65 @@ export default class Demo extends Component {
               title: 'Page',
               component: Page,
               theme: 'dark',
+              actions: [
+                {
+                  title: 'Action 1',
+                  show: 'always',
+                  onSelect: () => alert('Action 1 is selected.')
+                },
+                {
+                  title: 'Action 2',
+                  show: 'always',
+                  onSelect: () => alert('Action 2 is selected.')
+                }
+              ],
               passProps: {
                 ...this.props,
                 statusBarStyle: 'light-content'
+              }
+            };
+
+          case 'page-with-no-bar':
+            return {
+              title: 'Page',
+              component: Page,
+              theme: 'no-bar',
+              actions: [
+                {
+                  title: 'Action 1',
+                  show: 'always',
+                  onSelect: () => alert('Action 1 is selected.')
+                },
+                {
+                  title: 'Action 2',
+                  show: 'always',
+                  onSelect: () => alert('Action 2 is selected.')
+                }
+              ],
+              passProps: {
+                ...this.props
+              }
+            };
+
+          case 'page-with-transparent-bar':
+            return {
+              title: 'Page',
+              component: Page,
+              theme: 'transparent-bar',
+              actions: [
+                {
+                  title: 'Action 1',
+                  show: 'always',
+                  onSelect: () => alert('Action 1 is selected.')
+                },
+                {
+                  title: 'Action 2',
+                  show: 'always',
+                  onSelect: () => alert('Action 2 is selected.')
+                }
+              ],
+              passProps: {
+                ...this.props
               }
             };
 

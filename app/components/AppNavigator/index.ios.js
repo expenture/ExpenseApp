@@ -118,7 +118,10 @@ export default class AppNavigator extends Component {
       barTintColor = Color(colors.dark).saturate(0.7).darken(0.32).hexString();
       tintColor = colors.light;
       titleTextColor = colors.light;
-    } else if (theme === 'navigationBarHidden') {
+    } else if (theme === 'transparent-bar') {
+      translucent = true;
+      barTintColor = 'transparent';
+    } else if (theme === 'no-bar') {
       navigationBarHidden = true;
     } else {
       translucent = true;
