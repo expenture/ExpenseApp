@@ -1,4 +1,4 @@
-# Expense App
+# Expense App [![Travis](https://img.shields.io/travis/expenture/ExpenseApp.svg?style=flat-square)](https://travis-ci.org/expenture/ExpenseApp)
 
 An expense managing application to make life more easier and free. This is the iOS/Android/Web app with [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/).
 
@@ -59,3 +59,11 @@ $ bin/build-android
 ```
 
 The release APK will locate at `android/app/build/outputs/apk/`.
+
+
+## Badges
+
+- [![Travis](https://img.shields.io/travis/expenture/ExpenseApp.svg?style=flat-square)](https://travis-ci.org/expenture/ExpenseApp)
+- [![Coveralls](https://img.shields.io/coveralls/expenture/ExpenseApp.svg?style=flat-square)](https://coveralls.io/github/expenture/ExpenseApp)
+- [![David](https://img.shields.io/david/expenture/ExpenseApp.svg?style=flat-square)](https://david-dm.org/expenture/ExpenseApp)
+- [![David](https://img.shields.io/david/dev/expenture/ExpenseApp.svg?style=flat-square)](https://david-dm.org/expenture/ExpenseApp#info=devDependencies)
