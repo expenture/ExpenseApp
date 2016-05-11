@@ -55,5 +55,8 @@
     "sleep": "^3.0.1",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.9"
   }
 }

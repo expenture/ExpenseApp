@@ -39,3 +39,6 @@ install:
 
 script:
   - npm test
+
+after_script:
+  - '[ "$TEST_COMMAND" = "bin/test-js" ] && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls || true'
