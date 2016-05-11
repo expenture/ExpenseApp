@@ -4,6 +4,13 @@ import { createAction } from 'redux-actions';
 import getBackendURL from './utils/getBackendURL';
 import ExpentureAPIException from './ExpentureAPIException';
 
+export const changeBackendURL = (backendURL) => {
+  return {
+    type: 'CHANGE_BACKEND_URL',
+    backendURL
+  };
+};
+
 const signInRequest = createAction('SIGN_IN_REQUEST');
 
 const signInSuccess = (accessTokenObj) => {

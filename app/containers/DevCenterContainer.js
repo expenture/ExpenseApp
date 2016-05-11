@@ -7,6 +7,7 @@ import RootNavigator from 'components/RootNavigator';
 
 import MenuContainer from './dev-center/MenuContainer';
 import ReduxStoreContainer from './dev-center/ReduxStoreContainer';
+import ExpentureAPIContainer from './dev-center/ExpentureAPIContainer';
 import DesignSpecContainer from './dev-center/DesignSpecContainer';
 import UIPlaygroundContainer from './dev-center/UIPlaygroundContainer';
 
@@ -31,6 +32,12 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
     return {
       title: 'Store',
       component: ReduxStoreContainer
+    };
+
+  case 'dev-center-expentureAPI':
+    return {
+      title: 'expentureAPI',
+      component: ExpentureAPIContainer
     };
 
   case 'dev-center-design-spec':

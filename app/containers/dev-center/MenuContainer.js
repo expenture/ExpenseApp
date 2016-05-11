@@ -49,6 +49,16 @@ export default class MoreMenuContainer extends ContainerBase {
             />
           </ListTable.Section>
 
+          <ListTable.Section header="Modules & API">
+            <ListTable.Cell
+              title="Expenture API"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-expentureAPI' });
+              }}
+            />
+          </ListTable.Section>
+
           <ListTable.Section header="Design & UI & Components">
             <ListTable.Cell
               title="Design Spec"

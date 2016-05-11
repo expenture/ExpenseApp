@@ -15,6 +15,7 @@ import getCurrentUnixTime from 'utils/getCurrentUnixTime';
 import getBackendURL from './utils/getBackendURL';
 
 import {
+  changeBackendURL,
   signIn,
   signOut,
   refreshAccessToken,
@@ -25,7 +26,7 @@ const expentureAPI = {
   signIn: (username, password) => store.dispatch(signIn(username, password)),
   signOut: () => store.dispatch(signOut()),
 
-  asyncGetAccessnToken: () => {
+  asyncGetAccessToken: () => {
     /**
      * An original solution is: https://git.io/vrTMb,
      * this is better while less rely on setTimeout.
@@ -46,7 +47,7 @@ const expentureAPI = {
 
         const waitForRefreshingTimeout = setTimeout(() => {
           unsubscribe();
-          reject('asyncGetAccessnToken waitForRefreshingTimeout');
+          reject('asyncGetAccessToken waitForRefreshingTimeout');
         }, 10000);
 
         // Check the state again to prevent token refreshing is done before the store.subscribe
@@ -87,7 +88,7 @@ const expentureAPI = {
       uri = `${getBackendURL()}${uri}`;
     }
 
-    const accessToken = await expentureAPI.asyncGetAccessnToken();
+    const accessToken = await expentureAPI.asyncGetAccessToken();
     options = {
       ...options,
       headers: {
@@ -107,6 +108,10 @@ const expentureAPI = {
       }
       return response;
     });
+  },
+
+  setBackendURL: (newURL) => {
+    store.dispatch(changeBackendURL(newURL));
   },
 
   getBackendURL

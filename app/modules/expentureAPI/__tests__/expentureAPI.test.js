@@ -55,7 +55,7 @@ describe('expentureAPI', () => {
     });
   });
 
-  describe('asyncGetAccessnToken', () => {
+  describe('asyncGetAccessToken', () => {
     it('returns the access token if the API status is ready', async (done) => {
       store.setStateForTesting({
         expentureAPI: {
@@ -68,7 +68,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessnToken();
+      const accessToken = await expentureAPI.asyncGetAccessToken();
       expect(accessToken).toEqual('a');
       done();
     });
@@ -81,7 +81,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessnToken();
+      const accessToken = await expentureAPI.asyncGetAccessToken();
       expect(accessToken).toBeUndefined();
 
       store.setStateForTesting({
@@ -91,7 +91,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken2 = await expentureAPI.asyncGetAccessnToken();
+      const accessToken2 = await expentureAPI.asyncGetAccessToken();
       expect(accessToken2).toBeUndefined();
       done();
     });
@@ -108,7 +108,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      expentureAPI.asyncGetAccessnToken().then(() => {
+      expentureAPI.asyncGetAccessToken().then(() => {
         throw 'this should not be resolved, timeout rejecttion is expected';
       }).catch(() => {
         done();
@@ -139,7 +139,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessnToken();
+      const accessToken = await expentureAPI.asyncGetAccessToken();
       expect(accessToken).toEqual('new_access_token');
       done();
     });
@@ -161,7 +161,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessnToken();
+      const accessToken = await expentureAPI.asyncGetAccessToken();
       expect(accessToken).toEqual('a');
       done();
     });
@@ -186,7 +186,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessnToken();
+      const accessToken = await expentureAPI.asyncGetAccessToken();
       expect(accessToken).toBeUndefined();
       done();
     });
@@ -329,6 +329,15 @@ describe('expentureAPI', () => {
       expect(fetchResponse.status).toEqual(401);
       expect(store.getState().expentureAPI.status).toEqual('not-authorized');
       done();
+    });
+  });
+
+  describe('setBackendURL', () => {
+    it('changes the backend URL', () => {
+      expentureAPI.setBackendURL('https://example.com');
+
+      expect(store.getState().expentureAPI.backendURL).toEqual('https://example.com');
+      expect(expentureAPI.getBackendURL()).toEqual('https://example.com');
     });
   });
 });

@@ -10,6 +10,18 @@ describe('reducer', () => {
     ).toEqual(initialState);
   });
 
+  it('handles CHANGE_BACKEND_URL', () => {
+    expect(
+      reducer(initialState, {
+        type: 'CHANGE_BACKEND_URL',
+        backendURL: 'http://exp.com'
+      })
+    ).toEqual({
+      ...initialState,
+      backendURL: 'http://exp.com'
+    });
+  });
+
   it('handles SIGN_IN_REQUEST', () => {
     expect(
       reducer(initialState, {

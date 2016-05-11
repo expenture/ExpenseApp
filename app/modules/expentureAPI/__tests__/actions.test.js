@@ -10,6 +10,18 @@ describe('main actions', () => {
     nock.cleanAll();
   });
 
+  describe('changeBackendURL', () => {
+    it('dispatchs CHANGE_BACKEND_URL with the new backendURL', () => {
+      const store = mockStore();
+
+      store.dispatch(actions.changeBackendURL('http://exp.com'));
+      expect(store.getActions()).toEqual([{
+        type: 'CHANGE_BACKEND_URL',
+        backendURL: 'http://exp.com'
+      }]);
+    });
+  });
+
   describe('signIn', () => {
     it('dispatchs SIGN_IN_SUCCESS when signed in successfully', async (done) => {
       nock(getBackendURL())

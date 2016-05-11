@@ -12,6 +12,15 @@ export const initialState = {
 };
 
 export default handleActions({
+  CHANGE_BACKEND_URL: (state, action) => {
+    const { backendURL } = action;
+
+    return {
+      ...state,
+      backendURL
+    };
+  },
+
   SIGN_IN_REQUEST: (state) => {
     return {
       ...state,

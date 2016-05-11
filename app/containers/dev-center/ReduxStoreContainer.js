@@ -41,6 +41,7 @@ export default class ReduxStoreContainer extends ContainerBase {
             <ListTable.Cell>
               <Text
                 style={{
+                  flex: 1,
                   fontFamily: 'Menlo',
                   fontWeight: '100',
                   fontSize: 12
