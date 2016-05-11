@@ -2,8 +2,8 @@
  * @providesModule views/SamplePage
  */
 
-import React, {
-  Component,
+import React, { Component, PropTypes } from 'react';
+import {
   StyleSheet,
   Text,
   View

@@ -2,9 +2,8 @@
  * @providesModule views/BlankPageView
  */
 
-import React, {
-  PropTypes,
-  Component,
+import React, { Component, PropTypes } from 'react';
+import {
   View,
   Text
 } from 'react-native';

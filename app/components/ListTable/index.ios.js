@@ -2,9 +2,8 @@
  * @providesModule components/ListTable
  */
 
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   View,
   TouchableWithoutFeedback,
   Text,

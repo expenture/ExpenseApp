@@ -2,9 +2,8 @@
  * @providesModule views/DashboardView
  */
 
-import React, {
-  PropTypes,
-  Component,
+import React, { Component, PropTypes } from 'react';
+import {
   StyleSheet,
   Dimensions,
   RefreshControl,

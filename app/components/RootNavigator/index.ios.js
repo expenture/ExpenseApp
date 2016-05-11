@@ -4,7 +4,8 @@
  * @providesModule components/RootNavigator
  */
 
-import React, {
+import React from 'react';
+import {
   Navigator
 } from 'react-native';
 

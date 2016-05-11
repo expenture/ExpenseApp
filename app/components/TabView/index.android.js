@@ -9,9 +9,8 @@
  * @providesModule components/TabView
  */
 
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   View,
   TouchableNativeFeedback,
   Image,

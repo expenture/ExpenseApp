@@ -6,9 +6,8 @@
  * @providesModule components/TabView
  */
 
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   TabBarIOS,
   Image
 } from 'react-native';

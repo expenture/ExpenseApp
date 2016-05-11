@@ -6,9 +6,8 @@
  * @providesModule components/AppNavigator
  */
 
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   NavigatorIOS,
   ActionSheetIOS
 } from 'react-native';

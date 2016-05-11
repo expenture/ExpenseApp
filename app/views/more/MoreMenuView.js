@@ -2,9 +2,8 @@
  * @providesModule views/more/MoreMenuView
  */
 
-import React, {
-  PropTypes,
-  Component,
+import React, { Component, PropTypes } from 'react';
+import {
   ScrollView,
   View,
   Text,

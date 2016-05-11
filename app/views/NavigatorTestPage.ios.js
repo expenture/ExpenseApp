@@ -2,9 +2,8 @@
  * @providesModule views/NavigatorTestPage
  */
 
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   Text,
   View,
   TouchableOpacity

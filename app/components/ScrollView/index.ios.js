@@ -2,7 +2,8 @@
  * @providesModule components/ScrollView
  */
 
-import React, {
+import React from 'react';
+import {
   ScrollView
 } from 'react-native';
 

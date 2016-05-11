@@ -2,9 +2,8 @@
  * @providesModule components/Text
  */
 
-import React, {
-  PropTypes,
-  Component,
+import React, { Component, PropTypes } from 'react';
+import {
   Text
 } from 'react-native';
 

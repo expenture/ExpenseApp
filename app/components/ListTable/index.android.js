@@ -4,9 +4,8 @@
  * Ref: https://www.google.com/design/spec/components/lists.html
  */
 
-import React, {
-  Component,
-  PropTypes,
+import React, { Component, PropTypes } from 'react';
+import {
   StyleSheet,
   View,
   Text,

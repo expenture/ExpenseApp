@@ -4,7 +4,8 @@
  * @providesModule components/StatusBar
  */
 
-import React, {
+import React from 'react';
+import {
   StatusBar
 } from 'react-native';
 
