@@ -30,6 +30,12 @@ if [ ! -f config.js ]; then
 else
   echo 'The config file: config.js already exists'
 fi
+if [ ! -f buildConfig.js ]; then
+  echo 'Copying sample buildConfig file: cp buildConfig.sample.js buildConfig.js'
+  cp buildConfig.sample.js buildConfig.js
+else
+  echo 'The buildConfig file: buildConfig.js already exists'
+fi
 echo ''
 
 # Render templates

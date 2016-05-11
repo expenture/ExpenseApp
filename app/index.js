@@ -5,12 +5,17 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+
+import store from 'store';
 import AppContainer from './containers';
 
 export default class Application extends Component {
   render() {
     return (
-      <AppContainer />
+      <Provider store={store}>
+         <AppContainer />
+      </Provider>
     );
   }
 }

@@ -1,6 +1,5 @@
 module.exports = {
   "env": {
-    "browser": true,
     "node": true,
     "es6": true,
     "jest": true
@@ -112,7 +111,7 @@ module.exports = {
     "no-new-wrappers": 2, // disallows creating new instances of String,Number, and Boolean
     "no-octal": 2, // disallow use of octal literals
     "no-octal-escape": 2, // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
-    "no-param-reassign": 2, // disallow reassignment of function parameters (off by default)
+    "no-param-reassign": 1, // disallow reassignment of function parameters (off by default)
     "no-process-env": 2, // disallow use of process.env (off by default)
     "no-proto": 2, // disallow usage of __proto__ property
     "no-redeclare": 2, // disallow declaring the same variable more then once
@@ -120,7 +119,7 @@ module.exports = {
     "no-script-url": 0, // disallow use of javascript: urls.
     "no-self-compare": 2, // disallow comparisons where both sides are exactly the same (off by default)
     "no-sequences": 2, // disallow use of comma operator
-    "no-throw-literal": 2, // restrict what can be thrown as an exception (off by default)
+    "no-throw-literal": 1, // restrict what can be thrown as an exception (off by default)
     "no-unused-expressions": 1, // disallow usage of expressions in statement position
     "no-void": 2, // disallow use of void operator (off by default)
     "no-warning-comments": [1, { "terms": ["todo", "fixme"], "location": "start" }], // disallow usage of configurable warning terms in comments": 2, // e.g. TODO or FIXME (off by default)
@@ -149,7 +148,7 @@ module.exports = {
     "no-shadow-restricted-names": 2, // disallow shadowing of names such as arguments
     "no-undef": 2, // disallow use of undeclared variables unless mentioned in a /*global */ block
     "no-undef-init": 2, // disallow use of undefined when initializing variables
-    "no-undefined": 2, // disallow use of undefined variable (off by default)
+    "no-undefined": 0, // disallow use of undefined variable (off by default)
     "no-unused-vars": 1, // disallow declaration of variables that are not used in the code
     "no-use-before-define": 0, // disallow use of variables before they are defined
 

@@ -50,7 +50,7 @@ If you want to upload the app to App Store, or use any Xcode releasing features,
 Before building the releasing Android application, you'll need to have a keystore file containing the signing key to generate the signed release APK.
 
 1. Place the keystore file under the `android/app/` directory, and rename it to `release-key.keystore`.
-2. Edit `config.js` and fill in the `androidReleaseKeystorePassword`, `androidReleaseKeyAlias` and `androidReleaseKeyPassword` properties.
+2. Edit `buildConfig.js` and fill in the `androidReleaseKeystorePassword`, `androidReleaseKeyAlias` and `androidReleaseKeyPassword` properties.
 
 After completing the steps above, run:
 

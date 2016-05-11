@@ -1,9 +1,5 @@
 module.exports = {
   appName: 'Expense',
-  googleAnalyticsID: '',
-  androidPackageName: 'io.expenture.expense',
-  androidReleaseKeystoreFile: 'release-key.keystore',
-  androidReleaseKeystorePassword: 'keystore_password_here',
-  androidReleaseKeyAlias: 'key_alias_here',
-  androidReleaseKeyPassword: 'key_password_here'
+  backendURL: 'http://api.expenture.io',
+  googleAnalyticsID: ''
 };

@@ -41,9 +41,10 @@ bundle.js
 #
 node_modules/
 npm-debug.log
-config.js
+/config.js
+/buildConfig.js
 /build.json
-coverage
+/coverage
 
 # BUCK
 #

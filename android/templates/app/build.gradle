@@ -81,7 +81,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "{{config.androidPackageName}}"
+        applicationId "{{buildConfig.androidPackageName}}"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode {{app.versionCode}}
@@ -92,10 +92,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("{{config.androidReleaseKeystoreFile}}")
-            storePassword "{{config.androidReleaseKeystorePassword}}"
-            keyAlias "{{config.androidReleaseKeyAlias}}"
-            keyPassword "{{config.androidReleaseKeyPassword}}"
+            storeFile file("{{buildConfig.androidReleaseKeystoreFile}}")
+            storePassword "{{buildConfig.androidReleaseKeystorePassword}}"
+            keyAlias "{{buildConfig.androidReleaseKeyAlias}}"
+            keyPassword "{{buildConfig.androidReleaseKeyPassword}}"
         }
     }
     splits {

@@ -47,6 +47,7 @@ variables.app.versionCode = variables.app.version.split('.').map((v) => parseInt
 // load configurations from config.js
 try {
   variables.config = require('../config.js');
+  variables.buildConfig = require('../buildConfig.js');
 } catch (e) {}
 
 // load app constants from app/constants/*
