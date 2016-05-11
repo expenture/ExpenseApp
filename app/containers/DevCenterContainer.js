@@ -6,6 +6,7 @@ import Platform from 'utils/Platform';
 import RootNavigator from 'components/RootNavigator';
 
 import MenuContainer from './dev-center/MenuContainer';
+import ReduxStoreContainer from './dev-center/ReduxStoreContainer';
 import DesignSpecContainer from './dev-center/DesignSpecContainer';
 import UIPlaygroundContainer from './dev-center/UIPlaygroundContainer';
 
@@ -24,6 +25,12 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
       title: 'Dev Center',
       component: MenuContainer,
       actions
+    };
+
+  case 'dev-center-redux-store':
+    return {
+      title: 'Store',
+      component: ReduxStoreContainer
     };
 
   case 'dev-center-design-spec':

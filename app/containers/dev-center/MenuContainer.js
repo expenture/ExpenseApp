@@ -39,6 +39,16 @@ export default class MoreMenuContainer extends ContainerBase {
             </ListTable.Cell>
           </ListTable.Section>
 
+          <ListTable.Section header="Core">
+            <ListTable.Cell
+              title="Redux Store"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-redux-store' });
+              }}
+            />
+          </ListTable.Section>
+
           <ListTable.Section header="Design & UI & Components">
             <ListTable.Cell
               title="Design Spec"
