@@ -9,7 +9,7 @@
  * @providesModule expentureAPI
  */
 
-import fetch from 'fetch';
+import fetch from 'utils/fetch';
 import store from 'store';
 import getCurrentUnixTime from 'utils/getCurrentUnixTime';
 import getBackendURL from './utils/getBackendURL';

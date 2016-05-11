@@ -1,4 +1,4 @@
-import fetch from 'fetch';
+import fetch from 'utils/fetch';
 import { createAction } from 'redux-actions';
 
 import getBackendURL from './utils/getBackendURL';

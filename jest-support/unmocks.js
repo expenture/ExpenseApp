@@ -14,7 +14,7 @@ jest.unmock('redux-thunk');
 
 // We mock requests by nock, so unmock fetch
 jest.unmock('isomorphic-fetch');
-jest.unmock('fetch');
+jest.unmock('utils/fetch');
 
 // Common modules or utils in the app that should not be mocked
 jest.unmock('utils/stringifyJSON');

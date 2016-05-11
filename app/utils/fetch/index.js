@@ -1,5 +1,5 @@
 /**
- * @providesModule fetch
+ * @providesModule utils/fetch
  */
 
 import fetch from 'isomorphic-fetch';
