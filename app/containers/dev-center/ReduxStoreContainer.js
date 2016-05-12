@@ -21,7 +21,7 @@ export default class ReduxStoreContainer extends ContainerBase {
     super(props);
 
     this.state = {
-      setStateForTestingEnabled: false
+      mode: null
     };
 
     this.enableSetStateForTesting = this.enableSetStateForTesting.bind(this);
@@ -52,12 +52,15 @@ export default class ReduxStoreContainer extends ContainerBase {
             </ListTable.Cell>
           </ListTable.Section>
 
-          <ListTable.Section
-            header="Actions"
-          >
-            {(() => {
-              if (this.state.setStateForTestingEnabled) {
-                return (
+          {(() => {
+            switch (this.state.mode) {
+            case 'set-state-for-testing':
+              return (
+                <ListTable.Section
+                  header="Set State For Testing"
+                  key="ssft"
+                  footer={'Edit the state and press the "Apply New State" button to set the new state, or press the "Reset State" button to reset the state to the initial status.\n\nNote that it is dangerous to modify the state as it might broke the app. In the most worst situation, it might cause data lost.'}
+                >
                   <ListTable.Cell
                     title="New State"
                     textInput={true}
@@ -72,56 +75,42 @@ export default class ReduxStoreContainer extends ContainerBase {
                       fontSize: 12
                     }}
                   />
-                );
-              } else {
-                return (
-                  <ListTable.Cell
-                    key="ssft"
-                    title="Set State For Testing"
-                    onPress={this.enableSetStateForTesting}
-                  />
-                );
-              }
-            })()}
-            {(() => {
-              if (this.state.setStateForTestingEnabled) {
-                return (
                   <ListTable.Cell
                     key="ssft-ans"
                     title="Apply New State"
                     onPress={this.setStateForTesting}
                   />
-                );
-              } else {
-                return (
                   <ListTable.Cell
                     key="rsft"
-                    title="Reset State For Testing"
+                    title="Reset State"
                     onPress={this.resetStateForTesting}
                   />
-                );
-              }
-            })()}
-            {(() => {
-              if (this.state.setStateForTestingEnabled) {
-                return (
                   <ListTable.Cell
-                    key="ssft-c"
                     title="Cancel"
                     onPress={this.disableSetStateForTesting}
                   />
-                );
-              } else {
-                return (
+                </ListTable.Section>
+              );
+            default:
+              return (
+                <ListTable.Section
+                  header="Actions"
+                  footer={'\nThe Redux store is the state container of the app.\n\nHere you can perform some actions such as modifying the state directly, or reset the state to the initial status.\n\nNote that it is dangerous to modify the state as it might broke the app.'}
+                  key="Actions"
+                >
+                  <ListTable.Cell
+                    title="Set State For Testing"
+                    onPress={this.enableSetStateForTesting}
+                  />
                   <ListTable.Cell
                     title="Log & Time Traveling"
                     disabled={true}
                     onDisabledPress={() => alert('This is not yet implemented.')}
                   />
-                );
-              }
-            })()}
-          </ListTable.Section>
+                </ListTable.Section>
+              );
+            }
+          })()}
         </ListTable>
       </ScrollView>
     );
@@ -130,12 +119,12 @@ export default class ReduxStoreContainer extends ContainerBase {
   enableSetStateForTesting() {
     this.setState({
       newStateString: JSON.stringify(this.props.state, null, 2),
-      setStateForTestingEnabled: true
+      mode: 'set-state-for-testing'
     });
   }
 
   disableSetStateForTesting() {
-    this.setState({ setStateForTestingEnabled: false });
+    this.setState({ mode: null });
   }
 
   setStateForTesting() {
@@ -151,5 +140,6 @@ export default class ReduxStoreContainer extends ContainerBase {
   resetStateForTesting() {
     store.enableTesting();
     store.resetStateForTesting();
+    this.disableSetStateForTesting();
   }
 }

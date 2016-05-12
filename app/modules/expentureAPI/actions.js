@@ -72,7 +72,7 @@ export const signIn = (username, password) => {
           dispatch(signInSuccess(json));
         }
       })
-      .catch(e => dispatch(signInFailure(e)));
+      .catch(e => dispatch(signInFailure({ hint: 'Possible network error?', ...e })));
   };
 };
 

@@ -4,6 +4,8 @@
 
 import React, { Component } from 'react';
 
+import config from 'config';
+
 import DevCenterContainer from './DevCenterContainer';
 import SignInContainer from './SignInContainer';
 import MainFrameContainer from './MainFrameContainer';
@@ -15,7 +17,7 @@ export default class AppContainer extends Component {
   }
 
   render() {
-    if (this.state.devCenter) {
+    if (config.devMode || this.state.devCenter) {
       return <DevCenterContainer />;
     }
 

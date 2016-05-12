@@ -32,14 +32,15 @@ const expentureAPI = {
      * this is better while less rely on setTimeout.
      */
     return new Promise((resolve, reject) => {
+      const currentState = store.getState().expentureAPI;
 
-      const waitForRefreshingDone = () => {
+      const waitForRefreshingDoneThenResolve = () => {
         const unsubscribe = store.subscribe(() => {
-          const currentState = store.getState().expentureAPI;
-          if (currentState.status === 'ready') {
+          const state = store.getState().expentureAPI;
+          if (state.status === 'ready') {
             clearTimeout(waitForRefreshingTimeout);
-            resolve(currentState.accessToken);
-          } else if (currentState.status === 'not-authorized') {
+            resolve(state.accessToken);
+          } else if (state.status === 'not-authorized') {
             clearTimeout(waitForRefreshingTimeout);
             resolve();
           }
@@ -51,34 +52,30 @@ const expentureAPI = {
         }, 10000);
 
         // Check the state again to prevent token refreshing is done before the store.subscribe
-        const currentState = store.getState().expentureAPI;
-        if (currentState.status === 'ready') {
+        const state = store.getState().expentureAPI;
+        if (state.status === 'ready') {
           unsubscribe();
           clearTimeout(waitForRefreshingTimeout);
-          resolve(currentState.accessToken);
+          resolve(state.accessToken);
         }
       };
 
-      const currentState = store.getState().expentureAPI;
       if (currentState.status === 'ready') {
         const currentUnixTime = getCurrentUnixTime();
         const accessTokenExpireTime =
           currentState.accessTokenCreatedAt + currentState.accessTokenExpiresIn;
 
+        // If the token is ablout to expire, refresh it
         if (accessTokenExpireTime - currentUnixTime < 60 * 5) {
           store.dispatch(refreshAccessToken());
-          waitForRefreshingDone();
-          return;
+          waitForRefreshingDoneThenResolve();
         } else {
           resolve(currentState.accessToken);
-          return;
         }
       } else if (currentState.status === 'token-refreshing') {
-        waitForRefreshingDone();
-        return;
+        waitForRefreshingDoneThenResolve();
       } else {
         resolve();
-        return;
       }
     });
   },

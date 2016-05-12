@@ -83,7 +83,12 @@ describe('main actions', () => {
 
       const expectedActions = [
         { type: 'SIGN_IN_REQUEST' },
-        { type: 'SIGN_IN_FAILURE' }
+        {
+          type: 'SIGN_IN_FAILURE',
+          error: {
+            hint: 'Possible network error?'
+          }
+        }
       ];
 
       await store.dispatch(actions.signIn('username', 'password'));
