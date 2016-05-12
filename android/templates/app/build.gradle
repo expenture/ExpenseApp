@@ -89,6 +89,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        multiDexEnabled true
     }
     signingConfigs {
         release {
@@ -137,4 +138,5 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':Orientation')
     compile project(':react-native-android-checkbox')
+    compile project(":react-native-fbsdk")
 }

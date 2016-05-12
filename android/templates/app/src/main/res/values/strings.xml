@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Expense</string>
+    <string name="app_name">{{config.appName}}</string>
+    <string name="facebook_app_id">{{config.facebookAppID}}</string>
 </resources>

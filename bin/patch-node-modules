@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Exit if any subcommand fails
+set -e
+
+# Switch to the project directory
+cd "$(dirname "$0")"
+cd ..
+BASEDIR=$(pwd)
+
+echo 'Patching react-native-fbsdk ...'
+
+cat node_modules/react-native-fbsdk/iOS/core/RCTFBSDKCore.xcodeproj/project.pbxproj | sed 's/"~\/Documents\/FacebookSDK",$/"~\/Documents\/FacebookSDK","$(SRCROOT)\/..\/..\/..\/..\/ios\/vendor\/**",/g' | sed 's/"\$(SRCROOT)\/..\/..\/node_modules\/react-native\/React\/\*\*",$/"$(SRCROOT)\/..\/..\/node_modules\/react-native\/React\/**","$(SRCROOT)\/..\/..\/..\/..\/node_modules\/react-native\/React\/**",/g' > node_modules/react-native-fbsdk/iOS/core/RCTFBSDKCore.xcodeproj/project.pbxproj.tmp
+rm node_modules/react-native-fbsdk/iOS/core/RCTFBSDKCore.xcodeproj/project.pbxproj
+mv node_modules/react-native-fbsdk/iOS/core/RCTFBSDKCore.xcodeproj/project.pbxproj.tmp node_modules/react-native-fbsdk/iOS/core/RCTFBSDKCore.xcodeproj/project.pbxproj
+
+cat node_modules/react-native-fbsdk/iOS/login/RCTFBSDKLogin.xcodeproj/project.pbxproj | sed 's/"~\/Documents\/FacebookSDK",$/"~\/Documents\/FacebookSDK","$(SRCROOT)\/..\/..\/..\/..\/ios\/vendor\/**",/g' | sed 's/"\$(SRCROOT)\/..\/..\/node_modules\/react-native\/React\/\*\*",$/"$(SRCROOT)\/..\/..\/node_modules\/react-native\/React\/**","$(SRCROOT)\/..\/..\/..\/..\/node_modules\/react-native\/React\/**",/g' > node_modules/react-native-fbsdk/iOS/login/RCTFBSDKLogin.xcodeproj/project.pbxproj.tmp
+rm node_modules/react-native-fbsdk/iOS/login/RCTFBSDKLogin.xcodeproj/project.pbxproj
+mv node_modules/react-native-fbsdk/iOS/login/RCTFBSDKLogin.xcodeproj/project.pbxproj.tmp node_modules/react-native-fbsdk/iOS/login/RCTFBSDKLogin.xcodeproj/project.pbxproj
+
+cat node_modules/react-native-fbsdk/iOS/share/RCTFBSDKShare.xcodeproj/project.pbxproj | sed 's/"~\/Documents\/FacebookSDK",$/"~\/Documents\/FacebookSDK","$(SRCROOT)\/..\/..\/..\/..\/ios\/vendor\/**",/g' | sed 's/"\$(SRCROOT)\/..\/..\/node_modules\/react-native\/React\/\*\*",$/"$(SRCROOT)\/..\/..\/node_modules\/react-native\/React\/**","$(SRCROOT)\/..\/..\/..\/..\/node_modules\/react-native\/React\/**",/g' > node_modules/react-native-fbsdk/iOS/share/RCTFBSDKShare.xcodeproj/project.pbxproj.tmp
+rm node_modules/react-native-fbsdk/iOS/share/RCTFBSDKShare.xcodeproj/project.pbxproj
+mv node_modules/react-native-fbsdk/iOS/share/RCTFBSDKShare.xcodeproj/project.pbxproj.tmp node_modules/react-native-fbsdk/iOS/share/RCTFBSDKShare.xcodeproj/project.pbxproj

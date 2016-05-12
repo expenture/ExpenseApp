@@ -19,3 +19,5 @@ export default class Application extends Component {
     );
   }
 }
+const FBSDK = require('react-native-fbsdk');
+window.FBSDK = FBSDK;

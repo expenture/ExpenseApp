@@ -38,6 +38,12 @@ else
 fi
 echo ''
 
+# Patch some node modules
+echo '== Patch node modules =='
+echo 'Patching some node modules with bin/patch-node-modules'
+./bin/patch-node-modules
+echo ''
+
 # Render templates
 echo '== Render templates =='
 echo 'Rendering native templates with bin/render-templates'
