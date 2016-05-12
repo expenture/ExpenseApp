@@ -15,6 +15,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import autobind from 'autobind-decorator';
 
 export default class ContainerBase extends Component {
   static PropTypes = {
@@ -29,8 +30,18 @@ export default class ContainerBase extends Component {
     this.state = {
       focusKey: 0
     };
+  }
 
-    this.registerView = this.registerView.bind(this);
+  @autobind
+  registerView(ref) {
+    if (!ref) return;
+
+    this.view = ref;
+
+    if (this.pendingViewFunction) {
+      this.pendingViewFunction(ref);
+      this.pendingViewFunction = null;
+    }
   }
 
   _handleConstruct() {
@@ -47,17 +58,6 @@ export default class ContainerBase extends Component {
 
   componentWillUnmount() {
     this._handleDestruct();
-  }
-
-  registerView(ref) {
-    if (!ref) return;
-
-    this.view = ref;
-
-    if (this.pendingViewFunction) {
-      this.pendingViewFunction(ref);
-      this.pendingViewFunction = null;
-    }
   }
 
   onFocus() {

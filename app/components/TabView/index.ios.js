@@ -11,6 +11,7 @@ import {
   TabBarIOS,
   Image
 } from 'react-native';
+import autobind from 'autobind-decorator';
 
 import Color from 'color';
 
@@ -44,10 +45,10 @@ export default class TabView extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       currentTab: this.props.initialTab
     };
-    this.selectTab = this.selectTab.bind(this);
   }
 
   render() {
@@ -87,6 +88,7 @@ export default class TabView extends Component {
     );
   }
 
+  @autobind
   selectTab(i) {
     if (this.state.currentTab !== i) {
       this.setState({ currentTab: i });

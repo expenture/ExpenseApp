@@ -12,6 +12,7 @@ import {
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
+import autobind from 'autobind-decorator';
 import Overlay from 'react-native-overlay';
 import { BarChart, PieChart } from 'react-native-ios-charts';
 import Orientation from 'react-native-orientation';
@@ -73,12 +74,6 @@ export default class DashboardView extends Component {
       scrollContentOffsetY: initialScrollContentOffsetY,
       focus: false
     };
-
-    this.onRefresh = this.onRefresh.bind(this);
-    this.scrollToTop = this.scrollToTop.bind(this);
-    this._handleScroll = this._handleScroll.bind(this);
-    this._setScrollViewSnapping = this._setScrollViewSnapping.bind(this);
-    this._orientationDidUpdate = this._orientationDidUpdate.bind(this);
   }
 
   render() {
@@ -615,10 +610,12 @@ export default class DashboardView extends Component {
     );
   }
 
+  @autobind
   scrollToTop() {
     this.refs.scrollView.scrollTo({ y: initialScrollContentOffsetY });
   }
 
+  @autobind
   onRefresh() {
     this.scrollToTop();
   }
@@ -639,6 +636,7 @@ export default class DashboardView extends Component {
     }
   }
 
+  @autobind
   _handleScroll(e) {
     if (!(e.nativeEvent && e.nativeEvent.contentOffset)) return;
 
@@ -649,6 +647,7 @@ export default class DashboardView extends Component {
     this._setScrollViewSnapping.bind(this)();
   }
 
+  @autobind
   _setScrollViewSnapping(enable = true) {
     const { scrollContentOffsetY } = this.state;
 
@@ -675,6 +674,7 @@ export default class DashboardView extends Component {
     }
   }
 
+  @autobind
   _orientationDidUpdate(orientation) {
     if (orientation !== 'PORTRAIT' && orientation !== 'LANDSCAPE') return;
     this.setState({ orientation });

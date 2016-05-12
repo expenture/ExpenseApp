@@ -9,6 +9,7 @@ import {
   Text,
   StatusBar
 } from 'react-native';
+import autobind from 'autobind-decorator';
 
 import ListTable from 'components/ListTable';
 
@@ -24,10 +25,9 @@ export default class MoreMenuView extends Component {
     this.state = {
       statusBarIndex: 0
     };
-
-    this.remountStatusBar = this.remountStatusBar.bind(this);
   }
 
+  @autobind
   remountStatusBar() {
     let statusBarIndex = this.state.statusBarIndex;
     statusBarIndex += 1;

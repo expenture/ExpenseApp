@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import autobind from 'autobind-decorator';
 import { connect } from 'react-redux';
 import ContainerBase from 'ContainerBase';
 
@@ -23,11 +24,6 @@ export default class ReduxStoreContainer extends ContainerBase {
     this.state = {
       mode: null
     };
-
-    this.enableSetStateForTesting = this.enableSetStateForTesting.bind(this);
-    this.disableSetStateForTesting = this.disableSetStateForTesting.bind(this);
-    this.setStateForTesting = this.setStateForTesting.bind(this);
-    this.resetStateForTesting = this.resetStateForTesting.bind(this);
   }
 
   render() {
@@ -116,6 +112,7 @@ export default class ReduxStoreContainer extends ContainerBase {
     );
   }
 
+  @autobind
   enableSetStateForTesting() {
     this.setState({
       newStateString: JSON.stringify(this.props.state, null, 2),
@@ -123,10 +120,12 @@ export default class ReduxStoreContainer extends ContainerBase {
     });
   }
 
+  @autobind
   disableSetStateForTesting() {
     this.setState({ mode: null });
   }
 
+  @autobind
   setStateForTesting() {
     try {
       store.enableTesting();
@@ -137,6 +136,7 @@ export default class ReduxStoreContainer extends ContainerBase {
     }
   }
 
+  @autobind
   resetStateForTesting() {
     store.enableTesting();
     store.resetStateForTesting();

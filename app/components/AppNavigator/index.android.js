@@ -12,6 +12,7 @@ import {
   View,
   ToolbarAndroid
 } from 'react-native';
+import autobind from 'autobind-decorator';
 
 import style from 'constants/style';
 
@@ -29,25 +30,26 @@ export default class AppNavigator extends Component {
 
   constructor() {
     super();
-    this.push = this.push.bind(this);
-    this.pop = this.pop.bind(this);
-    this.popToTop = this.popToTop.bind(this);
-    this.getRouteStackLength = this.getRouteStackLength.bind(this);
+
     this.scenes = [];
   }
 
+  @autobind
   push(route) {
     this.refs.nav.push(route);
   }
 
+  @autobind
   pop() {
     this.refs.nav.pop();
   }
 
+  @autobind
   popToTop() {
     this.refs.nav.popToTop();
   }
 
+  @autobind
   getRouteStackLength() {
     return this.refs.nav.getCurrentRoutes().length;
   }

@@ -5,6 +5,7 @@ jest.unmock('nock');
 jest.unmock('redux-mock-store');
 
 // Common utils that should not be mocked
+jest.unmock('autobind-decorator');
 jest.unmock('sleep');
 
 // Redux core related modules that should not be mocked

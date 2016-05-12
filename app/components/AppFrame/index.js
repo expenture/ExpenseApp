@@ -3,6 +3,7 @@
  */
 
 import React, { Component, PropTypes } from 'react';
+import autobind from 'autobind-decorator';
 
 import RootNavigator from 'components/RootNavigator';
 import AppNavigator from 'components/AppNavigator';
@@ -26,15 +27,6 @@ export default class AppFrame extends Component {
       appNavigators: {},
       appNavigatorRefStacks: {}
     };
-
-    this.renderTabView = this.renderTabView.bind(this);
-    this.directlySetState = this.directlySetState.bind(this);
-    this.getCurrentAppNavigator = this.getCurrentAppNavigator.bind(this);
-    this.getCurrentAppNavigatorRefStack = this.getCurrentAppNavigatorRefStack.bind(this);
-    this.getCurrentContainerRef = this.getCurrentContainerRef.bind(this);
-    this.getAllContainerRefs = this.getAllContainerRefs.bind(this);
-    this.registerAppNavigator = this.registerAppNavigator.bind(this);
-    this._setFocusFor = this._setFocusFor.bind(this);
   }
 
   render() {
@@ -108,6 +100,7 @@ export default class AppFrame extends Component {
     );
   }
 
+  @autobind
   renderTabView(rootRoute, rootNavigator) {
     const { tabs, renderAppScene } = this.props;
     // const renderSceneFuncForAppNavigator = this.renderSceneFuncForAppNavigatorConstructor(rootNavigator);
@@ -195,6 +188,7 @@ export default class AppFrame extends Component {
     );
   }
 
+  @autobind
   directlySetState(newState) {
     // directly sets the state to avoid rerendering
     this.state = {
@@ -203,6 +197,7 @@ export default class AppFrame extends Component {
     };
   }
 
+  @autobind
   registerAppNavigator(name, ref) {
     // directly sets the state to avoid rerendering
     this.state.appNavigators[name] = ref;
@@ -212,24 +207,29 @@ export default class AppFrame extends Component {
     }
   }
 
+  @autobind
   getCurrentAppNavigator() {
     return this.state.appNavigators[this.state.currentTab];
   }
 
+  @autobind
   getCurrentAppNavigatorRefStack() {
     return this.state.appNavigatorRefStacks[this.state.currentTab];
   }
 
+  @autobind
   getCurrentContainerRef() {
     const rs = this.getCurrentAppNavigatorRefStack();
     return rs[rs.length - 1];
   }
 
+  @autobind
   getAllContainerRefs() {
     const rs = this.state.appNavigatorRefStacks;
     return Object.keys(rs).map(k => rs[k]).reduce((c, n) => c.concat(n), []);
   }
 
+  @autobind
   _setFocusFor(ref) {
     if (!ref) return;
     ref.onFocus && ref.onFocus.bind(ref)();
@@ -257,16 +257,17 @@ export default class AppFrame extends Component {
 
   componentWillMount() {
     if (Platform.OS === 'android') {
-      this.registerAndroidHardwareBackPress.bind(this)();
+      this.registerAndroidHardwareBackPress();
     }
   }
 
   componentWillUnmount() {
     if (Platform.OS === 'android') {
-      this.unRegisterAndroidHardwareBackPress.bind(this)();
+      this.unRegisterAndroidHardwareBackPress();
     }
   }
 
+  @autobind
   registerAndroidHardwareBackPress() {
     const RN = require('react-native');
     const { BackAndroid } = RN;
@@ -285,6 +286,7 @@ export default class AppFrame extends Component {
     BackAndroid.addEventListener('hardwareBackPress', this.androidHardwareBackPressHandler);
   }
 
+  @autobind
   unRegisterAndroidHardwareBackPress() {
     const RN = require('react-native');
     const { BackAndroid } = RN;

@@ -11,6 +11,7 @@ import {
   NavigatorIOS,
   ActionSheetIOS
 } from 'react-native';
+import autobind from 'autobind-decorator';
 
 import Color from 'color';
 
@@ -21,24 +22,23 @@ export default class AppNavigator extends Component {
   static propTypes = {
     initialRoute: PropTypes.object.isRequired,
     renderScene: PropTypes.func.isRequired
-  }
+  };
 
   constructor() {
     super();
-    this.push = this.push.bind(this);
-    this.pop = this.pop.bind(this);
-    this.popToTop = this.popToTop.bind(this);
-    this._renderRouteObject = this._renderRouteObject.bind(this);
   }
 
+  @autobind
   push(route) {
     this.refs.nav.push(this._renderRouteObject(route, this));
   }
 
+  @autobind
   pop() {
     this.refs.nav.pop();
   }
 
+  @autobind
   popToTop() {
     this.refs.nav.popToTop();
   }
@@ -57,6 +57,7 @@ export default class AppNavigator extends Component {
     );
   }
 
+  @autobind
   _renderRouteObject(route, navigator) {
     const sceneObj = this.props.renderScene(route, navigator);
     const SceneComponent = sceneObj.component;

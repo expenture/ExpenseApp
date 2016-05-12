@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import autobind from 'autobind-decorator';
 
 import SignInView from 'views/SignInView';
 
 export default class SignInContainer extends Component {
   constructor() {
     super();
-    this._signIn = this._signIn.bind(this);
   }
 
   render() {
@@ -16,6 +16,7 @@ export default class SignInContainer extends Component {
     );
   }
 
+  @autobind
   _signIn() {
     this.props.tempSignInAction();
   }

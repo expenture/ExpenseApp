@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import autobind from 'autobind-decorator';
 
 import AppFrame from 'components/AppFrame';
 
@@ -24,9 +25,6 @@ export default class MainFrameContainer extends Component {
     super(props);
 
     this.state = {};
-
-    this.touchDevCenterTrigger = this.touchDevCenterTrigger.bind(this);
-    this.loadDevCenter = this.loadDevCenter.bind(this);
   }
 
   render() {
@@ -144,6 +142,7 @@ export default class MainFrameContainer extends Component {
     );
   }
 
+  @autobind
   touchDevCenterTrigger() {
     if (!this.dtc) this.dtc = 0;
     this.dtc++;
@@ -159,6 +158,7 @@ export default class MainFrameContainer extends Component {
     }, 1000);
   }
 
+  @autobind
   loadDevCenter() {
     let currentAppNavigator = this.refs.appFrame.getCurrentAppNavigator();
     currentAppNavigator.push({ name: 'dev-center-menu' });

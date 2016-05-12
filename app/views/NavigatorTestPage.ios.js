@@ -8,18 +8,17 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
+import autobind from 'autobind-decorator';
 
 export default class NavigatorTestPage extends Component {
   static propTypes = {
     route: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
     nextRoute: PropTypes.object
-  }
+  };
 
   constructor() {
     super();
-    this._goToNextRoute = this._goToNextRoute.bind(this);
-    this._goBack = this._goBack.bind(this);
   }
 
   render() {
@@ -44,10 +43,12 @@ export default class NavigatorTestPage extends Component {
     );
   }
 
+  @autobind
   _goToNextRoute() {
     this.props.navigator.push(this.props.nextRoute);
   }
 
+  @autobind
   _goBack() {
     this.props.navigator.pop();
   }

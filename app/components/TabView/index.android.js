@@ -17,6 +17,7 @@ import {
   Text,
   LayoutAnimation
 } from 'react-native';
+import autobind from 'autobind-decorator';
 
 import style from 'constants/style';
 
@@ -48,10 +49,10 @@ export default class TabView extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       currentTab: this.props.initialTab
     };
-    this.selectTab = this.selectTab.bind(this);
   }
 
   render() {
@@ -119,6 +120,7 @@ export default class TabView extends Component {
     );
   }
 
+  @autobind
   selectTab(i) {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
     if (this.state.currentTab !== i) {

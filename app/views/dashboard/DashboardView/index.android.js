@@ -6,7 +6,9 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet
 } from 'react-native';
+import autobind from 'autobind-decorator';
 import Orientation from 'react-native-orientation';
+
 import Color from 'color';
 import moment from 'utils/moment';
 
@@ -64,12 +66,6 @@ export default class DashboardView extends Component {
     this.state = {
       focus: false
     };
-
-    this.onRefresh = this.onRefresh.bind(this);
-    this.scrollToTop = this.scrollToTop.bind(this);
-    this._handleScroll = this._handleScroll.bind(this);
-    this._setScrollViewSnapping = this._setScrollViewSnapping.bind(this);
-    this._orientationDidUpdate = this._orientationDidUpdate.bind(this);
   }
 
   render() {
@@ -82,10 +78,12 @@ export default class DashboardView extends Component {
     );
   }
 
+  @autobind
   scrollToTop() {
-    this.refs.scrollView.scrollTo({ y: 0 });
+    // this.refs.scrollView.scrollTo({ y: 0 });
   }
 
+  @autobind
   onRefresh() {
     this.scrollToTop();
   }
@@ -93,6 +91,7 @@ export default class DashboardView extends Component {
   componentWillReceiveProps(nextProps) {
   }
 
+  @autobind
   _orientationDidUpdate(orientation) {
     if (orientation !== 'PORTRAIT' && orientation !== 'LANDSCAPE') return;
     this.setState({ orientation });
