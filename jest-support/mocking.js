@@ -1,4 +1,4 @@
-// Specify some common modules that should not be mocked for Jest.
+// Specify some common modules that should be mocked or unmocked for Jest.
 
 // Thease are mocking utils, don't mock then!
 jest.unmock('nock');

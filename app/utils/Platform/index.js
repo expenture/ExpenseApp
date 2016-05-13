@@ -2,5 +2,8 @@
  * @providesModule utils/Platform
  */
 
-import { Platform } from 'react-web';
+const Platform = {
+  OS: 'web'
+};
+
 export default Platform;

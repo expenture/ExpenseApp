@@ -12,7 +12,7 @@
   "jest": {
     "rootDir": "app",
     "setupFiles": [
-      "../jest-support/unmocks.js"
+      "../jest-support/mocking.js"
     ]
   },
   "dependencies": {
