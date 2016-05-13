@@ -58,6 +58,13 @@ export default class MoreMenuContainer extends ContainerBase {
               }}
             />
             <ListTable.Cell
+              title="Push Notification"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-PushNotification' });
+              }}
+            />
+            <ListTable.Cell
               title="FB API"
               navigated={true}
               onPress={() => {

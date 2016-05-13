@@ -1,4 +1,5 @@
 module.exports = {
+  iosBundleIdentifier: 'io.expenture.expense',
   androidPackageName: 'io.expenture.expense',
   androidReleaseKeystoreFile: 'release-key.keystore',
   androidReleaseKeystorePassword: 'keystore_password_here',

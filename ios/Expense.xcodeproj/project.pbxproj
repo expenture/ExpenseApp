@@ -21,9 +21,8 @@
 		123DDDF61CE456A200367D1E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123DDDF31CE456A200367D1E /* FBSDKShareKit.framework */; };
 		12818C611CDA30C5009DD349 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12818C601CDA30C5009DD349 /* Orientation.m */; };
 		12818C681CDA5C6F009DD349 /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12818C671CDA5C44009DD349 /* libRNOverlay.a */; };
+		12A1FAAC1CE4D41A002DB3B9 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A1FA9F1CE4D374002DB3B9 /* libRCTPushNotification.a */; };
 		12D10ED31CD78A98004B0D5E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E770071CD78322009A2F1A /* SwiftyJSON.framework */; };
-		12D10ED41CD78AB6004B0D5E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E76FF51CD7831B009A2F1A /* Charts.framework */; };
-		12D10ED51CD78AD9004B0D5E /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E770071CD78322009A2F1A /* SwiftyJSON.framework */; };
 		12D10ED61CD78AD9004B0D5E /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12E770071CD78322009A2F1A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		12D10EDA1CD78AE5004B0D5E /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E76FF51CD7831B009A2F1A /* Charts.framework */; };
 		12D10EDB1CD78AE5004B0D5E /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 12E76FF51CD7831B009A2F1A /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -137,6 +136,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNOverlay;
+		};
+		12A1FA9E1CE4D374002DB3B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12A1FA8F1CE4D373002DB3B9 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
 		};
 		12D10ED71CD78AD9004B0D5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -299,6 +305,7 @@
 		12818C5F1CDA30C5009DD349 /* Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Orientation.h; sourceTree = "<group>"; };
 		12818C601CDA30C5009DD349 /* Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Orientation.m; sourceTree = "<group>"; };
 		12818C621CDA5C43009DD349 /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
+		12A1FA8F1CE4D373002DB3B9 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		12D10EE81CD7A398004B0D5E /* ABNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ABNumberFormatter.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/ABNumberFormatter.swift"; sourceTree = "<group>"; };
 		12D10EE91CD7A398004B0D5E /* BarLineChartViewBaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BarLineChartViewBaseExtension.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/BarLineChartViewBaseExtension.swift"; sourceTree = "<group>"; };
 		12D10EEA1CD7A398004B0D5E /* chartDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = chartDataHelpers.swift; path = "../node_modules/react-native-ios-charts/RNiOSCharts/chartDataHelpers.swift"; sourceTree = "<group>"; };
@@ -366,16 +373,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				123DDDF41CE456A200367D1E /* FBSDKCoreKit.framework in Frameworks */,
+				123DDDF51CE456A200367D1E /* FBSDKLoginKit.framework in Frameworks */,
+				123DDDF61CE456A200367D1E /* FBSDKShareKit.framework in Frameworks */,
+				12D10ED31CD78A98004B0D5E /* SwiftyJSON.framework in Frameworks */,
+				12D10EDA1CD78AE5004B0D5E /* Charts.framework in Frameworks */,
 				123DDDBB1CE451C400367D1E /* libRCTFBSDKShare.a in Frameworks */,
 				123DDDBA1CE451BB00367D1E /* libRCTFBSDKLogin.a in Frameworks */,
-				123DDDF51CE456A200367D1E /* FBSDKLoginKit.framework in Frameworks */,
 				123DDDB91CE451B300367D1E /* libRCTFBSDKCore.a in Frameworks */,
-				12D10ED51CD78AD9004B0D5E /* SwiftyJSON.framework in Frameworks */,
-				12D10ED41CD78AB6004B0D5E /* Charts.framework in Frameworks */,
 				12D10ED31CD78A98004B0D5E /* SwiftyJSON.framework in Frameworks */,
 				12D10EDA1CD78AE5004B0D5E /* Charts.framework in Frameworks */,
 				12818C681CDA5C6F009DD349 /* libRNOverlay.a in Frameworks */,
-				123DDDF41CE456A200367D1E /* FBSDKCoreKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -383,10 +391,10 @@
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
-				123DDDF61CE456A200367D1E /* FBSDKShareKit.framework in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				12A1FAAC1CE4D41A002DB3B9 /* libRCTPushNotification.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +506,14 @@
 			isa = PBXGroup;
 			children = (
 				12818C671CDA5C44009DD349 /* libRNOverlay.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12A1FA901CE4D373002DB3B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12A1FA9F1CE4D374002DB3B9 /* libRCTPushNotification.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -620,12 +636,12 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				123DDDB31CE4517700367D1E /* RCTFBSDKShare.xcodeproj */,
-				123DDDAD1CE4517000367D1E /* RCTFBSDKLogin.xcodeproj */,
-				123DDD931CE4516500367D1E /* RCTFBSDKCore.xcodeproj */,
-				12818C621CDA5C43009DD349 /* RNOverlay.xcodeproj */,
 				12818C5E1CDA30C5009DD349 /* RCTOrientation */,
 				12D10F301CD7AC3F004B0D5E /* RNiOSCharts */,
+				123DDD931CE4516500367D1E /* RCTFBSDKCore.xcodeproj */,
+				123DDDAD1CE4517000367D1E /* RCTFBSDKLogin.xcodeproj */,
+				123DDDB31CE4517700367D1E /* RCTFBSDKShare.xcodeproj */,
+				12818C621CDA5C43009DD349 /* RNOverlay.xcodeproj */,
 				12E76FFC1CD78322009A2F1A /* SwiftyJSON.xcodeproj */,
 				12E76FED1CD7831B009A2F1A /* Charts.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -638,6 +654,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				12A1FA8F1CE4D373002DB3B9 /* RCTPushNotification.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -729,6 +746,14 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = PRYVD988FA;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Expense" */;
@@ -778,6 +803,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 12A1FA901CE4D373002DB3B9 /* Products */;
+					ProjectRef = 12A1FA8F1CE4D373002DB3B9 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -878,6 +907,13 @@
 			fileType = archive.ar;
 			path = libRNOverlay.a;
 			remoteRef = 12818C661CDA5C44009DD349 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12A1FA9F1CE4D374002DB3B9 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 12A1FA9E1CE4D374002DB3B9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		12E76FF51CD7831B009A2F1A /* Charts.framework */ = {
@@ -1163,6 +1199,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = ExpenseApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1188,6 +1225,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = ExpenseApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

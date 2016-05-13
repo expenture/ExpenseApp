@@ -47,6 +47,7 @@
     "react-native-lightbox": "^0.5.1",
     "react-native-orientation": "^1.16.0",
     "react-native-overlay": "^0.4.2",
+    "react-native-push-notification": "^1.0.6",
     "react-native-tableview-simple": "Neson/react-native-tableview-simple",
     "react-redux": "^4.4.5",
     "react-web": "^0.2.4",

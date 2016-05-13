@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import mikemonteith.com.reactnativeandroidcheckbox.CheckboxPackage;
 import com.facebook.CallbackManager;
@@ -21,6 +22,7 @@ import java.util.List;
 
 public class MainActivity extends ReactActivity {
     CallbackManager mCallbackManager;
+    private ReactNativePushNotificationPackage mReactNativePushNotificationPackage;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -46,10 +48,12 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
+        mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
         mCallbackManager = new CallbackManager.Factory().create();
 
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            mReactNativePushNotificationPackage,
             new OrientationPackage(this),
             new CheckboxPackage(),
             new FBSDKPackage(mCallbackManager)
@@ -66,6 +70,13 @@ public class MainActivity extends ReactActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onNewIntent (Intent intent) {
+      super.onNewIntent(intent);
+
+      mReactNativePushNotificationPackage.newIntent(intent);
     }
 
     @Override

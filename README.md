@@ -11,7 +11,7 @@ Just run:
 $ bin/setup
 ```
 
-Then start the iOS app with `bin/run-ios`, Android app with `bin/run-android` or web app with `bin/run-web`.
+Then start the iOS app with `bin/run-ios`, Android app with `bin/run-android` or web app with `bin/run-web`. To setup FB integration, Google Analytics, Google Cloud Messaging or any other configurations, edit `config.js`.
 
 > Note: Make sure you have done [setting up your development environment for React Native](https://facebook.github.io/react-native/docs/getting-started.html) before running native apps.
 
