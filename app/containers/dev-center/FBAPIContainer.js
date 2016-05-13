@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import ContainerBase from 'ContainerBase';
 
-import fbAPI from 'fbAPI';
+import FBAPI from 'FBAPI';
 
 import ScrollView from 'components/ScrollView';
 import StatusBar from 'components/StatusBar';
@@ -47,13 +47,13 @@ export default class FBAPIContainer extends ContainerBase {
           <ListTable.Section
             header="Actions"
             key="Actions"
-            footer={'\nThe fbAPI module is the API wrapper for Facebook.\n\nHere you can test the functions on it directly.'}
+            footer={'\nThe FBAPI module is the API wrapper for Facebook.\n\nHere you can test the functions on it directly.'}
           >
             <ListTable.Cell
               title="Login"
               onPress={() => {
-                fbAPI.login().then(() => {
-                  alert('FB login success.');
+                FBAPI.login().then((tokenObj) => {
+                  alert(`FB login success. Access token: ${JSON.stringify(tokenObj)}`);
                 }).catch(e => {
                   alert(`FB login failed with error: ${e}.`);
                 });
@@ -62,7 +62,7 @@ export default class FBAPIContainer extends ContainerBase {
             <ListTable.Cell
               title="Logout"
               onPress={() => {
-                fbAPI.logout().then(() => {
+                FBAPI.logout().then(() => {
                   alert('FB logout success.');
                 }).catch(e => {
                   alert(`FB logout failed with error: ${e}.`);

@@ -1,5 +1,5 @@
  /**
- * @providesModule fbAPI
+ * @providesModule FBAPI
  */
 
 import FBSDK, { LoginManager, AccessToken } from 'react-native-fbsdk';
@@ -17,7 +17,7 @@ const requestPermissions = [
   'user_friends'
 ];
 
-const fbAPI = {
+const FBAPI = {
   login: () => {
     return new Promise((resolve, reject) => {
       LoginManager.logInWithReadPermissions(requestPermissions).then(
@@ -47,4 +47,4 @@ const fbAPI = {
   }
 };
 
-export default fbAPI;
+export default FBAPI;

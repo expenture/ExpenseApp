@@ -36,9 +36,9 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
       component: ReduxStoreContainer
     };
 
-  case 'dev-center-expentureAPI':
+  case 'dev-center-ExpentureAPI':
     return {
-      title: 'expentureAPI',
+      title: 'ExpentureAPI',
       component: ExpentureAPIContainer
     };
 
@@ -48,9 +48,9 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
       component: PushNotificationContainer
     };
 
-  case 'dev-center-fbAPI':
+  case 'dev-center-FBAPI':
     return {
-      title: 'fbAPI',
+      title: 'FBAPI',
       component: FBAPIContainer
     };
 

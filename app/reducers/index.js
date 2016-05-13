@@ -4,9 +4,9 @@
 
 import { combineReducers } from 'redux';
 
-import expentureAPI from 'expentureAPI/reducer';
+import expentureAPI from 'ExpentureAPI/reducer';
 import pushNotification from 'PushNotification/reducer';
-import fbAPI from 'fbAPI/reducer';
+import fbAPI from 'FBAPI/reducer';
 
 export default combineReducers({
   expentureAPI,

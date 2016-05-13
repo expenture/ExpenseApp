@@ -1,5 +1,5 @@
 /**
- * @providesModule fbAPI/reducer
+ * @providesModule FBAPI/reducer
  */
 
 import { handleActions } from 'redux-actions';

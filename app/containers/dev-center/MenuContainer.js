@@ -54,7 +54,7 @@ export default class MoreMenuContainer extends ContainerBase {
               title="Expenture API"
               navigated={true}
               onPress={() => {
-                this.props.navigator.push({ name: 'dev-center-expentureAPI' });
+                this.props.navigator.push({ name: 'dev-center-ExpentureAPI' });
               }}
             />
             <ListTable.Cell
@@ -68,7 +68,7 @@ export default class MoreMenuContainer extends ContainerBase {
               title="FB API"
               navigated={true}
               onPress={() => {
-                this.props.navigator.push({ name: 'dev-center-fbAPI' });
+                this.props.navigator.push({ name: 'dev-center-FBAPI' });
               }}
             />
           </ListTable.Section>

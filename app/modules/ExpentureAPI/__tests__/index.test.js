@@ -1,13 +1,13 @@
 jest.disableAutomock();
 
-import expentureAPI from '../index';
+import ExpentureAPI from '../index';
 import nock from 'nock';
 import store from 'store';
 import getCurrentUnixTime from 'utils/getCurrentUnixTime';
 
 store.enableTesting();
 
-describe('expentureAPI', () => {
+describe('ExpentureAPI', () => {
   afterEach(() => {
     jest.clearAllTimers();
     nock.cleanAll();
@@ -32,7 +32,7 @@ describe('expentureAPI', () => {
           "created_at": 1400000000
         });
 
-      await expentureAPI.signIn('username', 'password');
+      await ExpentureAPI.signIn('username', 'password');
       expect(store.getState().expentureAPI.status).toEqual('ready');
       done();
     });
@@ -49,7 +49,7 @@ describe('expentureAPI', () => {
 
       expect(store.getState().expentureAPI.status).toEqual('ready');
 
-      await expentureAPI.signOut();
+      await ExpentureAPI.signOut();
       expect(store.getState().expentureAPI.status).toEqual('not-authorized');
       done();
     });
@@ -68,7 +68,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessToken();
+      const accessToken = await ExpentureAPI.asyncGetAccessToken();
       expect(accessToken).toEqual('a');
       done();
     });
@@ -81,7 +81,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessToken();
+      const accessToken = await ExpentureAPI.asyncGetAccessToken();
       expect(accessToken).toBeUndefined();
 
       store.setStateForTesting({
@@ -91,7 +91,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken2 = await expentureAPI.asyncGetAccessToken();
+      const accessToken2 = await ExpentureAPI.asyncGetAccessToken();
       expect(accessToken2).toBeUndefined();
       done();
     });
@@ -108,7 +108,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      expentureAPI.asyncGetAccessToken().then(() => {
+      ExpentureAPI.asyncGetAccessToken().then(() => {
         throw 'this should not be resolved, timeout rejecttion is expected';
       }).catch(() => {
         done();
@@ -139,7 +139,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessToken();
+      const accessToken = await ExpentureAPI.asyncGetAccessToken();
       expect(accessToken).toEqual('new_access_token');
       done();
     });
@@ -161,7 +161,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessToken();
+      const accessToken = await ExpentureAPI.asyncGetAccessToken();
       expect(accessToken).toEqual('a');
       done();
     });
@@ -186,7 +186,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const accessToken = await expentureAPI.asyncGetAccessToken();
+      const accessToken = await ExpentureAPI.asyncGetAccessToken();
       expect(accessToken).toBeUndefined();
       done();
     });
@@ -207,7 +207,7 @@ describe('expentureAPI', () => {
       });
 
       // Using await syntax
-      const fetchResponse = await expentureAPI.fetch('/sample-path');
+      const fetchResponse = await ExpentureAPI.fetch('/sample-path');
       expect(fetchResponse.status).toEqual(200);
       const fetchJSON = await fetchResponse.json();
       expect(fetchJSON).toEqual({ ping: 'pong' });
@@ -229,7 +229,7 @@ describe('expentureAPI', () => {
       });
 
       // Using .then syntax
-      expentureAPI.fetch('/sample-path').then(response => {
+      ExpentureAPI.fetch('/sample-path').then(response => {
         expect(response.status).toEqual(200);
         return response.json();
       }).then(json => {
@@ -261,7 +261,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const fetchResponse = await expentureAPI.fetch('/sample-path');
+      const fetchResponse = await ExpentureAPI.fetch('/sample-path');
       expect(fetchResponse.status).toEqual(200);
       const fetchJSON = await fetchResponse.json();
       expect(fetchJSON).toEqual({ ping: 'pong' });
@@ -300,7 +300,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const fetchResponse = await expentureAPI.fetch('/sample-path');
+      const fetchResponse = await ExpentureAPI.fetch('/sample-path');
       expect(fetchResponse.status).toEqual(200);
       const fetchJSON = await fetchResponse.json();
       expect(fetchJSON).toEqual({ ping: 'pong' });
@@ -325,7 +325,7 @@ describe('expentureAPI', () => {
         }
       });
 
-      const fetchResponse = await expentureAPI.fetch('/sample-path');
+      const fetchResponse = await ExpentureAPI.fetch('/sample-path');
       expect(fetchResponse.status).toEqual(401);
       expect(store.getState().expentureAPI.status).toEqual('not-authorized');
       done();
@@ -334,10 +334,10 @@ describe('expentureAPI', () => {
 
   describe('setBackendURL', () => {
     it('changes the backend URL', () => {
-      expentureAPI.setBackendURL('https://example.com');
+      ExpentureAPI.setBackendURL('https://example.com');
 
       expect(store.getState().expentureAPI.backendURL).toEqual('https://example.com');
-      expect(expentureAPI.getBackendURL()).toEqual('https://example.com');
+      expect(ExpentureAPI.getBackendURL()).toEqual('https://example.com');
     });
   });
 });

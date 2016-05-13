@@ -1,5 +1,5 @@
 /**
- * @providesModule expentureAPI/reducer
+ * @providesModule ExpentureAPI/reducer
  */
 
 import { handleActions } from 'redux-actions';

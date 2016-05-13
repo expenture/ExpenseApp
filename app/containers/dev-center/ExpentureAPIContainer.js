@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ContainerBase from 'ContainerBase';
 
 import store from 'store';
-import expentureAPI from 'expentureAPI';
+import ExpentureAPI from 'ExpentureAPI';
 
 import ScrollView from 'components/ScrollView';
 import StatusBar from 'components/StatusBar';
@@ -82,7 +82,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     title="Sign In"
                     onPress={() => {
                       const { username, password } = this.state;
-                      expentureAPI.signIn(username, password);
+                      ExpentureAPI.signIn(username, password);
                       this.setState({ mode: null });
                     }}
                   />
@@ -129,7 +129,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     onPress={async () => {
                       try {
                         const { url, options } = this.state;
-                        const response = await expentureAPI.fetch(url, JSON.parse(options));
+                        const response = await ExpentureAPI.fetch(url, JSON.parse(options));
                         const responseStatus = response.status;
                         const responseText = await response.text();
                         alert(`Status: ${responseStatus}, Response Text: ${responseText}`);
@@ -166,7 +166,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     title="Set Backend URL"
                     onPress={() => {
                       const { backendURL } = this.state;
-                      expentureAPI.setBackendURL(backendURL);
+                      ExpentureAPI.setBackendURL(backendURL);
                       this.setState({ mode: null });
                     }}
                   />
@@ -183,7 +183,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                 <ListTable.Section
                   header="Actions"
                   key="Actions"
-                  footer={'\nThe expentureAPI module is in charge to authenticate and send requests to the backend server. It store and updates its state in the redux store.\n\nHere you can test the functions on it directly.'}
+                  footer={'\nThe ExpentureAPI module is in charge to authenticate and send requests to the backend server. It store and updates its state in the redux store.\n\nHere you can test the functions on it directly.'}
                 >
                   <ListTable.Cell
                     title="Sign In"
@@ -194,13 +194,13 @@ export default class ExpentureAPIContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Sign Out"
                     onPress={() => {
-                      expentureAPI.signOut();
+                      ExpentureAPI.signOut();
                     }}
                   />
                   <ListTable.Cell
                     title="Get Access Token"
                     onPress={async () => {
-                      const token = await expentureAPI.asyncGetAccessToken();
+                      const token = await ExpentureAPI.asyncGetAccessToken();
                       alert(`Access Token: ${JSON.stringify(token)}`);
                     }}
                   />
