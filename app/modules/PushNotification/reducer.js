@@ -20,6 +20,7 @@ export const getInitialState = () => {
 export default handleActions({
   [REHYDRATE]: (state, action) => {
     const { pushNotification: lastState } = action.payload;
+    if (!lastState) return state;
 
     return lastState;
   },
@@ -29,6 +30,7 @@ export default handleActions({
     const { deviceToken } = action;
 
     return {
+      ...state,
       status: 'registered',
       deviceToken
     };

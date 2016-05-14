@@ -15,6 +15,7 @@ export const initialState = {
 export default handleActions({
   [REHYDRATE]: (state, action) => {
     const { expentureAPI: lastState } = action.payload;
+    if (!lastState) return state;
 
     switch (lastState.status) {
     case 'signing-in':

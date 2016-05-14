@@ -12,6 +12,7 @@ export const initialState = {
 export default handleActions({
   [REHYDRATE]: (state, action) => {
     const { fbAPI: lastState } = action.payload;
+    if (!lastState) return state;
 
     return lastState;
   },
