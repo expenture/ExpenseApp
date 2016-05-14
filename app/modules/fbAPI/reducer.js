@@ -3,12 +3,18 @@
  */
 
 import { handleActions } from 'redux-actions';
+import { REHYDRATE } from 'redux-persist/constants';
 
 export const initialState = {
   status: 'not-connected'
 };
 
 export default handleActions({
+  [REHYDRATE]: (state, action) => {
+    const { fbAPI: lastState } = action.payload;
+
+    return lastState;
+  },
 
   FB_LOGIN_SUCCESS: (state, action) => {
     const {

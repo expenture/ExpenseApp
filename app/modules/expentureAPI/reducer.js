@@ -3,6 +3,7 @@
  */
 
 import { handleActions } from 'redux-actions';
+import { REHYDRATE } from 'redux-persist/constants';
 
 import config from 'config';
 
@@ -12,6 +13,27 @@ export const initialState = {
 };
 
 export default handleActions({
+  [REHYDRATE]: (state, action) => {
+    const { expentureAPI: lastState } = action.payload;
+
+    switch (lastState.status) {
+    case 'signing-in':
+      return {
+        ...lastState,
+        status: 'not-authorized'
+      };
+
+    case 'token-refreshing':
+      return {
+        ...lastState,
+        status: 'ready'
+      };
+
+    default:
+      return lastState;
+    }
+  },
+
   CHANGE_BACKEND_URL: (state, action) => {
     const { backendURL } = action;
 
@@ -57,10 +79,14 @@ export default handleActions({
   },
 
   REFRESH_ACCESS_TOKEN_REQUEST: (state) => {
-    return {
-      ...state,
-      status: 'token-refreshing'
-    };
+    if (state.status === 'ready') {
+      return {
+        ...state,
+        status: 'token-refreshing'
+      };
+    } else {
+      return state;
+    }
   },
 
   REFRESH_ACCESS_TOKEN_SUCCESS: (state, action) => {

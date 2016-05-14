@@ -19,3 +19,7 @@ jest.unmock('utils/fetch');
 
 // Common modules or utils in the app that should not be mocked
 jest.unmock('utils/stringifyJSON');
+
+// These Redux store enhances are totally unnecessary for testing, always mock then
+jest.mock('Storage');
+jest.mock('middlewares/actionBuffer');

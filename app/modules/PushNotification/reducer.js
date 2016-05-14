@@ -3,6 +3,8 @@
  */
 
 import { handleActions } from 'redux-actions';
+import { REHYDRATE } from 'redux-persist/constants';
+
 
 import Platform from 'utils/Platform';
 import generateUUID from 'utils/generateUUID';
@@ -16,6 +18,12 @@ export const getInitialState = () => {
 };
 
 export default handleActions({
+  [REHYDRATE]: (state, action) => {
+    const { pushNotification: lastState } = action.payload;
+
+    return lastState;
+  },
+
 
   PUSH_NOTIFICATION_REGISTERED: (state, action) => {
     const { deviceToken } = action;

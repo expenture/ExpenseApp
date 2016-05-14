@@ -4,8 +4,11 @@
 
 import thunk from 'redux-thunk';
 
+import actionBuffer from 'middlewares/actionBuffer';
+
 const middlewares = [
-  thunk
+  thunk,
+  actionBuffer
 ];
 
 export default middlewares;

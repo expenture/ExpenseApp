@@ -3,16 +3,17 @@
  */
 
 import { createStore, applyMiddleware } from 'redux';
+import { persistStore } from 'redux-persist';
+
+import Storage from 'Storage';
 
 import middlewares from 'middlewares';
 import reducers from 'reducers';
 
-const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
-
-export const store = createStoreWithMiddleware(reducers);
+export const store = createStore(reducers, {}, applyMiddleware(...middlewares));
+persistStore(store, { storage: Storage });
 
 export default store;
-// if (typeof window === 'object') window.store = store;
 
 
 /**
