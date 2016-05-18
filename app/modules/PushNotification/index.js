@@ -33,7 +33,13 @@ RNPushNotification.configure({
 });
 
 const PushNotification = {
-  requestPermissions
+  requestPermissions,
+  requestPermissionsIfNotRegistered: () => {
+    const status = store.getState() &&
+                   store.getState().pushNotification &&
+                   store.getState().pushNotification.status;
+    if (status !== 'registered') requestPermissions();
+  }
 };
 
 export default PushNotification;

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import ContainerBase from 'ContainerBase';
 
+import DeviceInfo from 'utils/DeviceInfo';
+
 import ScrollView from 'components/ScrollView';
 import StatusBar from 'components/StatusBar';
 import ListTable from 'components/ListTable';
@@ -32,6 +34,9 @@ export default class MoreMenuContainer extends ContainerBase {
             </ListTable.Cell>
             <ListTable.Cell>
               <Text>
+                {`Bun. ID: ${DeviceInfo.getBundleId()}\n`}
+                {`Version: ${DeviceInfo.getVersion()} (${DeviceInfo.getReadableVersion()})\n`}
+                {`Build number: ${DeviceInfo.getBuildNumber()}\n`}
                 {`Git commit: ${buildInfo.commit.substring(0, 8)}\n`}
                 {`Build: ${buildInfo.timeStamp}\n`}
                 {`${buildInfo.user}@${buildInfo.hostname}`}
@@ -45,6 +50,13 @@ export default class MoreMenuContainer extends ContainerBase {
               navigated={true}
               onPress={() => {
                 this.props.navigator.push({ name: 'dev-center-redux-store' });
+              }}
+            />
+            <ListTable.Cell
+              title="Backend Session"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-BackendSession' });
               }}
             />
           </ListTable.Section>
@@ -69,6 +81,13 @@ export default class MoreMenuContainer extends ContainerBase {
               navigated={true}
               onPress={() => {
                 this.props.navigator.push({ name: 'dev-center-FBAPI' });
+              }}
+            />
+            <ListTable.Cell
+              title="Device Info"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-DeviceInfo' });
               }}
             />
           </ListTable.Section>

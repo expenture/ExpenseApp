@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ContainerBase from 'ContainerBase';
 
 import store from 'store';
-import ExpentureAPI from 'ExpentureAPI';
+import BackendSession from 'BackendSession';
 
 import ScrollView from 'components/ScrollView';
 import StatusBar from 'components/StatusBar';
@@ -11,7 +11,7 @@ import ListTable from 'components/ListTable';
 import Text from 'components/Text';
 
 @connect(state => ({
-  expentureAPIState: state.expentureAPI
+  backendSessionState: state.backendSession
 }))
 export default class ExpentureAPIContainer extends ContainerBase {
   static propTypes = {
@@ -32,7 +32,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
         <StatusBar key={this.state.focusKey} barStyle="default" />
         <ListTable>
           <ListTable.Section
-            header="Expenture API State"
+            header="Backend Session State"
             key="State"
           >
             <ListTable.Cell>
@@ -44,7 +44,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                   fontSize: 12
                 }}
               >
-                {JSON.stringify(this.props.expentureAPIState, null, 2)}
+                {JSON.stringify(this.props.backendSessionState, null, 2)}
               </Text>
             </ListTable.Cell>
           </ListTable.Section>
@@ -83,11 +83,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     title="Sign In"
                     onPress={() => {
                       const { username, password } = this.state;
-                      ExpentureAPI.signIn(username, password).then(() => {
-                        alert('Sign in success.');
-                      }).catch(() => {
-                        alert('Sign in failure.');
-                      });
+                      BackendSession.signIn(username, password);
                       this.setState({ mode: null });
                     }}
                   />
@@ -104,7 +100,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                 <ListTable.Section
                   header="Fetch"
                   key="Fetch"
-                  footer={'Send a fetch request to the backend server. Authentication is automatically handled if signed in and the status is "ready".\n\nEnter the request URL (first parameter of "fetch") and the options (object as JSON, the second parameter of "fetch") and press "Fetch" to send the request.'}
+                  footer={'Enter the request URL (first parameter of "fetch") and the options (object as JSON, the second parameter of "fetch") and press "Fetch" to send the request.'}
                 >
                   <ListTable.Cell
                     title="URL"
@@ -134,7 +130,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     onPress={async () => {
                       try {
                         const { url, options } = this.state;
-                        const response = await ExpentureAPI.fetch(url, JSON.parse(options));
+                        const response = await BackendSession.fetch(url, JSON.parse(options));
                         const responseStatus = response.status;
                         const responseText = await response.text();
                         alert(`Status: ${responseStatus}, Response Text: ${responseText}`);
@@ -151,44 +147,12 @@ export default class ExpentureAPIContainer extends ContainerBase {
                   />
                 </ListTable.Section>
               );
-            case 'set-backend-url':
-              return (
-                <ListTable.Section
-                  header="Set Backend URL"
-                  key="URL"
-                  footer={'Enter the new backend URL and press "Set Backend URL" to change the backend server URL.'}
-                >
-                  <ListTable.Cell
-                    title="Backend URL"
-                    textInput={true}
-                    value={this.state.backendURL}
-                    onChangeText={(t) => this.setState({ backendURL: t })}
-                    placeholder="https://..."
-                    autoCorrect={false}
-                    autoFocus={true}
-                  />
-                  <ListTable.Cell
-                    title="Set Backend URL"
-                    onPress={() => {
-                      const { backendURL } = this.state;
-                      ExpentureAPI.setBackendURL(backendURL);
-                      this.setState({ mode: null });
-                    }}
-                  />
-                  <ListTable.Cell
-                    title="Cancel"
-                    onPress={() => {
-                      this.setState({ mode: null });
-                    }}
-                  />
-                </ListTable.Section>
-              );
             default:
               return (
                 <ListTable.Section
                   header="Actions"
                   key="Actions"
-                  footer={'\nThe ExpentureAPI module is in charge to authenticate and send requests to the backend server. It store and updates its state in the redux store.\n\nHere you can test the functions on it directly.'}
+                  footer={'\nThe Backend Session Controller, BackendSession, is a high-level module handling the connection with the backend server. It wraps up low-level modules like ExpentureAPI, PushNotification, FBAPI and directly interacts with the user during its workflow.\n\nIt store and updates its state in the redux store, so that other module or components can access the current state.\n\nHere you can test the functions on it directly.'}
                 >
                   <ListTable.Cell
                     title="Sign In"
@@ -197,42 +161,21 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     }}
                   />
                   <ListTable.Cell
+                    title="Sign In With Facebook"
+                    onPress={() => {
+                      BackendSession.fbSignIn();
+                    }}
+                  />
+                  <ListTable.Cell
                     title="Sign Out"
                     onPress={() => {
-                      ExpentureAPI.signOut().then(() => {
-                        alert('Sign out success.');
-                      }).catch(() => {
-                        alert('Sign out failure.');
-                      });
-                    }}
-                  />
-                  <ListTable.Cell
-                    title="Sign Out (Force)"
-                    onPress={() => {
-                      ExpentureAPI.signOut({ force: true }).then(() => {
-                        alert('Sign out success.');
-                      }).catch(() => {
-                        alert('Sign out failure.');
-                      });
-                    }}
-                  />
-                  <ListTable.Cell
-                    title="Get Access Token"
-                    onPress={async () => {
-                      const token = await ExpentureAPI.asyncGetAccessToken();
-                      alert(`Access Token: ${JSON.stringify(token)}`);
+                      BackendSession.signOut();
                     }}
                   />
                   <ListTable.Cell
                     title="Send Fetch Request"
                     onPress={() => {
                       this.setState({ mode: 'fetch', url: '/ping', options: '{\n  "method":  "GET"\n}' });
-                    }}
-                  />
-                  <ListTable.Cell
-                    title="Set Backend URL"
-                    onPress={() => {
-                      this.setState({ mode: 'set-backend-url' });
                     }}
                   />
                 </ListTable.Section>

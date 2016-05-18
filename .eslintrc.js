@@ -86,8 +86,8 @@ module.exports = {
     "curly": 1, // specify curly brace conventions for all control statements
     "default-case": 1, // require default case in switch statements (off by default)
     "dot-notation": 2, // encourages use of dot notation whenever possible
-    "eqeqeq": 2, // require the use of === and !==
-    "guard-for-in": 2, // make sure for-in loops have an if statement (off by default)
+    "eqeqeq": 1, // require the use of === and !==
+    "guard-for-in": 1, // make sure for-in loops have an if statement (off by default)
     "no-alert": 1, // disallow the use of alert, confirm, and prompt
     "no-caller": 2, // disallow use of arguments.caller or arguments.callee
     "no-div-regex": 2, // disallow division operators explicitly at beginning of regular expression (off by default)

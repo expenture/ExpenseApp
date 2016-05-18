@@ -1,7 +1,9 @@
 import fetch from 'utils/fetch';
 import { createAction } from 'redux-actions';
 
+import DeviceInfo from 'utils/DeviceInfo';
 import getBackendURL from './utils/getBackendURL';
+import apiFetch from './utils/apiFetch';
 import ExpentureAPIException from './ExpentureAPIException';
 
 export const changeBackendURL = (backendURL) => {
@@ -51,8 +53,11 @@ const signInFailure = (error) => {
 
 export const signIn = (username, password) => {
   const requestAccessTokenURL = `${getBackendURL()}/oauth/token?grant_type=password`;
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(signInRequest());
+
+    const { clientUID, clientType } = getState().expentureAPI || {};
+
     return fetch(requestAccessTokenURL, {
       method: 'POST',
       headers: {
@@ -61,18 +66,30 @@ export const signIn = (username, password) => {
       },
       body: JSON.stringify({
         grant_type: 'password',
+        client_uid: clientUID,
+        client_type: clientType,
+        client_name: DeviceInfo.getDeviceName() || DeviceInfo.getModel(),
         username: username,
         password: password
       })
     }).then(res => res.json())
+      .catch(e => {
+        dispatch(signInFailure({ hint: 'Possible network error?', ...e }));
+        throw e;
+      })
       .then(json => {
         if (json.error) {
           dispatch(signInFailure(json.error));
+          throw json.error;
         } else {
-          dispatch(signInSuccess(json));
+          try {
+            dispatch(signInSuccess(json));
+          } catch (e) {
+            dispatch(signInFailure({ hint: 'Possible server error?', ...e }));
+            throw e;
+          }
         }
-      })
-      .catch(e => dispatch(signInFailure({ hint: 'Possible network error?', ...e })));
+      });
   };
 };
 
@@ -149,12 +166,44 @@ export const refreshAccessToken = () => {
 
 const signOutRequest = createAction('SIGN_OUT_REQUEST');
 const signOutSuccess = createAction('SIGN_OUT_SUCCESS');
+const signOutFailure = (error) => {
+  return {
+    type: 'SIGN_OUT_FAILURE',
+    error
+  };
+};
 
-export const signOut = () => {
+export const signOut = ({ force = false } = {}) => {
   return (dispatch) => {
     dispatch(signOutRequest());
-    // TODO: Send request to the server to revoke the access token
-    dispatch(signOutSuccess());
+    const signOutURL = `${getBackendURL()}/current_oauth_application`;
+    return apiFetch(signOutURL, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+      .catch(e => {
+        if (force) {
+          dispatch(signOutSuccess());
+        } else {
+          dispatch(signOutFailure({ hint: 'Possible network error?', ...e }));
+          throw e;
+        }
+      })
+      .then(json => {
+        if (!json|| json.error) {
+          if (force) {
+            dispatch(signOutSuccess());
+          } else {
+            dispatch(signOutFailure(json.error));
+            throw json.error;
+          }
+        } else {
+          dispatch(signOutSuccess());
+        }
+      });
   };
 };
 

@@ -1,41 +1,41 @@
 jest.unmock('../reducer');
 
-import reducer, { initialState } from '../reducer';
+import reducer, { getInitialState } from '../reducer';
 import stringifyJSON from 'utils/stringifyJSON';
 
 describe('reducer', () => {
-  it('returns the initial state: \n' + stringifyJSON(initialState, 4), () => {
+  it('returns the initial state: \n' + stringifyJSON(getInitialState(), 4), () => {
     expect(
       reducer(undefined, {})
-    ).toEqual(initialState);
+    ).toEqual(getInitialState());
   });
 
   it('handles CHANGE_BACKEND_URL', () => {
     expect(
-      reducer(initialState, {
+      reducer(getInitialState(), {
         type: 'CHANGE_BACKEND_URL',
         backendURL: 'http://exp.com'
       })
     ).toEqual({
-      ...initialState,
+      ...getInitialState(),
       backendURL: 'http://exp.com'
     });
   });
 
   it('handles SIGN_IN_REQUEST', () => {
     expect(
-      reducer(initialState, {
+      reducer(getInitialState(), {
         type: 'SIGN_IN_REQUEST'
       })
     ).toEqual({
-      ...initialState,
+      ...getInitialState(),
       status: 'signing-in'
     });
   });
 
   it('handles SIGN_IN_SUCCESS', () => {
     expect(
-      reducer(initialState, {
+      reducer(getInitialState(), {
         type: 'SIGN_IN_SUCCESS',
         accessToken: 'a',
         accessTokenCreatedAt: 1,
@@ -43,7 +43,7 @@ describe('reducer', () => {
         refreshToken: 'b'
       })
     ).toEqual({
-      ...initialState,
+      ...getInitialState(),
       status: 'ready',
       accessToken: 'a',
       accessTokenCreatedAt: 1,
@@ -54,12 +54,12 @@ describe('reducer', () => {
 
   it('handles SIGN_IN_FAILURE', () => {
     expect(
-      reducer(initialState, {
+      reducer(getInitialState(), {
         type: 'SIGN_IN_FAILURE',
         error: 'e'
       })
     ).toEqual({
-      ...initialState,
+      ...getInitialState(),
       error: 'e'
     });
   });
@@ -167,8 +167,33 @@ describe('reducer', () => {
         type: 'SIGN_OUT_SUCCESS'
       })
     ).toEqual({
+      ...getInitialState(),
       backendURL: 'http://example.com',
       status: 'not-authorized'
+    });
+  });
+
+  it('handles SIGN_OUT_FAILURE', () => {
+    expect(
+      reducer({
+        backendURL: 'http://example.com',
+        status: 'ready',
+        accessToken: 'a',
+        refreshToken: 'r',
+        accessTokenCreatedAt: 0,
+        accessTokenExpiresIn: 10
+      }, {
+        type: 'SIGN_OUT_FAILURE',
+        error: 'error'
+      })
+    ).toEqual({
+        backendURL: 'http://example.com',
+        status: 'ready',
+        accessToken: 'a',
+        refreshToken: 'r',
+        accessTokenCreatedAt: 0,
+        accessTokenExpiresIn: 10,
+        error: 'error'
     });
   });
 

@@ -22,4 +22,8 @@ jest.unmock('utils/stringifyJSON');
 
 // These Redux store enhances are totally unnecessary for testing, always mock then
 jest.mock('Storage');
+jest.mock('utils/persistStore');
 jest.mock('middlewares/actionBuffer');
+
+// Mock device info
+jest.mock('utils/DeviceInfo');

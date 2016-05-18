@@ -1,4 +1,5 @@
 jest.unmock('../actions');
+jest.unmock('../utils/apiFetch');
 
 import nock from 'nock';
 import mockStore from 'mockStore';
@@ -51,7 +52,7 @@ describe('main actions', () => {
       done();
     });
 
-    it('dispatchs SIGN_IN_FAILURE when signed in faild with wrong credentials', async (done) => {
+    it('dispatchs SIGN_IN_FAILURE when signed in faild with wrong credentials', (done) => {
       nock(getBackendURL())
         .post('/oauth/token?grant_type=password')
         .reply(401, {
@@ -68,12 +69,14 @@ describe('main actions', () => {
         }
       ];
 
-      await store.dispatch(actions.signIn('username', 'password'));
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
+      store.dispatch(actions.signIn('username', 'password')).catch((e) => {
+        expect(e).toEqual('invalid_resource_owner');
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
     });
 
-    it('dispatchs SIGN_IN_FAILURE if the server response is invalid', async (done) => {
+    it('dispatchs SIGN_IN_FAILURE if the server response is invalid', (done) => {
       nock(getBackendURL())
         .post('/oauth/token?grant_type=password')
         .reply(200, {
@@ -86,14 +89,15 @@ describe('main actions', () => {
         {
           type: 'SIGN_IN_FAILURE',
           error: {
-            hint: 'Possible network error?'
+            hint: 'Possible server error?'
           }
         }
       ];
 
-      await store.dispatch(actions.signIn('username', 'password'));
-      expect(store.getActions()).toEqual(expectedActions);
-      done();
+      store.dispatch(actions.signIn('username', 'password')).catch(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
     });
   });
 
@@ -189,6 +193,9 @@ describe('main actions', () => {
 
   describe('signOut', () => {
     it('dispatchs SIGN_OUT_REQUEST and SIGN_OUT_SUCCESS', async (done) => {
+      nock(getBackendURL())
+        .delete('/current_oauth_application')
+        .reply(200, {});
       const store = mockStore();
 
       const expectedActions = [
@@ -199,6 +206,26 @@ describe('main actions', () => {
       await store.dispatch(actions.signOut());
       expect(store.getActions()).toEqual(expectedActions);
       done();
+    });
+
+    it('dispatchs SIGN_OUT_REQUEST and SIGN_OUT_FAILURE if failure', (done) => {
+      nock(getBackendURL())
+        .delete('/current_oauth_application')
+        .reply(400, { error: 'error' });
+      const store = mockStore();
+
+      const expectedActions = [
+        { type: 'SIGN_OUT_REQUEST' },
+        {
+          type: 'SIGN_OUT_FAILURE',
+          error: 'error'
+        }
+      ];
+
+      store.dispatch(actions.signOut()).catch(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+        done();
+      });
     });
   });
 });

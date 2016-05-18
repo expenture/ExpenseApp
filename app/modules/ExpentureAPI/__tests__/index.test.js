@@ -40,6 +40,9 @@ describe('ExpentureAPI', () => {
 
   describe('signOut', () => {
     it('sign out the user', async (done) => {
+      nock('http://exp.com')
+        .delete('/current_oauth_application')
+        .reply(200, {});
       store.setStateForTesting({
         expentureAPI: {
           backendURL: 'http://exp.com',

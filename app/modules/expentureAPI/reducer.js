@@ -5,11 +5,18 @@
 import { handleActions } from 'redux-actions';
 import { REHYDRATE } from 'redux-persist/constants';
 
+import generateUUID from 'utils/generateUUID';
+import Platform from 'utils/Platform';
+
 import config from 'config';
 
-export const initialState = {
-  backendURL: config.backendURL,
-  status: 'not-authorized'
+export const getInitialState = () => {
+  return {
+    backendURL: config.backendURL,
+    status: 'not-authorized',
+    clientUID: `${generateUUID()}-${generateUUID()}`,
+    clientType: `${Platform.OS}-device`
+  };
 };
 
 export default handleActions({
@@ -45,10 +52,14 @@ export default handleActions({
   },
 
   SIGN_IN_REQUEST: (state) => {
-    return {
-      ...state,
-      status: 'signing-in'
-    };
+    if (state.status === 'not-authorized') {
+      return {
+        ...state,
+        status: 'signing-in'
+      };
+    } else {
+      return state;
+    }
   },
 
   SIGN_IN_SUCCESS: (state, action) => {
@@ -72,11 +83,18 @@ export default handleActions({
   SIGN_IN_FAILURE: (state, action) => {
     const { error } = action;
 
-    return {
-      ...state,
-      status: 'not-authorized',
-      error
-    };
+    if (state.status === 'signing-in') {
+      return {
+        ...state,
+        status: 'not-authorized',
+        error
+      };
+    } else {
+      return {
+        ...state,
+        error
+      };
+    }
   },
 
   REFRESH_ACCESS_TOKEN_REQUEST: (state) => {
@@ -130,13 +148,19 @@ export default handleActions({
   },
 
   SIGN_OUT_SUCCESS: (state) => {
+    const { backendURL } = state;
+    return {
+      ...getInitialState(),
+      backendURL
+    };
+  },
+
+  SIGN_OUT_FAILURE: (state, action) => {
+    const { error } = action;
+
     return {
       ...state,
-      accessToken: undefined,
-      accessTokenCreatedAt: undefined,
-      accessTokenExpiresIn: undefined,
-      refreshToken: undefined,
-      status: 'not-authorized'
+      error
     };
   },
 
@@ -150,4 +174,4 @@ export default handleActions({
       status: 'not-authorized'
     };
   }
-}, initialState);
+}, getInitialState());

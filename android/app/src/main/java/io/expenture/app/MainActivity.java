@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import mikemonteith.com.reactnativeandroidcheckbox.CheckboxPackage;
@@ -53,6 +54,7 @@ public class MainActivity extends ReactActivity {
 
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNDeviceInfo(),
             mReactNativePushNotificationPackage,
             new OrientationPackage(this),
             new CheckboxPackage(),

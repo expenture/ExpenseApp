@@ -27,6 +27,8 @@ After running `bin/setup` (yes, we need some dependencies to setup for the desig
 
 ## Build
 
+Before the first build, you need to edit `config.js` and `buildConfig.js` to configure the app and build.
+
 ### Build for iOS
 
 `open ios/Expense.xcodeproj` with Xcode and configure the release build.

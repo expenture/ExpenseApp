@@ -19,6 +19,7 @@
 		123DDDF41CE456A200367D1E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123DDDF11CE456A200367D1E /* FBSDKCoreKit.framework */; };
 		123DDDF51CE456A200367D1E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123DDDF21CE456A200367D1E /* FBSDKLoginKit.framework */; };
 		123DDDF61CE456A200367D1E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123DDDF31CE456A200367D1E /* FBSDKShareKit.framework */; };
+		12402A1F1CE8D85E003618D6 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12402A171CE8D7F0003618D6 /* libRNDeviceInfo.a */; };
 		12818C611CDA30C5009DD349 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 12818C601CDA30C5009DD349 /* Orientation.m */; };
 		12818C681CDA5C6F009DD349 /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12818C671CDA5C44009DD349 /* libRNOverlay.a */; };
 		12A1FAAC1CE4D41A002DB3B9 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12A1FA9F1CE4D374002DB3B9 /* libRCTPushNotification.a */; };
@@ -129,6 +130,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTFBSDKShare;
+		};
+		12402A161CE8D7F0003618D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12402A011CE8D7EF003618D6 /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
+			remoteInfo = RNDeviceInfo;
 		};
 		12818C661CDA5C44009DD349 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -302,6 +310,7 @@
 		123DDDF11CE456A200367D1E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = vendor/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		123DDDF21CE456A200367D1E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = vendor/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		123DDDF31CE456A200367D1E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = vendor/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		12402A011CE8D7EF003618D6 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		12818C5F1CDA30C5009DD349 /* Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Orientation.h; sourceTree = "<group>"; };
 		12818C601CDA30C5009DD349 /* Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Orientation.m; sourceTree = "<group>"; };
 		12818C621CDA5C43009DD349 /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
@@ -394,6 +403,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				12402A1F1CE8D85E003618D6 /* libRNDeviceInfo.a in Frameworks */,
 				12A1FAAC1CE4D41A002DB3B9 /* libRCTPushNotification.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +500,14 @@
 				123DDDF31CE456A200367D1E /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		12402A021CE8D7EF003618D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12402A171CE8D7F0003618D6 /* libRNDeviceInfo.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		12818C5E1CDA30C5009DD349 /* RCTOrientation */ = {
@@ -654,6 +672,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				12402A011CE8D7EF003618D6 /* RNDeviceInfo.xcodeproj */,
 				12A1FA8F1CE4D373002DB3B9 /* RCTPushNotification.xcodeproj */,
 			);
 			name = Libraries;
@@ -829,6 +848,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 12402A021CE8D7EF003618D6 /* Products */;
+					ProjectRef = 12402A011CE8D7EF003618D6 /* RNDeviceInfo.xcodeproj */;
+				},
+				{
 					ProductGroup = 12818C631CDA5C43009DD349 /* Products */;
 					ProjectRef = 12818C621CDA5C43009DD349 /* RNOverlay.xcodeproj */;
 				},
@@ -900,6 +923,13 @@
 			fileType = archive.ar;
 			path = libRCTFBSDKShare.a;
 			remoteRef = 123DDDB71CE4517800367D1E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12402A171CE8D7F0003618D6 /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 12402A161CE8D7F0003618D6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		12818C671CDA5C44009DD349 /* libRNOverlay.a */ = {

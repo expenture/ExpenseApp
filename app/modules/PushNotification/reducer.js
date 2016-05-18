@@ -5,15 +5,12 @@
 import { handleActions } from 'redux-actions';
 import { REHYDRATE } from 'redux-persist/constants';
 
-
 import Platform from 'utils/Platform';
-import generateUUID from 'utils/generateUUID';
 
 export const getInitialState = () => {
   return {
     status: 'not-registered',
-    deviceType: Platform.OS,
-    deviceID: generateUUID()
+    deviceType: Platform.OS
   };
 };
 
@@ -24,7 +21,6 @@ export default handleActions({
 
     return lastState;
   },
-
 
   PUSH_NOTIFICATION_REGISTERED: (state, action) => {
     const { deviceToken } = action;

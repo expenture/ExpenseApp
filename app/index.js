@@ -10,6 +10,9 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import AppContainer from './containers';
 
+import exposeModules from './expose-modules';
+exposeModules();
+
 export default class Application extends Component {
   render() {
     return (
@@ -19,5 +22,3 @@ export default class Application extends Component {
     );
   }
 }
-const FBSDK = require('react-native-fbsdk');
-window.FBSDK = FBSDK;

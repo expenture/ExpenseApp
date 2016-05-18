@@ -7,9 +7,11 @@ import RootNavigator from 'components/RootNavigator';
 
 import MenuContainer from './dev-center/MenuContainer';
 import ReduxStoreContainer from './dev-center/ReduxStoreContainer';
+import BackendSessionContainer from './dev-center/BackendSessionContainer';
 import ExpentureAPIContainer from './dev-center/ExpentureAPIContainer';
 import PushNotificationContainer from './dev-center/PushNotificationContainer';
 import FBAPIContainer from './dev-center/FBAPIContainer';
+import DeviceInfoContainer from './dev-center/DeviceInfoContainer';
 import DesignSpecContainer from './dev-center/DesignSpecContainer';
 import UIPlaygroundContainer from './dev-center/UIPlaygroundContainer';
 
@@ -36,6 +38,12 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
       component: ReduxStoreContainer
     };
 
+  case 'dev-center-BackendSession':
+    return {
+      title: 'Backend Session Controller',
+      component: BackendSessionContainer
+    };
+
   case 'dev-center-ExpentureAPI':
     return {
       title: 'ExpentureAPI',
@@ -52,6 +60,12 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
     return {
       title: 'FBAPI',
       component: FBAPIContainer
+    };
+
+  case 'dev-center-DeviceInfo':
+    return {
+      title: 'DeviceInfo',
+      component: DeviceInfoContainer
     };
 
   case 'dev-center-design-spec':
