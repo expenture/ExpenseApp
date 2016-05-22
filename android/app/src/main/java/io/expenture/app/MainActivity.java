@@ -1,8 +1,6 @@
 package io.expenture.app;
 
 import com.facebook.react.ReactActivity;
-import com.github.yamill.orientation.OrientationPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
@@ -10,6 +8,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import io.realm.react.RealmReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.github.yamill.orientation.OrientationPackage;
@@ -54,6 +53,7 @@ public class MainActivity extends ReactActivity {
 
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RealmReactPackage(),
             new RNDeviceInfo(),
             mReactNativePushNotificationPackage,
             new OrientationPackage(this),

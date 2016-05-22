@@ -243,30 +243,4 @@ export default class ExpentureAPIContainer extends ContainerBase {
       </ScrollView>
     );
   }
-
-  enableSetStateForTesting() {
-    this.setState({
-      newStateString: JSON.stringify(this.props.state, null, 2),
-      setStateForTestingEnabled: true
-    });
-  }
-
-  disableSetStateForTesting() {
-    this.setState({ setStateForTestingEnabled: false });
-  }
-
-  setStateForTesting() {
-    try {
-      store.enableTesting();
-      store.setStateForTesting(JSON.parse(this.state.newStateString));
-      this.disableSetStateForTesting();
-    } catch (e) {
-      alert(e);
-    }
-  }
-
-  resetStateForTesting() {
-    store.enableTesting();
-    store.resetStateForTesting();
-  }
 }

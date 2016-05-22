@@ -52,6 +52,7 @@
     "react-native-tableview-simple": "Neson/react-native-tableview-simple",
     "react-redux": "^4.4.5",
     "react-web": "^0.2.4",
+    "realm": "^0.12.0",
     "redux": "^3.5.2",
     "redux-action-buffer": "^1.0.0",
     "redux-actions": "^0.9.1",

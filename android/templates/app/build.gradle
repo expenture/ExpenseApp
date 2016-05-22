@@ -138,6 +138,7 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(":react-native-device-info")
     compile fileTree(dir: "node_modules/react-native-device-info/android/libs", include: ["*.jar"])
+    compile project(':realm')
     compile project(':react-native-push-notification')
     compile project(':Orientation')
     compile project(':react-native-android-checkbox')

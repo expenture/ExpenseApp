@@ -8,6 +8,7 @@ import RootNavigator from 'components/RootNavigator';
 import MenuContainer from './dev-center/MenuContainer';
 import ReduxStoreContainer from './dev-center/ReduxStoreContainer';
 import BackendSessionContainer from './dev-center/BackendSessionContainer';
+import AppRealmContainer from './dev-center/AppRealmContainer';
 import ExpentureAPIContainer from './dev-center/ExpentureAPIContainer';
 import PushNotificationContainer from './dev-center/PushNotificationContainer';
 import FBAPIContainer from './dev-center/FBAPIContainer';
@@ -42,6 +43,12 @@ export const renderDevCenterScene = (rootNavigator, route, navigator, handleExit
     return {
       title: 'Backend Session Controller',
       component: BackendSessionContainer
+    };
+
+  case 'dev-center-AppRealm':
+    return {
+      title: 'Realm',
+      component: AppRealmContainer
     };
 
   case 'dev-center-ExpentureAPI':

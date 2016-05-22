@@ -59,6 +59,13 @@ export default class MoreMenuContainer extends ContainerBase {
                 this.props.navigator.push({ name: 'dev-center-BackendSession' });
               }}
             />
+            <ListTable.Cell
+              title="Realm"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-AppRealm' });
+              }}
+            />
           </ListTable.Section>
 
           <ListTable.Section header="Modules & API">

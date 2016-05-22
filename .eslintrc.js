@@ -48,7 +48,7 @@ module.exports = {
     "comma-dangle": 2, // disallow or enforce trailing commas
     "no-cond-assign": 2, // disallow assignment in conditional expressions
     "no-console": 0, // disallow use of console (off by default in the node environment)
-    "no-constant-condition": 2, // disallow use of constant expressions in conditions
+    "no-constant-condition": 1, // disallow use of constant expressions in conditions
     "no-control-regex": 2, // disallow control characters in regular expressions
     "no-debugger": 2, // disallow use of debugger
     "no-dupe-args": 2, // disallow duplicate arguments in functions
@@ -94,7 +94,7 @@ module.exports = {
     "no-else-return": 1, // disallow else after a return in an if (off by default)
     "no-labels": 2, // disallow use of labels for anything other then loops and switches
     "no-eq-null": 2, // disallow comparisons to null without a type-checking operator (off by default)
-    "no-eval": 2, // disallow use of eval()
+    "no-eval": 1, // disallow use of eval()
     "no-extend-native": 2, // disallow adding to native types
     "no-extra-bind": 2, // disallow unnecessary function binding
     "no-fallthrough": 2, // disallow fallthrough of case statements
@@ -208,7 +208,7 @@ module.exports = {
     // These rules are only relevant to ES6 environments and are off by default.
     //
     "no-var": 1, // require let or const instead of var (off by default)
-    "generator-star-spacing": [2, "before"], // enforce the spacing around the * in generator functions (off by default)
+    "generator-star-spacing": [1, "before"], // enforce the spacing around the * in generator functions (off by default)
 
     //
     // Legacy
@@ -217,7 +217,7 @@ module.exports = {
     // While the names of the rules may not match up with the JSHint/JSLint counterpart,
     // the functionality is the same.
     //
-    "max-depth": [2, 3], // specify the maximum depth that blocks can be nested (off by default)
+    "max-depth": [2, 5], // specify the maximum depth that blocks can be nested (off by default)
     "max-len": [1, 100, 2], // specify the maximum length of a line in your program (off by default)
     "max-params": [2, 5], // limits the number of parameters that can be used in the function declaration. (off by default)
     "max-statements": 0, // specify the maximum number of statement allowed in a function (off by default)
