@@ -2,12 +2,11 @@
  * @providesModule models/Account
  */
 
-import AppModel from './AppModel';
+import Model from './_base';
 
-import generateUUID from 'utils/generateUUID';
 import parseMoney from 'utils/parseMoney';
 
-export default class Account extends AppModel {
+export default class Account extends Model {
   static schema = {
     name: 'Account',
     primaryKey: 'uid',

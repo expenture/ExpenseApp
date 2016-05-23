@@ -4,7 +4,6 @@
 
 import getRealm from './getRealm';
 import getRealmFromID from './getRealmFromID';
-
 import resetRealm from './resetRealm';
 
 import syncAccounts from './sync/syncAccounts';
@@ -21,6 +20,11 @@ class AppRealmClass {
 
   reset(args) {
     return resetRealm(args);
+  }
+
+  sync = async (args) => {
+    await syncAccounts(args);
+    await syncTransactions(args);
   }
 
   syncAccounts(args) {

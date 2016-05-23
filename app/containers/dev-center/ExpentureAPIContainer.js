@@ -85,16 +85,16 @@ export default class ExpentureAPIContainer extends ContainerBase {
                       const { username, password } = this.state;
                       ExpentureAPI.signIn(username, password).then(() => {
                         alert('Sign in success.');
+                        this.delayedSetState({ mode: null });
                       }).catch(() => {
                         alert('Sign in failure.');
                       });
-                      this.setState({ mode: null });
                     }}
                   />
                   <ListTable.Cell
                     title="Cancel"
                     onPress={() => {
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                 </ListTable.Section>
@@ -146,7 +146,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                 </ListTable.Section>
@@ -172,13 +172,13 @@ export default class ExpentureAPIContainer extends ContainerBase {
                     onPress={() => {
                       const { backendURL } = this.state;
                       ExpentureAPI.setBackendURL(backendURL);
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                   <ListTable.Cell
                     title="Cancel"
                     onPress={() => {
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                 </ListTable.Section>
@@ -193,7 +193,7 @@ export default class ExpentureAPIContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Sign In"
                     onPress={() => {
-                      this.setState({ mode: 'sign-in' });
+                      this.delayedSetState({ mode: 'sign-in' });
                     }}
                   />
                   <ListTable.Cell
@@ -226,13 +226,13 @@ export default class ExpentureAPIContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Send Fetch Request"
                     onPress={() => {
-                      this.setState({ mode: 'fetch', url: '/ping', options: '{\n  "method":  "GET"\n}' });
+                      this.delayedSetState({ mode: 'fetch', url: '/ping', options: '{\n  "method":  "GET"\n}' });
                     }}
                   />
                   <ListTable.Cell
                     title="Set Backend URL"
                     onPress={() => {
-                      this.setState({ mode: 'set-backend-url' });
+                      this.delayedSetState({ mode: 'set-backend-url' });
                     }}
                   />
                 </ListTable.Section>

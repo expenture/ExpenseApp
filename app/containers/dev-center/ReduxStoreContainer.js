@@ -114,7 +114,7 @@ export default class ReduxStoreContainer extends ContainerBase {
 
   @autobind
   enableSetStateForTesting() {
-    this.setState({
+    this.delayedSetState({
       newStateString: JSON.stringify(this.props.state, null, 2),
       mode: 'set-state-for-testing'
     });
@@ -122,7 +122,7 @@ export default class ReduxStoreContainer extends ContainerBase {
 
   @autobind
   disableSetStateForTesting() {
-    this.setState({ mode: null });
+    this.delayedSetState({ mode: null });
   }
 
   @autobind

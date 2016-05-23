@@ -1,4 +1,5 @@
 import store from 'store';
+import ModelsControllor from 'ModelsControllor';
 import AppRealm from 'AppRealm';
 import BackendSession from 'BackendSession';
 
@@ -10,6 +11,7 @@ import Transaction from 'models/Transaction';
 
 const modules = {
   store,
+  ModelsControllor,
   AppRealm,
   BackendSession,
 

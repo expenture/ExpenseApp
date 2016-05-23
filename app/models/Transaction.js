@@ -2,9 +2,9 @@
  * @providesModule models/Transaction
  */
 
-import AppModel from './AppModel';
+import Model from './_base';
 
-export default class Transaction extends AppModel {
+export default class Transaction extends Model {
   static schema = {
     name: 'Transaction',
     primaryKey: 'uid',

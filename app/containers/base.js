@@ -33,6 +33,13 @@ export default class ContainerBase extends Component {
   }
 
   @autobind
+  delayedSetState(newState) {
+    setTimeout(() => {
+      this.setState(newState);
+    }, 100);
+  }
+
+  @autobind
   registerView(ref) {
     if (!ref) return;
 

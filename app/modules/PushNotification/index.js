@@ -38,7 +38,11 @@ const PushNotification = {
     const status = store.getState() &&
                    store.getState().pushNotification &&
                    store.getState().pushNotification.status;
-    if (status !== 'registered') requestPermissions();
+    if (status !== 'registered') {
+      return requestPermissions();
+    } else {
+      return Promise.resolve();
+    }
   }
 };
 

@@ -44,7 +44,10 @@ export default class MoreMenuContainer extends ContainerBase {
             </ListTable.Cell>
           </ListTable.Section>
 
-          <ListTable.Section header="Core">
+          <ListTable.Section
+            header="Core"
+            footer="Core compositions or high level APIs in the app."
+          >
             <ListTable.Cell
               title="Redux Store"
               navigated={true}
@@ -60,15 +63,18 @@ export default class MoreMenuContainer extends ContainerBase {
               }}
             />
             <ListTable.Cell
-              title="Realm"
+              title="Data Models"
               navigated={true}
               onPress={() => {
-                this.props.navigator.push({ name: 'dev-center-AppRealm' });
+                this.props.navigator.push({ name: 'dev-center-models' });
               }}
             />
           </ListTable.Section>
 
-          <ListTable.Section header="Modules & API">
+          <ListTable.Section
+            header="Modules"
+            footer="Module and APIs in the app (low level)."
+          >
             <ListTable.Cell
               title="Expenture API"
               navigated={true}
@@ -97,9 +103,19 @@ export default class MoreMenuContainer extends ContainerBase {
                 this.props.navigator.push({ name: 'dev-center-DeviceInfo' });
               }}
             />
+            <ListTable.Cell
+              title="Realm"
+              navigated={true}
+              onPress={() => {
+                this.props.navigator.push({ name: 'dev-center-AppRealm' });
+              }}
+            />
           </ListTable.Section>
 
-          <ListTable.Section header="Design & UI & Components">
+          <ListTable.Section
+            header="Design & UI"
+            footer="Inspect the design and UI."
+          >
             <ListTable.Cell
               title="Design Spec"
               navigated={true}

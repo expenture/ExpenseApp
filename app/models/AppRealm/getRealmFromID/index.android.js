@@ -1,24 +1,41 @@
 /**
  * @providesModule getRealmFromID
  */
+
 import Realm from 'realm';
 
-import schema, { schemaVersion } from '../schema';
+import schemas from '../schemas';
 
 const realms = {};
 
-export default function getRealmFromID(id, { loadSchema = true } = {}) {
-  if (realms[id]) return realms[id];
+export default function getRealmFromID(id, { loadSchema = true, withCache = true } = {}) {
+  if (withCache && realms[id]) return realms[id];
+
+  const path = `${id}.realm`;
 
   if (!loadSchema) {
-    return new Realm({ path: `${id}.realm` });
+    return new Realm({ path });
   }
 
-  realms[id] = new Realm({
-    path: `${id}.realm`,
-    schema,
-    schemaVersion
+  // run migrations if needed
+  let nextSchemaIndex = Realm.schemaVersion(path);
+  while (nextSchemaIndex < schemas.length) {
+    let schema = schemas[nextSchemaIndex++];
+    let migratedRealm = new Realm({
+      path,
+      schema
+    });
+    migratedRealm.close();
+  }
+
+  // open the Realm with the latest schema
+  let schema = schemas[schemas.length-1];
+  let realm = new Realm({
+    path,
+    schema
   });
+
+  realms[id] = realm;
 
   return realms[id];
 }

@@ -3,6 +3,7 @@
  */
 
 import store from 'store';
+import AppRealm from 'AppRealm';
 import ExpentureAPI from 'ExpentureAPI';
 import PushNotification from 'PushNotification';
 import FBAPI from 'FBAPI';
@@ -21,15 +22,16 @@ import {
 
 const signIn = (username, password) => {
   store.dispatch(signInProcessing());
-  PushNotification.requestPermissionsIfNotRegistered();
   ExpentureAPI.signIn(username, password).then(() => {
+    PushNotification.requestPermissionsIfNotRegistered();
     return uploadPushNotificationDeviceTokenToServer();
   }).then(() => {
     store.dispatch(firstUserDataUpdateProcessing());
     return updateUserData();
   }).then(() => {
     store.dispatch(firstDataSyncProcessing());
-    // TOOD
+    AppRealm.reset({ force: true });
+    return AppRealm.sync();
   }).then(() => {
     store.dispatch(signInSuccess());
   }).catch(e => {
@@ -55,6 +57,7 @@ const fbSignIn = () => {
 
 const signOut = ({ force = false } = {}) => {
   ExpentureAPI.signOut({ force }).then(() => {
+    AppRealm.reset({ force });
     FBAPI.logout();
     // TODO: abandom PN
     // The BackendSession reducer will handle sign out actions fired from the

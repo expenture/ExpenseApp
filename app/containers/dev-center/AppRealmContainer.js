@@ -87,7 +87,7 @@ export default class AppRealmContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Cancel"
                     onPress={() => {
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                 </ListTable.Section>
@@ -113,13 +113,13 @@ export default class AppRealmContainer extends ContainerBase {
                     onPress={() => {
                       const { realmID } = this.state;
                       AppRealm.realmID = realmID;
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                   <ListTable.Cell
                     title="Cancel"
                     onPress={() => {
-                      this.setState({ mode: null });
+                      this.delayedSetState({ mode: null });
                     }}
                   />
                 </ListTable.Section>
@@ -134,10 +134,16 @@ export default class AppRealmContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Eval Script"
                     onPress={() => {
-                      this.setState({
+                      this.delayedSetState({
                         mode: 'eval-script',
                         script: '// var realm = AppRealm.getRealmFromID(\'test\');\n// var a = new Account({ name: \'New Account\' });\n// realm.write(function () { realm.create(\'Account\', a); });\n\nvar accounts = realm.objects(\'Account\');\naccounts.filtered(\'name CONTAINS $0\', \'New\');'
                       });
+                    }}
+                  />
+                  <ListTable.Cell
+                    title="Get Schema"
+                    onPress={() => {
+                      alert(JSON.stringify(AppRealm.schema, null, 2));
                     }}
                   />
                   <ListTable.Cell

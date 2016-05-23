@@ -2,25 +2,29 @@ import { Alert } from 'react-native';
 import RNPushNotification from 'react-native-push-notification';
 
 export default function requestPermissions() {
-  Alert.alert(
-    '啟用推播通知',
-    '要啟用推播通知嗎？',
-    [
-      {
-        text: '先不要',
-        onPress: () => {
-          notNow();
+  return new Promise((resolve) => {
+    Alert.alert(
+      '啟用推播通知',
+      '要啟用推播通知嗎？',
+      [
+        {
+          text: '先不要',
+          onPress: () => {
+            notNow();
+            resolve();
+          }
+        },
+        {
+          text: '好',
+          style: 'default',
+          onPress: () => {
+            RNPushNotification.requestPermissions();
+            resolve();
+          }
         }
-      },
-      {
-        text: '好',
-        style: 'default',
-        onPress: () => {
-          RNPushNotification.requestPermissions();
-        }
-      }
-    ]
-  );
+      ]
+    );
+  });
 }
 
 function notNow() {
