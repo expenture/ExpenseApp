@@ -3,6 +3,7 @@
  */
 
 import getDefaultBackendName from './getDefaultBackendName';
+import validate from './validate';
 
 class ModelsControllorClass {
   constructor({ backendName = getDefaultBackendName() } = {}) {
@@ -25,8 +26,12 @@ class ModelsControllorClass {
     return this.getBackendModule().update;
   }
 
-  get delete() {
-    return this.getBackendModule().delete;
+  get destroy() {
+    return this.getBackendModule().destroy;
+  }
+
+  validate(...args) {
+    return validate(...args);
   }
 
   setBackend = (backendName) => {

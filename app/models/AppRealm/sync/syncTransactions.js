@@ -97,9 +97,9 @@ export default async function syncTransactions({ throwError = false, perPage = 1
           processedTransactions += 1;
           store.dispatch(syncProcessing('transaction', 0.30 + (0.20 * (processedTransactions / deletedTransactionsCount)), 's-2-remote-deletion'));
 
-          if (r !== 404 && r !== 200) {
+          if (r.status !== 404 && r.status !== 200) {
             let text = await r.text();
-            throw new Error(text);
+            throw new Error(`${r.status}: ${text}`);
           }
 
           realm.write(() => {
@@ -199,9 +199,9 @@ export default async function syncTransactions({ throwError = false, perPage = 1
       updatedTransactions.forEach((transaction) => {
         let f = ExpentureAPI.fetch(`/me/transactions/${transaction.uid}`, {
           method: transaction.syncedAt ? 'PATCH' : 'PUT',
-          body: {
-            transaction: JSON.stringify(snakelizeObject(transaction))
-          }
+          body: JSON.stringify({
+            transaction: snakelizeObject(transaction)
+          })
         }).then((r) => {
           processedTransactions += 1;
           store.dispatch(syncProcessing('transaction', 0.80 + (0.20 * (processedTransactions / updatedTransactionsCount)), 's-4-remote-update'));

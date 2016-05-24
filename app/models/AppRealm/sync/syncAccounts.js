@@ -36,9 +36,9 @@ export default async function syncAccounts({ throwError = false } = {}) {
       let f = ExpentureAPI.fetch(`/me/accounts/${account.uid}`, {
         method: 'DELETE'
       }).then(async (r) => {
-        if (r !== 404 && r !== 200) {
+        if (r.status !== 404 && r.status !== 200) {
           let text = await r.text();
-          throw text;
+          throw new Error(`${r.status}: ${text}`);
         }
 
         realm.write(() => {
@@ -101,9 +101,9 @@ export default async function syncAccounts({ throwError = false } = {}) {
     updatedAccounts.forEach((account) => {
       let f = ExpentureAPI.fetch(`/me/accounts/${account.uid}`, {
         method: account.syncedAt ? 'PATCH' : 'PUT',
-        body: {
-          account: JSON.stringify(snakelizeObject(account))
-        }
+        body: JSON.stringify({
+          account: snakelizeObject(account)
+        })
       }).then((r) => {
         return r.json();
       }).then((json) => {

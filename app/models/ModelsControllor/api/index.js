@@ -15,7 +15,7 @@ const apiBackend = {
     throw new Error('apiBackend: Not yet implemented');
   },
 
-  delete: async () => {
+  destroy: async () => {
     throw new Error('apiBackend: Not yet implemented');
   }
 };

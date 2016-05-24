@@ -66,6 +66,6 @@ ModelsControllor.find('Account',
 
 > TODO: Complete this.
 
-### Delete
+### Destroy
 
 > TODO: Complete this.

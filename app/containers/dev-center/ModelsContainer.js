@@ -20,6 +20,7 @@ export default class ModelsContainer extends ContainerBase {
 
     this.state = {
       mode: null,
+      utilsMode: null,
       modelsControllorBackendName: ModelsControllor.backendName
     };
   }
@@ -43,6 +44,7 @@ export default class ModelsContainer extends ContainerBase {
                     title="Options"
                     textInput={true}
                     multiline={true}
+                    autoCapitalize="none"
                     value={this.state.queryOptionsString}
                     onChangeText={(t) => this.setState({ queryOptionsString: t })}
                     autoCorrect={false}
@@ -58,9 +60,11 @@ export default class ModelsContainer extends ContainerBase {
                     onPress={() => {
                       const { modelName, queryOptionsString } = this.state;
                       try {
-                        let queryOptions = JSON.parse(queryOptionsString)
+                        let queryOptions = JSON.parse(queryOptionsString);
                         ModelsControllor.query(modelName, queryOptions).then((result) => {
-                          alert(JSON.stringify(result, null, 2));
+                          const results = JSON.stringify(result, null, 2);
+                          this.setState({ results });
+                          alert(results);
                         }).catch((e) => {
                           alert('ERROR: ' + e);
                         });
@@ -69,10 +73,21 @@ export default class ModelsContainer extends ContainerBase {
                       }
                     }}
                   />
+                  {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ modelName: null, queryOptionsString: `{
+  "filter": {\n    \n  },
+  "sort": "-updatedAt",
+  "limit": 5
+}`, results: null });
+                    }}
+                  />
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
-                      this.delayedSetState({ mode: null });
+                      this.delayedSetState({ mode: null, results: null });
                     }}
                   />
                 </ListTable.Section>
@@ -90,16 +105,19 @@ export default class ModelsContainer extends ContainerBase {
                     onPress={() => {
                       const { modelName, uid } = this.state;
                       ModelsControllor.find(modelName, uid).then((result) => {
-                        alert(JSON.stringify(result, null, 2));
+                        const results = JSON.stringify(result, null, 2);
+                        this.setState({ results });
+                        alert(results);
                       }).catch((e) => {
                         alert('ERROR: ' + e);
                       });
                     }}
                   />
+                  {this.getResultsOutput()}
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
-                      this.delayedSetState({ mode: null });
+                      this.delayedSetState({ mode: null, results: null });
                     }}
                   />
                 </ListTable.Section>
@@ -110,15 +128,51 @@ export default class ModelsContainer extends ContainerBase {
                   header="Models Controller - Create"
                   key="mcc"
                 >
+                  {this.getModelNameInput()}
+                  <ListTable.Cell
+                    title="Obj"
+                    textInput={true}
+                    multiline={true}
+                    autoCapitalize="none"
+                    value={this.state.createObjString}
+                    onChangeText={(t) => this.setState({ createObjString: t })}
+                    autoCorrect={false}
+                    autoFocus={true}
+                    style={{
+                      fontFamily: 'Menlo',
+                      fontWeight: '100',
+                      fontSize: 12
+                    }}
+                  />
                   <ListTable.Cell
                     title="Create"
                     onPress={() => {
+                      const { modelName, createObjString } = this.state;
+                      try {
+                        let createObj = JSON.parse(createObjString);
+                        ModelsControllor.create(modelName, createObj).then((result) => {
+                          const results = JSON.stringify(result, null, 2);
+                          this.setState({ results });
+                          alert(results);
+                        }).catch((e) => {
+                          alert('ERROR: ' + e);
+                        });
+                      } catch (e) {
+                        alert('ERROR: ' + e);
+                      }
+                    }}
+                  />
+                  {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ modelName: null, createObjString: '{\n  \n}', results: null });
                     }}
                   />
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
-                      this.delayedSetState({ mode: null });
+                      this.delayedSetState({ mode: null, results: null });
                     }}
                   />
                 </ListTable.Section>
@@ -129,34 +183,82 @@ export default class ModelsContainer extends ContainerBase {
                   header="Models Controller - Update"
                   key="mcu"
                 >
+                  {this.getModelNameInput()}
+                  {this.getUIDInput()}
+                  <ListTable.Cell
+                    title="Obj"
+                    textInput={true}
+                    multiline={true}
+                    autoCapitalize="none"
+                    value={this.state.updateObjString}
+                    onChangeText={(t) => this.setState({ updateObjString: t })}
+                    autoCorrect={false}
+                    autoFocus={true}
+                    style={{
+                      fontFamily: 'Menlo',
+                      fontWeight: '100',
+                      fontSize: 12
+                    }}
+                  />
                   <ListTable.Cell
                     title="Update"
                     onPress={() => {
+                      const { modelName, uid, updateObjString } = this.state;
+                      try {
+                        let updateObj = JSON.parse(updateObjString);
+                        ModelsControllor.update(modelName, uid, updateObj).then((result) => {
+                          const results = JSON.stringify(result, null, 2);
+                          this.setState({ results });
+                          alert(results);
+                        }).catch((e) => {
+                          alert('ERROR: ' + e);
+                        });
+                      } catch (e) {
+                        alert('ERROR: ' + e);
+                      }
+                    }}
+                  />
+                  {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ modelName: null, updateObjString: '{\n  \n}', results: null });
                     }}
                   />
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
-                      this.delayedSetState({ mode: null });
+                      this.delayedSetState({ mode: null, results: null });
                     }}
                   />
                 </ListTable.Section>
               );
-            case 'delete':
+            case 'destroy':
               return (
                 <ListTable.Section
-                  header="Models Controller - Delete"
+                  header="Models Controller - Destroy"
                   key="mcd"
                 >
+                  {this.getModelNameInput()}
+                  {this.getUIDInput()}
                   <ListTable.Cell
-                    title="Delete"
+                    title="Destroy"
                     onPress={() => {
+                      const { modelName, uid } = this.state;
+                      ModelsControllor.destroy(modelName, uid).then((result) => {
+                        const results = JSON.stringify(result, null, 2);
+                        this.setState({ results });
+                        alert(results);
+                      }).catch((e) => {
+                        alert('ERROR: ' + e);
+                      });
                     }}
                   />
+                  {this.getResultsOutput()}
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
-                      this.delayedSetState({ mode: null });
+                      this.delayedSetState({ mode: null, results: null });
                     }}
                   />
                 </ListTable.Section>
@@ -166,7 +268,7 @@ export default class ModelsContainer extends ContainerBase {
                 <ListTable.Section
                   header="Models Controller Actions"
                   key="mca"
-                  footer={'The ModelsController is the manager of data models. You can query, find, create, update or delete data (CRUD) by using the ModelsController.'}
+                  footer={'The ModelsController is the manager of data models. You can query, find, create, update or destroy data (CRUD) by using the ModelsController.'}
                 >
                   <ListTable.Cell
                     title="Query"
@@ -199,19 +301,152 @@ export default class ModelsContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Create"
                     onPress={() => {
-                      this.delayedSetState({ mode: 'create' });
+                      this.delayedSetState({
+                        mode: 'create',
+                        modelName: 'Account',
+                        createObjString: `{
+  "kind": "debit",
+  "name": "New Testing Account",
+  "currency": "TWD",
+  "balance": 5000000
+}`
+                      });
                     }}
                   />
                   <ListTable.Cell
                     title="Update"
-                    onPress={() => {
-                      this.delayedSetState({ mode: 'update' });
+                    onPress={async () => {
+                      let a = await ModelsControllor.query('Account', {
+                        filter: {
+                          name: ['=', 'New Testing Account']
+                        },
+                        limit: 1
+                      });
+                      a = a[0];
+                      let uid = a && a.uid;
+                      this.delayedSetState({
+                        mode: 'update',
+                        modelName: 'Account',
+                        uid,
+                        updateObjString: `{
+  "name": "Testing Update Account",
+  "balance": 100000000
+}`
+                      });
                     }}
                   />
                   <ListTable.Cell
-                    title="Delete"
+                    title="Destroy"
+                    onPress={async () => {
+                      let a = await ModelsControllor.query('Account', {
+                        filter: {
+                          name: ['=', 'New Testing Account']
+                        },
+                        limit: 1
+                      });
+                      a = a[0];
+                      let uid = a && a.uid;
+                      this.delayedSetState({
+                        mode: 'destroy',
+                        modelName: 'Account',
+                        uid
+                      });
+                    }}
+                  />
+                </ListTable.Section>
+              );
+            }
+          })()}
+
+          {(() => {
+            switch (this.state.utilsMode) {
+            case 'eval-script':
+              return (
+                <ListTable.Section
+                  header="Eval Script"
+                  key="es"
+                  footer={'Type the script to eval, then Press "Eval Script" to run it and get the results.\n\nUse the log() function to pass in the results if executing async functions.\n\nWARNING: this can be harmful.'}
+                >
+                  <ListTable.Cell
+                    title="Script"
+                    textInput={true}
+                    multiline={true}
+                    autoCapitalize="none"
+                    value={this.state.evalScriptString}
+                    onChangeText={(t) => this.setState({ evalScriptString: t })}
+                    autoCorrect={false}
+                    autoFocus={true}
+                    style={{
+                      fontFamily: 'Menlo',
+                      fontWeight: '100',
+                      fontSize: 12
+                    }}
+                  />
+                  <ListTable.Cell
+                    key="es"
+                    title="Eval Script"
                     onPress={() => {
-                      this.delayedSetState({ mode: 'delete' });
+                      this.setState({ results: '' });
+
+                      const log = (...results) => {
+                        results.forEach(result => {
+                          const resultStr = JSON.stringify(result, null, 2);
+                          this.setState({ results: this.state.results + '\n\n' + resultStr });
+                        });
+                      };
+
+                      try {
+                        const result = eval(this.state.evalScriptString);
+                        log(result);
+                      } catch (e) {
+                        alert('ERROR: ' + e);
+                      }
+                    }}
+                  />
+                  {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ evalScriptString: null, results: null });
+                    }}
+                  />
+                  <ListTable.Cell
+                    title="Back"
+                    onPress={() => {
+                      this.delayedSetState({ utilsMode: null, results: null });
+                    }}
+                  />
+                </ListTable.Section>
+              );
+            default:
+              return (
+                <ListTable.Section
+                  header="Utils"
+                  key="u"
+                  footer={'Utilities for testing.'}
+                >
+                  <ListTable.Cell
+                    title="Eval Script"
+                    onPress={() => {
+                      this.delayedSetState({
+                        utilsMode: 'eval-script',
+                        evalScriptString: `// Type the ES5 script here
+var a1 = new Account({ name: 'An Account' });
+ModelsControllor.validate('Account', a1).then(function (result) {
+  log(result, a1);
+});
+
+ModelsControllor.query('Account').then(function (accounts) {
+  var a2 = accounts[0];
+  a2.type = 'setting-this-is-invalid';
+  ModelsControllor.validate('Account', a2).then(function (result) {
+    log(result, a2);
+  });
+});
+
+':)';
+`
+                       });
                     }}
                   />
                 </ListTable.Section>
@@ -294,5 +529,32 @@ export default class ModelsContainer extends ContainerBase {
         autoCorrect={false}
       />
     );
+  }
+
+  getResultsOutput = () => {
+    if (this.state.results) {
+      return (
+        <ListTable.Cell
+          title="Results"
+          textInput={true}
+          multiline={true}
+          value={this.state.results}
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={{
+            fontFamily: 'Menlo',
+            fontWeight: '100',
+            fontSize: 12
+          }}
+        />
+      );
+    } else {
+      return (
+        <ListTable.Cell
+          title="No Results Yet"
+          disabled={true}
+        />
+      );
+    }
   }
 }

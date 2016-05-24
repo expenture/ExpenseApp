@@ -61,6 +61,7 @@
     "redux-thunk": "^2.0.1",
     "shared-git-hooks": "^1.1.4",
     "sleep": "^3.0.1",
+    "validate.js": "^0.10.0",
     "webpack": "^1.12.15",
     "webpack-dev-server": "^1.14.1"
   },

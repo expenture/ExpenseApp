@@ -2,6 +2,7 @@
  * This is the base model for all models to inherit
  */
 
+import autobind from 'autobind-decorator';
 import generateUUID from 'utils/generateUUID';
 
 export default class Model {
@@ -51,15 +52,22 @@ export default class Model {
     if (this.hasProperty('updatedAt') && !this.updatedAt) this.updatedAt = new Date();
   }
 
-  update = (props = {}) => {
+  @autobind
+  update(props = {}) {
     for (let k in props) {
       if (!this.hasProperty(k)) continue;
+      if (!props[k]) continue;
 
-      switch (k) {
-      case 'createdAt':
-      case 'updatedAt':
-      case 'deletedAt':
-      case 'datetime':
+      switch (this.getPropertyType(k)) {
+      case 'boolean':
+        this[k] = !!props[k];
+        break;
+
+      case 'number':
+        this[k] = parseFloat(props[k]);
+        break;
+
+      case 'date':
         this[k] = new Date(props[k]);
         break;
 
@@ -70,29 +78,35 @@ export default class Model {
     }
   }
 
-  clone = () => {
+  @autobind
+  clone() {
     let clonedObj = new this.constructor(this);
     for (let k in this) clonedObj[k] = this[k];
     return clonedObj;
   }
 
-  getSchema = () => {
+  @autobind
+  getSchema() {
     return this.constructor.getSchema();
   }
 
-  getProperties = () => {
+  @autobind
+  getProperties() {
     return this.constructor.getProperties();
   }
 
-  getPropertyKeys = () => {
+  @autobind
+  getPropertyKeys() {
     return this.constructor.getPropertyKeys();
   }
 
-  hasProperty = (propName) => {
+  @autobind
+  hasProperty(propName) {
     return this.constructor.hasProperty(propName);
   }
 
-  propertyType = (propName) => {
-    return this.constructor.propertyType(propName);
+  @autobind
+  getPropertyType(propName) {
+    return this.constructor.getPropertyType(propName);
   }
 }

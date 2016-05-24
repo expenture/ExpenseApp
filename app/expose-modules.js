@@ -1,4 +1,5 @@
 import store from 'store';
+import models from 'models';
 import ModelsControllor from 'ModelsControllor';
 import AppRealm from 'AppRealm';
 import BackendSession from 'BackendSession';
@@ -6,20 +7,16 @@ import BackendSession from 'BackendSession';
 import ExpentureAPI from 'ExpentureAPI';
 import FBAPI from 'FBAPI';
 
-import Account from 'models/Account';
-import Transaction from 'models/Transaction';
-
 const modules = {
   store,
+  models,
+  ...models,
   ModelsControllor,
   AppRealm,
   BackendSession,
 
   ExpentureAPI,
-  FBAPI,
-
-  Account,
-  Transaction
+  FBAPI
 };
 
 export default function exposeModules() {
