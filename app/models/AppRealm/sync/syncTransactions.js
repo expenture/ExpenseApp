@@ -92,7 +92,10 @@ export default async function syncTransactions({ throwError = false, perPage = 1
 
       deletedTransactions.forEach((transaction) => {
         let f = ExpentureAPI.fetch(`/me/transactions/${transaction.uid}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          body: JSON.stringify({
+            update_account: false
+          })
         }).then(async (r) => {
           processedTransactions += 1;
           store.dispatch(syncProcessing('transaction', 0.30 + (0.20 * (processedTransactions / deletedTransactionsCount)), 's-2-remote-deletion'));
@@ -200,6 +203,7 @@ export default async function syncTransactions({ throwError = false, perPage = 1
         let f = ExpentureAPI.fetch(`/me/transactions/${transaction.uid}`, {
           method: transaction.syncedAt ? 'PATCH' : 'PUT',
           body: JSON.stringify({
+            update_account: false,
             transaction: snakelizeObject(transaction)
           })
         }).then((r) => {

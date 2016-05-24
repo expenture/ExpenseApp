@@ -1,11 +1,11 @@
 /**
- * @providesModule ModelsControllor
+ * @providesModule ModelsController
  */
 
 import getDefaultBackendName from './getDefaultBackendName';
 import validate from './validate';
 
-class ModelsControllorClass {
+class ModelsControllerClass {
   constructor({ backendName = getDefaultBackendName() } = {}) {
     this.setBackend(backendName);
   }
@@ -56,6 +56,6 @@ class ModelsControllorClass {
   }
 }
 
-const ModelsControllor = new ModelsControllorClass();
+const ModelsController = new ModelsControllerClass();
 
-export default ModelsControllor;
+export default ModelsController;

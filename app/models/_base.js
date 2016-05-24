@@ -86,6 +86,11 @@ export default class Model {
   }
 
   @autobind
+  getErrors() {
+    return this._errors;
+  }
+
+  @autobind
   getSchema() {
     return this.constructor.getSchema();
   }

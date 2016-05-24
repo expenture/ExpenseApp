@@ -11,8 +11,8 @@ export default class Account extends Model {
     name: 'Account',
     primaryKey: 'uid',
     properties: {
-      uid: { type: 'string', indexed: true },
       type: { type: 'string', indexed: true, default: 'normal' },
+      uid: { type: 'string', indexed: true },
       kind: { type: 'string', optional: true, indexed: true },
       name: 'string',
       currency: { type: 'string', indexed: true },
@@ -37,33 +37,32 @@ export default class Account extends Model {
       }
     },
     type: {
-      immutable: {
-        type: 'Account'
-      }
+      uneditable: true
     },
-    kind: {},
+    kind: {
+      presence: true,
+      inclusion: ['cash', 'credit_card', 'debit_card']
+    },
     name: {
       presence: true
     },
     currency: {
-      presence: true
+      presence: true,
+      immutable: {
+        if: (o) => o.syncing
+      }
     },
     balance: {
       immutable: {
-        type: 'Account',
         if: (o) => o.syncing
       }
     },
 
     syncing: {
-      immutable: {
-        type: 'Account'
-      }
+      uneditable: true
     },
     synchronizerUID: {
-      immutable: {
-        type: 'Account'
-      }
+      uneditable: true
     }
   };
 

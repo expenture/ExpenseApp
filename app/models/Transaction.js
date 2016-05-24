@@ -9,10 +9,10 @@ export default class Transaction extends Model {
     name: 'Transaction',
     primaryKey: 'uid',
     properties: {
+      type: { type: 'string', indexed: true, default: 'normal' },
       uid: { type: 'string', indexed: true },
       accountUID: { type: 'string', indexed: true },
-      kind: { type: 'string', optional: true, indexed: true },
-      amount: { type: 'int', indexed: true },
+      amount: { type: 'int', default: 0, indexed: true },
       description: { type: 'string', optional: true },
 
       categoryCode: { type: 'string', optional: true, indexed: true },
@@ -29,7 +29,7 @@ export default class Transaction extends Model {
       separated: { type: 'bool', default: false, indexed: true },
       separateTransactionUID: { type: 'string', optional: true, indexed: true },
 
-      onRecord: { type: 'bool', default: true, indexed: true },
+      onRecord: { type: 'bool', optional: true, indexed: true },
       recordTransactionUID: { type: 'string', optional: true, indexed: true },
 
       ignoreInStatistics: { type: 'bool', default: true, indexed: true },
@@ -38,6 +38,55 @@ export default class Transaction extends Model {
       syncedAt: { type: 'date', indexed: true, optional: true },
       deletedAt: { type: 'date', indexed: true, optional: true }
     }
+  };
+
+  static constraints = {
+    uid: {
+      presence: true,
+      length: {
+        minimum: 8,
+        message: 'must be at least 8 characters'
+      }
+    },
+    accountUID: {
+      presence: true,
+      foreignKey: true
+    },
+    kind: {},
+    amount: {},
+    description: {},
+
+    categoryCode: {},
+    tags: {},
+    note: {},
+    datetime: {
+      presence: true
+    },
+
+    latitude: {},
+    longitude: {},
+    partyType: {},
+    partyCode: {},
+    partyName: {},
+
+    separated: {
+      uneditable: true
+    },
+    separateTransactionUID: {
+      immutable: true,
+      foreignKey: {
+        optional: true
+      }
+    },
+
+    onRecord: {
+      uneditable: true
+    },
+    recordTransactionUID: {
+      uneditable: true
+    },
+
+    ignoreInStatistics: {}
   };
 
   constructor(props = {}) {

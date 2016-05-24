@@ -87,43 +87,50 @@ const create = async (modelName, object) => {
   const ModelClass = getModelClass(modelName);
   const { realm } = AppRealm;
 
-  let newObject = new ModelClass(object);
+  const updatedAt = new Date();
+  let newObject = new ModelClass({ ...object, updatedAt });
 
   await validate(modelName, newObject, { throwError: true });
 
-  const updatedAt = new Date();
+  if (typeof newObject.beforeRealmSave === 'function') {
+    newObject.beforeRealmSave('create');
+  }
 
   realm.write(() => {
-    realm.create(modelName, {
-      ...newObject,
-      updatedAt
-    });
+    realm.create(modelName, newObject);
 
-    // CALLBACKS BEGIN
-
-    // CALLBACKS END
+    if (typeof newObject.afterRealmSave === 'function') {
+      newObject.afterRealmSave('create');
+    }
   });
 
   return newObject;
 };
 
-const update = async (modelName, uid, newAttrs) => {
+const update = async (modelName, uid, newAttrsOrObj) => {
   const ModelClass = getModelClass(modelName);
   const { realm } = AppRealm;
 
   let realmObject = realm.objects(modelName).filtered('uid == $0', uid)[0];
+  if (!realmObject) throw new Error(`${modelName} with uid ${uid} does not exists`);
   const updatedAt = new Date();
   let updateObject = new ModelClass(realmObject);
-  updateObject.update({ ...newAttrs, updatedAt });
+  updateObject.update({ ...newAttrsOrObj, updatedAt });
 
   await validate(modelName, updateObject, { throwError: true });
+
+  if (typeof updateObject.beforeRealmSave === 'function') {
+    updateObject.beforeRealmSave('update');
+  }
+
+  if (realmObject.uid !== updateObject.uid) throw new Error(`${modelName} UID changed on update (${realmObject.uid} -> ${updateObject.uid})`);
 
   realm.write(() => {
     realmObject.update(updateObject);
 
-    // CALLBACKS BEGIN
-
-    // CALLBACKS END
+    if (typeof updateObject.afterRealmSave === 'function') {
+      updateObject.afterRealmSave('update');
+    }
   });
 
   return updateObject;
@@ -136,17 +143,17 @@ const destroy = async (modelName, uidOrObject) => {
 
   let realmObject = realm.objects(modelName).filtered('uid == $0', uid)[0];
 
-  // VALIDATION BEGIN
-
-  // VALIDATION END
-
   if (realmObject) {
+    if (typeof realmObject.beforeRealmDestroy === 'function') {
+      realmObject.beforeRealmDestroy();
+    }
+
     realm.write(() => {
       realmObject.deletedAt = new Date();
 
-      // CALLBACKS BEGIN
-
-      // CALLBACKS END
+      if (typeof realmObject.afterRealmDestroy === 'function') {
+        realmObject.afterRealmDestroy();
+      }
     });
   }
 

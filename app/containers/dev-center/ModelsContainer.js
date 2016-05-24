@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ContainerBase from 'ContainerBase';
 
 import store from 'store';
-import ModelsControllor from 'ModelsControllor';
+import ModelsController from 'ModelsController';
 
 import ScrollView from 'components/ScrollView';
 import StatusBar from 'components/StatusBar';
@@ -21,7 +21,7 @@ export default class ModelsContainer extends ContainerBase {
     this.state = {
       mode: null,
       utilsMode: null,
-      modelsControllorBackendName: ModelsControllor.backendName
+      modelsControllerBackendName: ModelsController.backendName
     };
   }
 
@@ -38,6 +38,7 @@ export default class ModelsContainer extends ContainerBase {
                 <ListTable.Section
                   header="Models Controller - Query"
                   key="mcq"
+                  footer={'Query for (list) data. Type in the parameters and press "Query", the results will be alerted and shown below.\n\nSample parameters are set by default, press "Clear" to clear the inputs.'}
                 >
                   {this.getModelNameInput()}
                   <ListTable.Cell
@@ -61,7 +62,7 @@ export default class ModelsContainer extends ContainerBase {
                       const { modelName, queryOptionsString } = this.state;
                       try {
                         let queryOptions = JSON.parse(queryOptionsString);
-                        ModelsControllor.query(modelName, queryOptions).then((result) => {
+                        ModelsController.query(modelName, queryOptions).then((result) => {
                           const results = JSON.stringify(result, null, 2);
                           this.setState({ results });
                           alert(results);
@@ -97,6 +98,7 @@ export default class ModelsContainer extends ContainerBase {
                 <ListTable.Section
                   header="Models Controller - Find"
                   key="mcf"
+                  footer={'Find a single record by uid. Type in the parameters and press "Find", the results will be alerted and shown below.\n\nSample parameters are set by default, press "Clear" to clear the inputs.'}
                 >
                   {this.getModelNameInput()}
                   {this.getUIDInput()}
@@ -104,7 +106,7 @@ export default class ModelsContainer extends ContainerBase {
                     title="Find"
                     onPress={() => {
                       const { modelName, uid } = this.state;
-                      ModelsControllor.find(modelName, uid).then((result) => {
+                      ModelsController.find(modelName, uid).then((result) => {
                         const results = JSON.stringify(result, null, 2);
                         this.setState({ results });
                         alert(results);
@@ -114,6 +116,12 @@ export default class ModelsContainer extends ContainerBase {
                     }}
                   />
                   {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ modelName: null, uid: null, results: null });
+                    }}
+                  />
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
@@ -127,6 +135,7 @@ export default class ModelsContainer extends ContainerBase {
                 <ListTable.Section
                   header="Models Controller - Create"
                   key="mcc"
+                  footer={'Create new data. Type in the parameters and press "Create", the results will be alerted and shown below.\n\nSample parameters are set by default, press "Clear" to clear the inputs.'}
                 >
                   {this.getModelNameInput()}
                   <ListTable.Cell
@@ -150,7 +159,7 @@ export default class ModelsContainer extends ContainerBase {
                       const { modelName, createObjString } = this.state;
                       try {
                         let createObj = JSON.parse(createObjString);
-                        ModelsControllor.create(modelName, createObj).then((result) => {
+                        ModelsController.create(modelName, createObj).then((result) => {
                           const results = JSON.stringify(result, null, 2);
                           this.setState({ results });
                           alert(results);
@@ -182,6 +191,7 @@ export default class ModelsContainer extends ContainerBase {
                 <ListTable.Section
                   header="Models Controller - Update"
                   key="mcu"
+                  footer={'Update a record. Type in the parameters and press "Update", the results will be alerted and shown below.\n\nSample parameters are set by default, press "Clear" to clear the inputs.'}
                 >
                   {this.getModelNameInput()}
                   {this.getUIDInput()}
@@ -206,7 +216,7 @@ export default class ModelsContainer extends ContainerBase {
                       const { modelName, uid, updateObjString } = this.state;
                       try {
                         let updateObj = JSON.parse(updateObjString);
-                        ModelsControllor.update(modelName, uid, updateObj).then((result) => {
+                        ModelsController.update(modelName, uid, updateObj).then((result) => {
                           const results = JSON.stringify(result, null, 2);
                           this.setState({ results });
                           alert(results);
@@ -222,7 +232,7 @@ export default class ModelsContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Clear"
                     onPress={() => {
-                      this.delayedSetState({ modelName: null, updateObjString: '{\n  \n}', results: null });
+                      this.delayedSetState({ modelName: null, uid: null, updateObjString: '{\n  \n}', results: null });
                     }}
                   />
                   <ListTable.Cell
@@ -238,6 +248,7 @@ export default class ModelsContainer extends ContainerBase {
                 <ListTable.Section
                   header="Models Controller - Destroy"
                   key="mcd"
+                  footer={'Delete data. Type in the parameters and press "Delete", the results will be alerted and shown below.\n\nSample parameters are set by default, press "Clear" to clear the inputs.'}
                 >
                   {this.getModelNameInput()}
                   {this.getUIDInput()}
@@ -245,7 +256,7 @@ export default class ModelsContainer extends ContainerBase {
                     title="Destroy"
                     onPress={() => {
                       const { modelName, uid } = this.state;
-                      ModelsControllor.destroy(modelName, uid).then((result) => {
+                      ModelsController.destroy(modelName, uid).then((result) => {
                         const results = JSON.stringify(result, null, 2);
                         this.setState({ results });
                         alert(results);
@@ -255,6 +266,86 @@ export default class ModelsContainer extends ContainerBase {
                     }}
                   />
                   {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ modelName: null, uid: null, results: null });
+                    }}
+                  />
+                  <ListTable.Cell
+                    title="Back"
+                    onPress={() => {
+                      this.delayedSetState({ mode: null, results: null });
+                    }}
+                  />
+                </ListTable.Section>
+              );
+            case 'validate':
+              return (
+                <ListTable.Section
+                  header="Models Controller - Validate"
+                  key="mcv"
+                  footer={'Validate data object. Type in the parameters and press "Validate", the results will be alerted and shown below.\n\nSample parameters are set by default, press "Clear" to clear the inputs.'}
+                >
+                  {this.getModelNameInput()}
+                  <ListTable.Cell
+                    title="Obj"
+                    textInput={true}
+                    multiline={true}
+                    autoCapitalize="none"
+                    value={this.state.validateObjString}
+                    onChangeText={(t) => this.setState({ validateObjString: t })}
+                    autoCorrect={false}
+                    autoFocus={true}
+                    style={{
+                      fontFamily: 'Menlo',
+                      fontWeight: '100',
+                      fontSize: 12
+                    }}
+                  />
+                  <ListTable.Cell
+                    title="Validate"
+                    onPress={() => {
+                      const { modelName, validateObjString } = this.state;
+                      try {
+                        let validateObj = JSON.parse(validateObjString);
+                        ModelsController.validate(modelName, validateObj).then((result) => {
+                          const results = JSON.stringify(validateObj, null, 2);
+                          this.setState({ results });
+                          alert(result ? 'Is valid.' : 'is INVALID!');
+                        }).catch((e) => {
+                          alert('ERROR: ' + e);
+                        });
+                      } catch (e) {
+                        alert('ERROR: ' + e);
+                      }
+                    }}
+                  />
+                  <ListTable.Cell
+                    title="Validate (With Throw)"
+                    onPress={() => {
+                      const { modelName, validateObjString } = this.state;
+                      try {
+                        let validateObj = JSON.parse(validateObjString);
+                        ModelsController.validate(modelName, validateObj, { throwError: true }).then(() => {
+                          const results = JSON.stringify(validateObj, null, 2);
+                          this.setState({ results });
+                          alert('Is valid.');
+                        }).catch((e) => {
+                          alert('Has ERROR: ' + e);
+                        });
+                      } catch (e) {
+                        alert('ERROR: ' + e);
+                      }
+                    }}
+                  />
+                  {this.getResultsOutput()}
+                  <ListTable.Cell
+                    title="Clear"
+                    onPress={() => {
+                      this.delayedSetState({ modelName: null, validateObjString: '{\n  \n}', results: null });
+                    }}
+                  />
                   <ListTable.Cell
                     title="Back"
                     onPress={() => {
@@ -294,8 +385,10 @@ export default class ModelsContainer extends ContainerBase {
                   />
                   <ListTable.Cell
                     title="Find"
-                    onPress={() => {
-                      this.delayedSetState({ mode: 'find' });
+                    onPress={async () => {
+                      let transactions = await ModelsController.query('Transaction', { limit: 1 });
+                      let uid = transactions[0] && transactions[0].uid;
+                      this.delayedSetState({ mode: 'find', modelName: 'Transaction', uid });
                     }}
                   />
                   <ListTable.Cell
@@ -316,7 +409,7 @@ export default class ModelsContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Update"
                     onPress={async () => {
-                      let a = await ModelsControllor.query('Account', {
+                      let a = await ModelsController.query('Account', {
                         filter: {
                           name: ['=', 'New Testing Account']
                         },
@@ -338,7 +431,7 @@ export default class ModelsContainer extends ContainerBase {
                   <ListTable.Cell
                     title="Destroy"
                     onPress={async () => {
-                      let a = await ModelsControllor.query('Account', {
+                      let a = await ModelsController.query('Account', {
                         filter: {
                           name: ['=', 'New Testing Account']
                         },
@@ -350,6 +443,20 @@ export default class ModelsContainer extends ContainerBase {
                         mode: 'destroy',
                         modelName: 'Account',
                         uid
+                      });
+                    }}
+                  />
+                  <ListTable.Cell
+                    title="Validate"
+                    onPress={() => {
+                      this.delayedSetState({
+                        mode: 'validate',
+                        modelName: 'Account',
+                        validateObjString: `{
+  "kind": "debit",
+  "currency": "TWD",
+  "balance": 5000000
+}`
                       });
                     }}
                   />
@@ -391,7 +498,7 @@ export default class ModelsContainer extends ContainerBase {
                       const log = (...results) => {
                         results.forEach(result => {
                           const resultStr = JSON.stringify(result, null, 2);
-                          this.setState({ results: this.state.results + '\n\n' + resultStr });
+                          this.setState({ esResults: this.state.results + '\n\n' + resultStr });
                         });
                       };
 
@@ -403,7 +510,7 @@ export default class ModelsContainer extends ContainerBase {
                       }
                     }}
                   />
-                  {this.getResultsOutput()}
+                  {this.getResultsOutput(this.state.esResults)}
                   <ListTable.Cell
                     title="Clear"
                     onPress={() => {
@@ -432,14 +539,14 @@ export default class ModelsContainer extends ContainerBase {
                         utilsMode: 'eval-script',
                         evalScriptString: `// Type the ES5 script here
 var a1 = new Account({ name: 'An Account' });
-ModelsControllor.validate('Account', a1).then(function (result) {
+ModelsController.validate('Account', a1).then(function (result) {
   log(result, a1);
 });
 
-ModelsControllor.query('Account').then(function (accounts) {
+ModelsController.query('Account').then(function (accounts) {
   var a2 = accounts[0];
   a2.type = 'setting-this-is-invalid';
-  ModelsControllor.validate('Account', a2).then(function (result) {
+  ModelsController.validate('Account', a2).then(function (result) {
     log(result, a2);
   });
 });
@@ -453,31 +560,6 @@ ModelsControllor.query('Account').then(function (accounts) {
               );
             }
           })()}
-
-          <ListTable.Section
-            header="Data Backend"
-            key="sb"
-            footer={'The backend where ModelsControllor access data from.\nOn the native app, the backend defaults to the Realm, while on the web app, only web API is available.'}
-          >
-            <ListTable.Cell
-              title="Web API"
-              check={true}
-              checked={this.state.modelsControllorBackendName === 'api'}
-              onCheck={() => {
-                ModelsControllor.setBackend('api');
-                this.setState({ modelsControllorBackendName: ModelsControllor.backendName });
-              }}
-            />
-            <ListTable.Cell
-              title="Realm"
-              check={true}
-              checked={this.state.modelsControllorBackendName === 'realm'}
-              onCheck={() => {
-                ModelsControllor.setBackend('realm');
-                this.setState({ modelsControllorBackendName: ModelsControllor.backendName });
-              }}
-            />
-          </ListTable.Section>
 
           <ListTable.Section
             header="Backends"
@@ -495,6 +577,31 @@ ModelsControllor.query('Account').then(function (accounts) {
               navigated={true}
               onPress={() => {
                 this.props.navigator.push({ name: 'dev-center-AppRealm' });
+              }}
+            />
+          </ListTable.Section>
+
+          <ListTable.Section
+            header="Select Data Backend"
+            key="sb"
+            footer={'The backend where ModelsController access data from.\nOn the native app, the backend defaults to the Realm, while on the web app, only web API is available.'}
+          >
+            <ListTable.Cell
+              title="Web API"
+              check={true}
+              checked={this.state.modelsControllerBackendName === 'api'}
+              onCheck={() => {
+                ModelsController.setBackend('api');
+                this.setState({ modelsControllerBackendName: ModelsController.backendName });
+              }}
+            />
+            <ListTable.Cell
+              title="Realm"
+              check={true}
+              checked={this.state.modelsControllerBackendName === 'realm'}
+              onCheck={() => {
+                ModelsController.setBackend('realm');
+                this.setState({ modelsControllerBackendName: ModelsController.backendName });
               }}
             />
           </ListTable.Section>
@@ -531,14 +638,14 @@ ModelsControllor.query('Account').then(function (accounts) {
     );
   }
 
-  getResultsOutput = () => {
-    if (this.state.results) {
+  getResultsOutput = (results = this.state.results) => {
+    if (results) {
       return (
         <ListTable.Cell
           title="Results"
           textInput={true}
           multiline={true}
-          value={this.state.results}
+          value={results}
           autoCapitalize="none"
           autoCorrect={false}
           style={{

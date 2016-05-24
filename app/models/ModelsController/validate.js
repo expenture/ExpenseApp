@@ -21,6 +21,16 @@ class ValidationError extends Error {
 
 export default function validateModel(modelName, object, options = {}) {
   const ModelClass = getModelClass(modelName);
+
+  if (typeof object.beforeValidate === 'function') {
+    object.beforeValidate();
+  }
+
+  options = {
+    ...options,
+    modelName
+  };
+
   return validate.async(object, ModelClass.constraints, options)
     .then(() => {
       return true;

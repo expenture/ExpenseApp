@@ -1,6 +1,6 @@
 import store from 'store';
 import models from 'models';
-import ModelsControllor from 'ModelsControllor';
+import ModelsController from 'ModelsController';
 import AppRealm from 'AppRealm';
 import BackendSession from 'BackendSession';
 
@@ -11,7 +11,7 @@ const modules = {
   store,
   models,
   ...models,
-  ModelsControllor,
+  ModelsController,
   AppRealm,
   BackendSession,
 
