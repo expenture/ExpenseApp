@@ -91,5 +91,49 @@ export default class Transaction extends Model {
 
   constructor(props = {}) {
     super(props);
+
+    if (!this.datetime) this.datetime = new Date();
+  }
+
+  beforeRealmSave(action) {
+    const { realm } = require('AppRealm').default;
+    const account = realm.objects('Account')
+                         .filtered('uid == $0', this.accountUID)[0];
+
+    // Transactions added to syncing accounts should not be on record
+    if (action === 'create' && account.syncing) {
+      this.onRecord = false;
+    }
+
+    // Set the transaction type
+    if (action === 'create' && account.syncing) {
+      if (this.onRecord === false) {
+        this.type = 'not_on_record';
+      } else if (this.separateTransactionUID) {
+        this.type = 'virtual';
+      } else {
+        this.type = 'normal';
+      }
+    }
+
+    // For virtual transaction
+    if (this.type === 'virtual') {
+      const separateTransaction = realm.objects('Transaction')
+                                       .filtered('uid == $0', this.separateTransactionUID)[0];
+      this.onRecord = null;
+      this.accountUID = separateTransaction.accountUID;
+    }
+  }
+
+  afterRealmSave() {
+
+  }
+
+  beforeRealmDestroy() {
+
+  }
+
+  afterRealmDestroy() {
+
   }
 }
