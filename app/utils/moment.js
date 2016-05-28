@@ -2,7 +2,7 @@
  * @providesModule utils/moment
  */
 
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 require('moment/locale/zh-tw');
 
@@ -57,7 +57,7 @@ moment.updateLocale('zh-tw', {
     nextDay: '[明天]LT',
     nextWeek: '[下]ddddLT',
     lastDay: '[昨天]LT',
-    lastWeek: '[上]ddddLT',
+    lastWeek: 'ddddLT',
     sameElse: 'L'
   },
   ordinalParse: /\d{1,2}(日|月|週)/,
@@ -93,4 +93,30 @@ moment.updateLocale('zh-tw', {
   }
 });
 
+// TODO: I18n this
+moment.locale('zh-tw');
+moment.tz.setDefault('Asia/Taipei');
+
 export default moment;
+
+export const getCalendarDateLocale = () => {
+  let calendarLocale = moment.localeData() &&
+                       moment.localeData()._config &&
+                       moment.localeData()._config.calendar;
+  let cl = calendarLocale;
+  return {
+    sameDay: cl.sameDay ? removeTimeFromLocaleString(cl.sameDay) : '[Today]',
+    nextDay: cl.nextDay ? removeTimeFromLocaleString(cl.nextDay) : '[Tomorrow]',
+    nextWeek: cl.nextWeek ? removeTimeFromLocaleString(cl.nextWeek) : 'dddd',
+    lastDay: cl.lastDay ? removeTimeFromLocaleString(cl.lastDay) : '[Yesterday]',
+    lastWeek: cl.lastWeek ? removeTimeFromLocaleString(cl.lastWeek) : '[Last] dddd',
+    sameElse: cl.sameElse || 'L'
+  };
+};
+
+function removeTimeFromLocaleString(s) {
+  s = s.replace('LT', '');
+  s = s.replace('at', '');
+  s = s.replace(' ', '');
+  return s;
+}

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import ContainerBase from 'ContainerBase';
 
+import getGlobal from 'utils/getGlobal';
+
 import DeviceInfo from 'utils/DeviceInfo';
 
 import ScrollView from 'components/ScrollView';
@@ -128,6 +130,18 @@ export default class MoreMenuContainer extends ContainerBase {
               navigated={true}
               onPress={() => {
                 this.props.navigator.push({ name: 'dev-center-ui-playground' });
+              }}
+            />
+          </ListTable.Section>
+
+          <ListTable.Section
+            header="Dev Mode"
+          >
+            <ListTable.Cell
+              title="Dev Mode On"
+              onPress={() => {
+                const glob = getGlobal();
+                glob && glob.devMode && glob.devMode(true);
               }}
             />
           </ListTable.Section>

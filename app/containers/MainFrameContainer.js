@@ -45,7 +45,7 @@ export default class MainFrameContainer extends Component {
             initialRoute: { name: 'feed' }
           },
           {
-            title: '金流',
+            title: '帳務處理',
             icon: require('../images/iOS/TabBar/MoneyFlow.png'),
             selectedIcon: require('../images/iOS/TabBar/MoneyFlow-Selected.png'),
             initialRoute: { name: 'money-flow' }
@@ -104,6 +104,7 @@ export default class MainFrameContainer extends Component {
           case 'feed':
             return {
               title: 'Feed',
+              theme: 'no-bar',
               component: FeedContainer
             };
 

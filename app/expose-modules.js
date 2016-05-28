@@ -1,3 +1,5 @@
+import getGlobal from 'utils/getGlobal';
+
 import store from 'store';
 import models from 'models';
 import ModelsController from 'ModelsController';
@@ -7,7 +9,11 @@ import BackendSession from 'BackendSession';
 import ExpentureAPI from 'ExpentureAPI';
 import FBAPI from 'FBAPI';
 
+import moment from 'utils/moment';
+
 const modules = {
+  getGlobal,
+
   store,
   models,
   ...models,
@@ -16,17 +22,13 @@ const modules = {
   BackendSession,
 
   ExpentureAPI,
-  FBAPI
+  FBAPI,
+
+  moment
 };
 
 export default function exposeModules() {
-  let glob;
-
-  if (typeof global === 'object') {
-    glob = global;
-  } else if (typeof window === 'object') {
-    glob = window;
-  }
+  let glob = getGlobal();
 
   if (glob) {
     for (let key in modules) {
@@ -34,3 +36,5 @@ export default function exposeModules() {
     }
   }
 }
+
+exposeModules();

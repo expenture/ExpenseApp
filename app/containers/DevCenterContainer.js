@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import getGlobal from 'utils/getGlobal';
+
 import AppNavigator from 'components/AppNavigator';
 import Platform from 'utils/Platform';
 
@@ -159,7 +161,10 @@ export default class DevCenterContainer extends Component {
   }
 
   exit() {
-    // TODO: Exit
+    const glob = getGlobal();
+    if (glob) {
+      glob.devMode(false);
+    }
   }
 
   componentWillMount() {

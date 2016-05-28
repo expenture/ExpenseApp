@@ -79,8 +79,6 @@ export default class DashboardView extends Component {
   render() {
     const { state, props } = this;
 
-    moment.locale('zh-tw');
-
     let monthlyAmountsCount = 0;
     let monthlyExpenseAmountsCount =
       props.latestMonthlyExpenseAmounts &&

@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 
 import config from 'config';
+import getGlobal from 'utils/getGlobal';
 
 import DevCenterContainer from './DevCenterContainer';
 import SignInContainer from './SignInContainer';
@@ -13,11 +14,19 @@ import MainFrameContainer from './MainFrameContainer';
 export default class AppContainer extends Component {
   constructor() {
     super();
-    this.state = {};
+
+    this.state = {
+      devMode: config.devMode
+    };
+
+    const glob = getGlobal();
+    if (glob) {
+      glob.devMode = this.devMode;
+    }
   }
 
   render() {
-    if (config.devMode || this.state.devCenter) {
+    if (this.state.devMode) {
       return <DevCenterContainer />;
     }
 
@@ -28,5 +37,9 @@ export default class AppContainer extends Component {
     return (
       <MainFrameContainer />
     );
+  }
+
+  devMode = (tf) => {
+    this.setState({ devMode: tf });
   }
 }

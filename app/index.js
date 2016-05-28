@@ -10,8 +10,7 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import AppContainer from './containers';
 
-import exposeModules from './expose-modules';
-exposeModules();
+import './expose-modules';
 
 export default class Application extends Component {
   render() {
