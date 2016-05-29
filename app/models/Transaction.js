@@ -4,6 +4,8 @@
 
 import Model from './_base';
 
+import parseMoney from 'utils/parseMoney';
+
 export default class Transaction extends Model {
   static schema = {
     name: 'Transaction',
@@ -93,6 +95,20 @@ export default class Transaction extends Model {
     super(props);
 
     if (!this.datetime) this.datetime = new Date();
+  }
+
+  get partyName() {
+    // TODO: Get party name base on party type and code
+    return this.painPartyName;
+  }
+
+  get currency() {
+    // TODO: Get currency from account
+    return 'TWD';
+  }
+
+  get displayedAmount() {
+    return parseMoney(this.amount, true);
   }
 
   beforeRealmSave(action) {

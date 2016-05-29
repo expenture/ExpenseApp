@@ -8,21 +8,21 @@ require('moment/locale/zh-tw');
 
 moment.updateLocale('zh-tw', {
   months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
-  monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
+  monthsShort: '1 月_2 月_3 月_4 月_5 月_6 月_7 月_8 月_9 月_10 月_11 月_12 月'.split('_'),
   weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
   weekdaysShort: '週日_週一_週二_週三_週四_週五_週六'.split('_'),
   weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
   longDateFormat: {
     LT: 'Ah 點 mm 分',
     LTS: 'Ah 點 m 分 s 秒',
-    L: 'YYYY 年 MMMD 日',
-    LL: 'YYYY 年 MMMD 日',
-    LLL: 'YYYY 年 MMMD 日 Ah 點 mm 分',
-    LLLL: 'YYYY 年 MMMD 日 ddddAh 點 mm 分',
-    l: 'YYYY 年 MMMD 日',
-    ll: 'YYYY 年 MMMD 日',
-    lll: 'YYYY 年 MMMD 日 Ah 點 mm 分',
-    llll: 'YYYY 年 MMMD 日 ddddAh 點 mm 分'
+    L: 'YYYY 年 MMM D 日',
+    LL: 'YYYY 年 MMM D 日',
+    LLL: 'YYYY 年 MMM D 日 Ah 點 mm 分',
+    LLLL: 'YYYY 年 MMM D 日 ddddAh 點 mm 分',
+    l: 'YYYY 年 MMM D 日',
+    ll: 'YYYY 年 MMM D 日',
+    lll: 'YYYY 年 MMM D 日 Ah 點 mm 分',
+    llll: 'YYYY 年 MMM D 日 ddddAh 點 mm 分'
   },
   meridiemParse: /早上|上午|中午|下午|晚上/,
   meridiemHour: function (h, meridiem) {
