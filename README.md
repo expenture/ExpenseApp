@@ -2,6 +2,8 @@
 
 An expense managing application to make life more easier and free. This is the iOS/Android/Web app with [React](https://facebook.github.io/react/) and [React Native](https://facebook.github.io/react-native/).
 
+![](https://i.imgur.com/Z4w0Z6T.jpg)
+
 
 ## Development Setup
 
